@@ -1,0 +1,610 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+
+  <section class="relative min-h-screen flex items-center overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+      <div id="hero-parallax" class="absolute inset-x-0 -top-[10%] h-[120%] w-full will-change-transform">
+        <img src="assets/hero-ship-new.png" alt="Container ship at golden hour"
+          class="photo-crisp w-full h-full object-cover hero-media" fetchpriority="high" decoding="async" />
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-deep/85 via-navy-deep/45 to-navy-deep/10"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy-deep/10 to-transparent"></div>
+      <div class="absolute -top-32 -right-32 h-[40rem] w-[40rem] rounded-full blur-3xl opacity-40"
+        style="background: radial-gradient(circle, rgba(232,213,138,0.55), transparent 60%);"></div>
+    </div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 pt-24 pb-16">
+      <div
+        class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gold/40 bg-navy-deep/40 backdrop-blur">
+        <span class="h-1.5 w-1.5 rounded-full bg-gold animate-pulse"></span>
+        <span class="text-xs font-heading uppercase tracking-[0.3em] text-gold-light">DDS Marine Energy Services</span>
+      </div>
+      <h1 class="mt-6 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold leading-[0.98] text-ivory max-w-5xl">
+        Fueling Global Trade,<br />
+        <span class="text-gold-gradient italic" style="padding-right: 0.15em;">Connecting</span> 
+        <span class="text-gold-gradient italic" style="padding-right: 0.15em;">Continents.</span>
+      </h1>
+      <p class="mt-8 text-lg md:text-xl text-ivory/80 max-w-2xl leading-relaxed">A premier marine energy service
+        provider headquartered in Penang, Malaysia &mdash; delivering excellence in oil trading, shipping and marine
+        operations across the Straits of Malacca and beyond.</p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="services.html"
+          class="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-gold-gradient text-navy-deep font-semibold shadow-gold hover:scale-[1.03] transition-transform">Explore
+          Our Services <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg></a>
+        <a href="contact.html"
+          class="inline-flex items-center px-7 py-4 rounded-full border border-ivory/30 bg-ivory/5 backdrop-blur text-ivory font-medium hover:bg-ivory/10 transition-colors">Contact
+          Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream-gradient text-navy py-16 border-y border-slate-200 overflow-hidden">
+    <div class="container mx-auto px-4 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="reveal">
+        <div class="font-heading text-4xl md:text-5xl text-navy font-semibold"><span class="count-up"
+            data-target="2020">0</span></div>
+        <div class="mt-2 text-xs uppercase tracking-[0.3em] text-slate-500 font-semibold">Established</div>
+      </div>
+      <div class="reveal">
+        <div class="font-heading text-4xl md:text-5xl text-navy font-semibold"><span class="count-up"
+            data-target="50">0</span></div>
+        <div class="mt-2 text-xs uppercase tracking-[0.3em] text-slate-500 font-semibold">Successful STS</div>
+      </div>
+      <div class="reveal">
+        <div class="font-heading text-4xl md:text-5xl text-navy font-semibold"><span class="count-up"
+            data-target="6">0</span></div>
+        <div class="mt-2 text-xs uppercase tracking-[0.3em] text-slate-500 font-semibold">Vessels Chartered</div>
+      </div>
+      <div class="reveal">
+        <div class="font-heading text-4xl md:text-5xl text-navy font-semibold"><span class="count-up"
+            data-target="10">0</span>+</div>
+        <div class="mt-2 text-xs uppercase tracking-[0.3em] text-slate-500 font-semibold">Strategic Partners</div>
+      </div>
+    </div>
+
+    <!-- Chartered Vessels list (non-clickable button-like pills) -->
+    <div class="container mx-auto px-4 lg:px-8 mt-10 border-t border-navy/10 pt-8">
+      <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+        <div
+          class="reveal inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-200/80 shadow-sm text-xs font-heading uppercase tracking-[0.2em] font-medium text-navy/85">
+          <span class="h-2 w-2 rounded-full bg-gold"></span>
+          2 VLCC Tankers Chartered
+        </div>
+        <div
+          class="reveal inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-200/80 shadow-sm text-xs font-heading uppercase tracking-[0.2em] font-medium text-navy/85">
+          <span class="h-2 w-2 rounded-full bg-gold"></span>
+          2 Suezmax Chartered
+        </div>
+        <div
+          class="reveal inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-200/80 shadow-sm text-xs font-heading uppercase tracking-[0.2em] font-medium text-navy/85">
+          <span class="h-2 w-2 rounded-full bg-gold"></span>
+          1 Aframax Chartered
+        </div>
+        <div
+          class="reveal inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-200/80 shadow-sm text-xs font-heading uppercase tracking-[0.2em] font-medium text-navy/85">
+          <span class="h-2 w-2 rounded-full bg-gold"></span>
+          1 MR Chartered
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 lg:py-32">
+    <div class="container mx-auto px-4 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="reveal relative">
+        <img src="assets/port-sunset.jpg" alt="Port operations at sunset" loading="lazy" decoding="async"
+          class="rounded-2xl shadow-elegant w-full aspect-[4/5] object-cover" />
+        <div
+          class="absolute -bottom-6 -right-6 hidden md:block bg-gold-gradient text-navy-deep rounded-2xl p-6 shadow-gold max-w-[200px]">
+          <p class="font-heading text-3xl font-bold">2020</p>
+          <p class="text-xs uppercase tracking-widest mt-1">Operating Globally</p>
+        </div>
+      </div>
+      <div>
+
+        <div class=" max-w-3xl">
+          <div class="reveal inline-flex items-center gap-3">
+            <span class="h-px w-8 bg-gold-gradient"></span>
+            <span class="text-xs font-heading uppercase tracking-[0.35em] text-navy font-semibold">Who We Are</span>
+          </div>
+          <h2 class="reveal mt-4 font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-navy">
+            Marine excellence <span class='text-navy italic'>across the world</span>.</h2>
+
+        </div>
+
+        <p class="reveal mt-6 text-slate-600 text-lg leading-relaxed">Since 2020, DDS Marine Energy Services has
+          delivered comprehensive solutions in energy trading, shipping and logistics. Operating from Penang and serving
+          clients globally, we are the appointed <strong class="text-navy">Marine Strategic Advisor for Maharani Energy
+            Gateway</strong> across the globe.</p>
+        <p class="reveal mt-4 text-slate-600 leading-relaxed">Our work is grounded in professionalism, integrity and
+          environmental stewardship &mdash; earning the trust of Petronas, Shell, Pertamina, Swire Shipping and beyond.
+        </p>
+        <a href="about.html" class="reveal mt-8 inline-flex items-center gap-2 text-gold-dark font-semibold group">Learn
+          more about DDS Marine <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 lg:py-32 bg-ivory">
+    <div class="container mx-auto px-4 lg:px-8">
+
+      <div class="text-center mx-auto max-w-3xl">
+        <div class="reveal inline-flex items-center gap-3">
+          <span class="h-px w-8 bg-gold-gradient"></span>
+          <span class="text-xs font-heading uppercase tracking-[0.35em] text-navy font-semibold">Core Services</span>
+        </div>
+        <h2 class="reveal mt-4 font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-navy">
+          End-to-end marine solutions, expertly delivered.</h2>
+        <p class="mt-4 text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">From STS transfers and deep-draft
+          pilotage to bunkering and chartering &mdash; a full-stack marine partner.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <a href="services.html"
+          class="reveal group block h-full p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 transition-all hover:-translate-y-1 shadow-sm hover:shadow-elegant">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path
+                d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
+              <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76" />
+              <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6" />
+              <path d="M12 10v4" />
+              <path d="M12 2v3" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">STS Services Provider</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Ship-to-ship transfers across the Straits of Malacca,
+            executed with safety and precision.</p>
+          <div
+            class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-dark opacity-0 group-hover:opacity-100 transition-opacity">
+            Read more <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg></div>
+        </a>
+        <a href="services.html"
+          class="reveal group block h-full p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 transition-all hover:-translate-y-1 shadow-sm hover:shadow-elegant">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <circle cx="12" cy="12" r="10" />
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Marine Advisory for Malacca Straits</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Strategic marine advisory across one of the world's
+            busiest waterways.</p>
+          <div
+            class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-dark opacity-0 group-hover:opacity-100 transition-opacity">
+            Read more <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg></div>
+        </a>
+        <a href="services.html"
+          class="reveal group block h-full p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 transition-all hover:-translate-y-1 shadow-sm hover:shadow-elegant">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path d="M12 22V8" />
+              <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+              <circle cx="12" cy="5" r="3" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Mooring Master Services</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Certified mooring masters for STS, FSO and offshore
+            operations.</p>
+          <div
+            class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-dark opacity-0 group-hover:opacity-100 transition-opacity">
+            Read more <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg></div>
+        </a>
+        <a href="services.html"
+          class="reveal group block h-full p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 transition-all hover:-translate-y-1 shadow-sm hover:shadow-elegant">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path
+                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">POAC Services</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Person-in-Overall-Command for STS and complex marine
+            operations.</p>
+          <div
+            class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-dark opacity-0 group-hover:opacity-100 transition-opacity">
+            Read more <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg></div>
+        </a>
+        <a href="services.html"
+          class="reveal group block h-full p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 transition-all hover:-translate-y-1 shadow-sm hover:shadow-elegant">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <polygon points="3 11 22 2 13 21 11 13 3 11" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Deep Draft Vessel Pilotage</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Expert pilotage for deep-draft vessels in restricted
+            waterways.</p>
+          <div
+            class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-dark opacity-0 group-hover:opacity-100 transition-opacity">
+            Read more <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg></div>
+        </a>
+        <a href="services.html"
+          class="reveal group block h-full p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 transition-all hover:-translate-y-1 shadow-sm hover:shadow-elegant">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path d="m12 14 4-4" />
+              <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Bunker Survey</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">Independent bunker quantity & quality surveys.</p>
+          <div
+            class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-dark opacity-0 group-hover:opacity-100 transition-opacity">
+            Read more <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg></div>
+        </a>
+      </div>
+      <div class="mt-12 text-center">
+        <a href="services.html"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-navy text-ivory font-semibold hover:bg-navy-deep transition-colors">View
+          All 17 Services <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 lg:py-32 bg-cream-gradient">
+    <div class="container mx-auto px-4 lg:px-8">
+
+      <div class=" max-w-3xl">
+        <div class="reveal inline-flex items-center gap-3">
+          <span class="h-px w-8 bg-gold-gradient"></span>
+          <span class="text-xs font-heading uppercase tracking-[0.35em] text-navy font-semibold">Why DDS&nbsp;Marine</span>
+        </div>
+        <h2 class="reveal mt-4 font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-navy">The
+          standard our clients <span class='text-navy italic'>trust</span>.</h2>
+
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mt-14">
+        <div
+          class="reveal p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all h-full">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path d="M12 22V8" />
+              <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+              <circle cx="12" cy="5" r="3" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Proven Expertise in Marine Operations</h3>
+          <p class="mt-3 text-slate-600 leading-relaxed">A seasoned team delivering precise, safe and efficient
+            operations across offshore and port environments, from STS transfers to vessel pilotage and mooring
+            services.</p>
+        </div>
+        <div
+          class="reveal p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all h-full">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+              <path
+                d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+              <path d="m21 3 1 11h-2" />
+              <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+              <path d="M3 4h8" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Strong Industry Alliance</h3>
+          <p class="mt-3 text-slate-600 leading-relaxed">Trusted by Petronas, Shell, Pertamina, Swire Shipping and
+            Maharani Energy Gateway, backed by partnerships with leading equipment providers and regulators.</p>
+        </div>
+        <div
+          class="reveal p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all h-full">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <path
+                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Safety, Reliability & Compliance</h3>
+          <p class="mt-3 text-slate-600 leading-relaxed">We uphold the highest standards of safety, regulatory
+            compliance (OCIMF, IMO, MARPOL) and risk management in every operation, every time.</p>
+        </div>
+        <div
+          class="reveal p-8 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all h-full">
+          <div
+            class="h-12 w-12 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+              <path d="M2 12h20" />
+            </svg></div>
+          <h3 class="mt-5 font-heading text-xl font-semibold text-navy">Global Reach, Local Expertise</h3>
+          <p class="mt-3 text-slate-600 leading-relaxed">Headquartered in Penang at the heart of Asia's energy market,
+            with a network spanning Malaysia, Indonesia, Singapore, the Middle East and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white overflow-hidden">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mx-auto max-w-3xl">
+        <div class="reveal inline-flex items-center gap-3">
+          <span class="h-px w-8 bg-gold-gradient"></span>
+          <span class="text-xs font-heading uppercase tracking-[0.35em] text-navy font-semibold">Trusted By</span>
+        </div>
+        <h2 class="reveal mt-4 font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-navy">A
+          portfolio built on trust.</h2>
+
+      </div>
+    </div>
+    <div class="relative mt-8">
+      <div class="flex animate-marquee gap-12 w-max">
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Maharani Energy Gateway</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Petronas</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Njord Traders</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Sing Fuels & Integra Fuels</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Pertamina</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Shell</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Swire Shipping</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Vestigo</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Maharani Energy Gateway</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Petronas</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Njord Traders</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Sing Fuels & Integra Fuels</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Pertamina</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Shell</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Swire Shipping</div>
+        <div
+          class="shrink-0 px-8 py-5 rounded-xl border border-slate-200 bg-white font-heading text-lg uppercase tracking-[0.2em] text-slate-500 hover:text-gold-dark hover:border-gold/50 transition-colors">
+          Vestigo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Network of Offices -->
+  <section class="py-24 bg-white border-b border-slate-200">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mx-auto max-w-3xl">
+        <div class="reveal inline-flex items-center gap-3">
+          <span class="h-px w-8 bg-gold-gradient"></span>
+          <span class="text-xs font-heading uppercase tracking-[0.35em] text-navy font-semibold">Our Global
+            Network</span>
+        </div>
+        <h2 class="reveal mt-4 font-heading text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-navy">Our
+          Offices</h2>
+        <p class="reveal mt-3 text-slate-600">Positioned strategically at key maritime and financial hubs to support
+          global operations.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-14">
+        <!-- Penang (HQ) -->
+        <div
+          class="reveal p-6 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div
+              class="h-10 w-10 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-lg font-semibold text-navy">Penang</h3>
+            <p class="text-xs text-gold-dark font-heading uppercase tracking-wider mt-1 font-semibold">Headquarters</p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">Malaysia</p>
+        </div>
+
+        <!-- Kuala Lumpur -->
+        <div
+          class="reveal p-6 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div
+              class="h-10 w-10 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-lg font-semibold text-navy">Kuala Lumpur</h3>
+            <p class="text-xs text-slate-400 font-heading uppercase tracking-wider mt-1 font-semibold">Regional Office
+            </p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">Malaysia</p>
+        </div>
+
+        <!-- Muar -->
+        <div
+          class="reveal p-6 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div
+              class="h-10 w-10 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-lg font-semibold text-navy">Muar</h3>
+            <p class="text-xs text-slate-400 font-heading uppercase tracking-wider mt-1 font-semibold">Branch Office</p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">Malaysia</p>
+        </div>
+
+        <!-- Singapore -->
+        <div
+          class="reveal p-6 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div
+              class="h-10 w-10 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-lg font-semibold text-navy">Singapore</h3>
+            <p class="text-xs text-slate-400 font-heading uppercase tracking-wider mt-1 font-semibold">International Hub
+            </p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">Singapore</p>
+        </div>
+
+        <!-- Hong Kong -->
+        <div
+          class="reveal p-6 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div
+              class="h-10 w-10 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-lg font-semibold text-navy">Hong Kong</h3>
+            <p class="text-xs text-slate-400 font-heading uppercase tracking-wider mt-1 font-semibold">International Hub
+            </p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">Hong Kong</p>
+        </div>
+
+        <!-- India -->
+        <div
+          class="reveal p-6 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div
+              class="h-10 w-10 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-lg font-semibold text-navy">India</h3>
+            <p class="text-xs text-slate-400 font-heading uppercase tracking-wider mt-1 font-semibold">Regional Hub</p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">India</p>
+        </div>
+
+        <!-- Dubai -->
+        <div
+          class="reveal p-6 rounded-2xl bg-white border border-slate-200 hover:border-gold/60 hover:shadow-elegant transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div
+              class="h-10 w-10 rounded-xl bg-gold-gradient flex items-center justify-center shadow-gold text-navy-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-lg font-semibold text-navy">Dubai</h3>
+            <p class="text-xs text-slate-400 font-heading uppercase tracking-wider mt-1 font-semibold">Middle East Hub
+            </p>
+          </div>
+          <p class="mt-4 text-xs text-slate-500">United Arab Emirates</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div
+        class="reveal rounded-3xl bg-navy-gradient p-10 md:p-16 text-center relative overflow-hidden border border-gold/20">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-gold/5 to-transparent"></div>
+        <div class="relative">
+          <h2 class="font-heading text-3xl md:text-5xl font-semibold text-ivory">Ready to set sail with us?</h2>
+          <p class="mt-4 text-ivory/70 max-w-xl mx-auto">Whether it's STS, pilotage, bunkering or full marine advisory
+            &mdash; our team is on standby across the Straits of Malacca.</p>
+          <a href="contact.html"
+            class="mt-8 inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold-gradient text-navy-deep font-semibold shadow-gold hover:scale-105 transition-transform">Start
+            a Conversation <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+<%- include('partials/footer') %>

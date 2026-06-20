@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><%= title %></title>
+  <meta name="description"
+    content="DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca." />
+  <link rel="canonical" href="https://www.ddsmarine.com/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DDS Marine Energy Services" />
+  <meta property="og:locale" content="en_MY" />
+  <meta property="og:url" content="https://www.ddsmarine.com/" />
+  <meta property="og:title" content="<%= title %>" />
+  <meta property="og:description"
+    content="DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca." />
+  <meta property="og:image" content="https://www.ddsmarine.com/assets/hero-ship-new.png" />
+  <meta property="og:image:alt" content="DDS Marine Energy Services" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="<%= title %>" />
+  <meta name="twitter:description"
+    content="DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca." />
+  <meta name="twitter:image" content="https://www.ddsmarine.com/assets/hero-ship-new.png" />
+  <link rel="icon" type="image/png" href="assets/dds-logo-transparent.png" />
+  <link rel="apple-touch-icon" href="assets/dds-logo-transparent.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Jost', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            body: ['Raleway', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+          },
+          colors: {
+            gold: { DEFAULT: '#C9A24B', light: '#E8D58A', dark: '#B8862F' },
+            navy: { DEFAULT: '#152238', deep: '#0B1422' },
+            ivory: '#F8F4EC',
+          },
+          boxShadow: {
+            gold: '0 12px 40px -12px rgba(201,162,75,0.45)',
+            elegant: '0 20px 50px -20px rgba(11,20,34,0.25)',
+          },
+          backgroundImage: {
+            'gold-gradient': 'linear-gradient(135deg,#B8862F 0%,#C9A24B 35%,#E8D58A 65%,#B8862F 100%)',
+            'navy-gradient': 'linear-gradient(180deg,#1B2A45 0%,#0E1A2D 100%)',
+            'cream-gradient': 'linear-gradient(135deg,#FAF6ED 0%,#EFE5CE 100%)',
+          },
+          animation: {
+            'marquee': 'marquee 35s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+          },
+        },
+      },
+    }
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: #F8F4EC;
+      color: #152238;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Jost', sans-serif;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #B8862F 0%, #C9A24B 35%, #E8D58A 65%, #B8862F 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    img {
+      image-rendering: auto;
+    }
+
+    .photo-crisp {
+      filter: contrast(1.04) saturate(1.05);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .hero-media {
+      transform: scale(1.04);
+      animation: ship-drift 18s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 32px, 0) scale(.985);
+      filter: blur(6px);
+      transition: opacity .85s cubic-bezier(.22, 1, .36, 1), transform .85s cubic-bezier(.22, 1, .36, 1), filter .85s cubic-bezier(.22, 1, .36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+
+    .reveal-left {
+      transform: translate3d(-32px, 24px, 0) scale(.985);
+    }
+
+    .reveal-right {
+      transform: translate3d(32px, 24px, 0) scale(.985);
+    }
+
+    .float-soft {
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .card-lift {
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .card-lift:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px -28px rgba(11, 20, 34, .38);
+    }
+
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background: #F8F4EC;
+      color: #152238;
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+
+    #preloader.preloader-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-mark {
+      display: grid;
+      place-items: center;
+      gap: 1.15rem;
+      text-align: center;
+    }
+
+    .loader-ring {
+      width: 70px;
+      height: 70px;
+      border-radius: 9999px;
+      border: 1px solid rgba(232, 213, 138, .28);
+      border-top-color: #E8D58A;
+      animation: spin 1s linear infinite;
+      box-shadow: 0 0 45px rgba(201, 162, 75, .18);
+    }
+
+    .loader-brand {
+      font-family: 'Jost', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      color: #152238;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes ship-drift {
+      0% {
+        transform: scale(1.04) translate3d(-10px, 0, 0);
+      }
+
+      100% {
+        transform: scale(1.09) translate3d(14px, -8px, 0);
+      }
+    }
+
+    .animate-marquee-slow {
+      animation: marquee-slow 28s linear infinite;
+    }
+
+    @keyframes marquee-slow {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+
+    .loader-logo {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      animation: logo-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes logo-pulse {
+
+      0%,
+      100% {
+        transform: scale(0.92);
+        opacity: 0.75;
+      }
+
+      50% {
+        transform: scale(1.04);
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+
+      #preloader {
+        display: none !important;
+      }
+    }
+  </style>
+  <noscript>
+    <style>
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important
+      }
+
+      #preloader {
+        display: none !important
+      }
+    </style>
+  </noscript>
+</head>
