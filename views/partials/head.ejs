@@ -108,13 +108,11 @@
     }
 
     .photo-crisp {
-      filter: contrast(1.04) saturate(1.05);
+      /* Filters removed to prevent rasterization layer downsampling */
     }
 
     .hero-media {
-      transform: scale(1.04);
-      animation: ship-drift 18s ease-in-out infinite alternate;
-      will-change: transform;
+      /* Animations and scaling removed for maximum sharpness */
     }
 
     .reveal {
@@ -200,15 +198,6 @@
       }
     }
 
-    @keyframes ship-drift {
-      0% {
-        transform: scale(1.04) translate3d(-10px, 0, 0);
-      }
-
-      100% {
-        transform: scale(1.09) translate3d(14px, -8px, 0);
-      }
-    }
 
     .animate-marquee-slow {
       animation: marquee-slow 28s linear infinite;
