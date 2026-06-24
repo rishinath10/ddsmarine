@@ -79,6 +79,9 @@
           setTimeout(() => preloader.remove(), 700);
         };
         window.addEventListener('load', hidePreloader, { once: true });
+        if (document.readyState === 'complete') {
+          hidePreloader();
+        }
         setTimeout(hidePreloader, 2400);
 
         document.addEventListener('DOMContentLoaded', () => {

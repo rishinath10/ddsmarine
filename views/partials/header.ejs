@@ -6,6 +6,13 @@
       <div class="loader-brand mt-4">DDS Marine</div>
     </div>
   </div>
+  <script>
+    if (sessionStorage.getItem('preloader_shown')) {
+      document.getElementById('preloader').style.display = 'none';
+    } else {
+      sessionStorage.setItem('preloader_shown', 'true');
+    }
+  </script>
 
 
 
