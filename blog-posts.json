@@ -8,5 +8,15 @@
     "content": "<p>Welcome to the DDS Marine Energy Services blog! We're excited to launch this platform to share industry insights, company updates, and technical knowledge about the maritime world.</p><p>At DDS Marine, we specialize in Ship-to-Ship (STS) transfers, deep-draft pilotage, mooring master services, bunkering, chartering, and marine advisory. Based in Penang and operating across the Straits of Malacca, our team brings decades of experience to every operation.</p><p>Through this blog, we'll cover topics like:</p><ul><li>STS operations best practices</li><li>Marine safety and regulations</li><li>Industry trends in Malaysian waters</li><li>Company milestones and project highlights</li><li>Technical insights from our team</li></ul><p>Stay tuned for regular updates. If you have questions or topics you'd like us to cover, <a href=\"/contact\">get in touch</a>!</p>",
     "tags": ["company", "introduction"],
     "published": true
+  },
+  {
+    "slug": "successful-cargo-operations-at-fott-terminal",
+    "title": "Successful Cargo Discharge & Loading at FOTT Terminal",
+    "date": "2026-07-07",
+    "author": "Capt. Dinesh",
+    "excerpt": "DDS Marine successfully completed cargo discharge and loading operations at FOTT Terminal — a testament to meticulous planning, seamless coordination, and crew dedication.",
+    "content": "<p>We are proud to share the successful cargo discharge and loading operations at FOTT Terminal, executed safely and efficiently by our team onboard our Panamax tanker.</p><p>Every successful port call is the result of meticulous planning, seamless coordination, and the dedication of our vessel crew, terminal personnel, surveyors, agents, and all stakeholders involved.</p><p>At DDS Marine Energy Services, we remain committed to delivering safe, reliable, and efficient marine transportation while maintaining the highest operational and safety standards.</p><p>A sincere thank you to everyone who contributed to another smooth and successful operation. Here's to many more successful voyages ahead.</p><p><img src=\"/assets/blog-fott-terminal-operations.jpg\" alt=\"Cargo operations at FOTT Terminal\" class=\"rounded-2xl w-full\" /></p>",
+    "tags": ["operations", "FOTT Terminal", "cargo"],
+    "published": false
   }
 ]
