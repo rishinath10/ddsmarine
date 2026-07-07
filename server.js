@@ -28,6 +28,18 @@ function loadBlogPosts() {
   }
 }
 
+// Load ALL posts (including drafts) for preview
+function loadAllPosts() {
+  const filePath = path.join(__dirname, 'blog-posts.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(data).sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (err) {
+    console.error('Error loading all posts:', err.message);
+    return [];
+  }
+}
+
 // Static SEO files
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, 'robots.txt')));
 app.get('/sitemap.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap.xml')));
@@ -114,7 +126,7 @@ app.get('/blog', (req, res) => {
 });
 
 app.get('/blog/:slug', (req, res) => {
-    const posts = loadBlogPosts();
+    const posts = loadAllPosts();
     const post = posts.find(p => p.slug === req.params.slug);
     if (!post) {
         return res.status(404).render('404', { 
