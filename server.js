@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -14,16 +15,31 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Helper: load blog posts from JSON
+function loadBlogPosts() {
+  const filePath = path.join(__dirname, 'blog-posts.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const posts = JSON.parse(data);
+    return posts.filter(p => p.published).sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (err) {
+    console.error('Error loading blog posts:', err.message);
+    return [];
+  }
+}
+
 // Static SEO files
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, 'robots.txt')));
 app.get('/sitemap.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap.xml')));
 
 // Routes
 app.get('/', (req, res) => {
+    const blogPosts = loadBlogPosts();
     res.render('index', { 
         title: 'DDS Marine Energy Services | Marine Operations Malaysia',
         description: 'DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca.',
-        path: '/'
+        path: '/',
+        blogPosts: blogPosts
     });
 });
 
@@ -82,6 +98,38 @@ app.get('/thankyou', (req, res) => {
         title: 'Message Received | DDS Marine',
         description: 'Thank you for contacting DDS Marine Energy Services. We will get back to you shortly.',
         path: '/thankyou'
+    });
+});
+
+// Blog routes
+app.get('/blog', (req, res) => {
+    const posts = loadBlogPosts();
+    res.render('blog', { 
+        title: 'Blog | DDS Marine Energy Services',
+        description: 'Industry insights, company updates, and technical knowledge from the DDS Marine team.',
+        path: '/blog',
+        posts: posts,
+        post: null
+    });
+});
+
+app.get('/blog/:slug', (req, res) => {
+    const posts = loadBlogPosts();
+    const post = posts.find(p => p.slug === req.params.slug);
+    if (!post) {
+        return res.status(404).render('404', { 
+            title: 'Post Not Found | DDS Marine',
+            description: 'The blog post you are looking for does not exist.',
+            path: req.path
+        });
+    }
+    res.render('blog', { 
+        title: post.title + ' | DDS Marine Blog',
+        description: post.excerpt,
+        path: '/blog/' + post.slug,
+        ogImage: post.ogImage || 'https://www.ddsmarine.com/assets/hero-ship.jpg',
+        posts: [],
+        post: post
     });
 });
 
