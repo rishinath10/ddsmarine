@@ -41,9 +41,11 @@
             bebas: ['"Bebas Neue"', 'sans-serif'],
           },
           colors: {
-            gold: { DEFAULT: '#C9A24B', light: '#E8D58A', dark: '#B8862F' },
-            navy: { DEFAULT: '#152238', deep: '#0B1422' },
-            ivory: '#F8F4EC',
+            gold: { DEFAULT: '#C8973F', light: '#DFC48A', dark: '#A87A2E' },
+            navy: { DEFAULT: '#0E2240', deep: '#081527' },
+            ivory: '#F7F3EA',
+            hairline: '#D9C48F',
+            ink: '#1C2B3A',
           },
           boxShadow: {
             gold: '0 12px 40px -12px rgba(201,162,75,0.45)',
@@ -66,6 +68,7 @@
       },
     }
   </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <style>
@@ -117,16 +120,14 @@
 
     .reveal {
       opacity: 0;
-      transform: translate3d(0, 32px, 0) scale(.985);
-      filter: blur(6px);
-      transition: opacity .85s cubic-bezier(.22, 1, .36, 1), transform .85s cubic-bezier(.22, 1, .36, 1), filter .85s cubic-bezier(.22, 1, .36, 1);
+      transform: translate3d(0, 10px, 0);
+      transition: opacity .2s cubic-bezier(.2,.7,.3,1), transform .2s cubic-bezier(.2,.7,.3,1);
       transition-delay: var(--reveal-delay, 0ms);
     }
 
     .reveal.in {
       opacity: 1;
       transform: none;
-      filter: blur(0);
     }
 
     .reveal-left {
@@ -142,12 +143,11 @@
     }
 
     .card-lift {
-      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      transition: box-shadow .2s cubic-bezier(.2,.7,.3,1), border-color .2s cubic-bezier(.2,.7,.3,1);
     }
 
     .card-lift:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px -28px rgba(11, 20, 34, .38);
+      box-shadow: 0 4px 16px rgba(14, 34, 64, .12);
     }
 
     #preloader {
@@ -232,6 +232,21 @@
         transform: scale(1.04);
         opacity: 1;
       }
+    }
+
+    @keyframes ship-sail {
+      0% { left: -300px; }
+      100% { left: 110%; }
+    }
+
+    @keyframes wave-drift {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-hint {
+      0%, 100% { top: -12px; }
+      50% { top: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {

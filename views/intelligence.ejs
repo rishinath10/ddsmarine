@@ -1,0 +1,139 @@
+<%- include('partials/head') %>
+</head>
+
+<body x-data="{ mobileOpen: false }">
+
+  <%- include('partials/header') %>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-20 bg-navy-gradient overflow-hidden">
+      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #C9A24B 0%, transparent 50%);"></div>
+      <div class="container mx-auto px-4 lg:px-8 text-center relative z-10">
+        <div class="reveal">
+          <% if (locals.issue) { %>
+            <!-- Single Issue View -->
+            <a href="/intelligence" class="inline-flex items-center gap-2 text-gold-light hover:text-gold transition-colors mb-6 text-sm font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+              Back to Intelligence
+            </a>
+            <span class="text-gold text-sm font-medium tracking-widest uppercase">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
+            <h1 class="text-3xl md:text-5xl font-heading font-bold text-ivory mt-3 max-w-3xl mx-auto leading-tight"><%= issue.title %></h1>
+          <% } else { %>
+            <!-- Intelligence Archive View -->
+            <span class="text-gold text-sm font-medium tracking-widest uppercase">Premium Weekly Publication</span>
+            <h1 class="text-3xl md:text-5xl font-heading font-bold text-ivory mt-3">DDS Weekly Maritime Intelligence</h1>
+            <p class="text-ivory/60 mt-4 max-w-2xl mx-auto">Crude and product tanker markets, Singapore and global bunker pricing, sanctions and compliance watch, and Southeast Asia maritime risk — delivered weekly.</p>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
+    <% if (!locals.issue) { %>
+      <!-- Intelligence Archive -->
+      <section class="py-16 lg:py-24 bg-ivory">
+        <div class="container mx-auto px-4 lg:px-8">
+          <% if (issues.length === 0) { %>
+            <div class="text-center py-16">
+              <p class="text-navy/50 text-lg">No issues published yet. Check back soon!</p>
+            </div>
+          <% } else { %>
+            <% var featured = issues[0]; var rest = issues.slice(1); %>
+
+            <!-- Featured Latest Issue -->
+            <div class="reveal rounded-3xl bg-navy-gradient overflow-hidden shadow-elegant border border-gold/20 grid md:grid-cols-2">
+              <div class="aspect-[4/3] md:aspect-auto">
+                <img src="<%= featured.coverImage %>" alt="<%= featured.title %>" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-8 md:p-10 flex flex-col justify-center">
+                <span class="text-gold text-xs font-medium tracking-widest uppercase">Latest Issue &middot; No. <%= featured.issueNumber %></span>
+                <h2 class="mt-3 font-heading text-2xl md:text-3xl font-semibold text-ivory leading-tight"><%= featured.title %></h2>
+                <p class="mt-3 text-ivory/60 text-sm leading-relaxed"><%= featured.excerpt %></p>
+                <a href="/intelligence/<%= featured.slug %>" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-gold-gradient text-navy-deep shadow-gold hover:scale-105 transition-transform w-fit">
+                  Read Issue
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <% if (rest.length > 0) { %>
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <% rest.forEach(function(issue) { %>
+                  <article class="reveal bg-white rounded-2xl overflow-hidden shadow-elegant border border-slate-200/60 card-lift">
+                    <img src="<%= issue.coverImage %>" alt="<%= issue.title %>" class="w-full aspect-[16/9] object-cover" />
+                    <div class="p-8">
+                      <span class="text-xs text-navy/40">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
+                      <h3 class="text-xl font-heading font-semibold text-navy mt-2 mb-3">
+                        <a href="/intelligence/<%= issue.slug %>" class="hover:text-gold-dark transition-colors"><%= issue.title %></a>
+                      </h3>
+                      <p class="text-navy/60 text-sm leading-relaxed mb-4"><%= issue.excerpt %></p>
+                      <a href="/intelligence/<%= issue.slug %>" class="inline-flex items-center gap-1 text-gold-dark font-medium text-sm hover:text-gold transition-colors">
+                        Read More
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                      </a>
+                    </div>
+                  </article>
+                <% }); %>
+              </div>
+            <% } %>
+          <% } %>
+        </div>
+      </section>
+    <% } else { %>
+      <!-- Single Issue Content -->
+      <article class="py-16 lg:py-24 bg-ivory">
+        <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+          <div class="reveal">
+            <img src="<%= issue.coverImage %>" alt="<%= issue.title %>" class="w-full rounded-2xl shadow-elegant border border-slate-200/60" />
+
+            <p class="mt-8 text-navy/70 leading-relaxed"><%= issue.excerpt %></p>
+
+            <% if (issue.highlights && issue.highlights.length) { %>
+              <div class="mt-8 p-6 rounded-2xl bg-navy-gradient border border-gold/20">
+                <h3 class="text-gold text-xs font-medium tracking-widest uppercase mb-4">In This Issue</h3>
+                <ul class="space-y-2">
+                  <% issue.highlights.forEach(function(h) { %>
+                    <li class="flex items-start gap-3 text-ivory/80 text-sm">
+                      <span class="text-gold mt-0.5">&#9670;</span>
+                      <span><%= h %></span>
+                    </li>
+                  <% }); %>
+                </ul>
+              </div>
+            <% } %>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <a href="<%= issue.pdfUrl %>" download class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-gold-gradient text-navy-deep shadow-gold hover:scale-105 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M21 21H3"/></svg>
+                Download Full Issue (PDF)
+              </a>
+              <a href="/contact" class="text-navy/60 hover:text-navy text-sm transition-colors">Subscribe for weekly updates &rarr;</a>
+            </div>
+          </div>
+
+          <div class="mt-12 pt-8 border-t border-slate-200">
+            <a href="/intelligence" class="inline-flex items-center gap-2 text-navy/50 hover:text-navy transition-colors text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+              Back to all issues
+            </a>
+          </div>
+        </div>
+      </article>
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script>
+    // Reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
