@@ -40,6 +40,31 @@ function loadAllPosts() {
   }
 }
 
+// Helper: load intelligence issues from JSON
+function loadIntelligenceIssues() {
+  const filePath = path.join(__dirname, 'intelligence-issues.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const issues = JSON.parse(data);
+    return issues.filter(i => i.published).sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (err) {
+    console.error('Error loading intelligence issues:', err.message);
+    return [];
+  }
+}
+
+// Load ALL issues (including drafts)
+function loadAllIntelligenceIssues() {
+  const filePath = path.join(__dirname, 'intelligence-issues.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(data).sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (err) {
+    console.error('Error loading all intelligence issues:', err.message);
+    return [];
+  }
+}
+
 // Static SEO files
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, 'robots.txt')));
 app.get('/sitemap.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap.xml')));
@@ -47,11 +72,13 @@ app.get('/sitemap.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap
 // Routes
 app.get('/', (req, res) => {
     const blogPosts = loadBlogPosts();
-    res.render('index', { 
+    const intelligenceIssues = loadIntelligenceIssues();
+    res.render('index', {
         title: 'DDS Marine Energy Services | Marine Operations Malaysia',
         description: 'DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca.',
         path: '/',
-        blogPosts: blogPosts
+        blogPosts: blogPosts,
+        latestIssue: intelligenceIssues[0] || null
     });
 });
 
@@ -106,10 +133,11 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/thankyou', (req, res) => {
-    res.render('thankyou', { 
+    res.render('thankyou', {
         title: 'Message Received | DDS Marine',
         description: 'Thank you for contacting DDS Marine Energy Services. We will get back to you shortly.',
-        path: '/thankyou'
+        path: '/thankyou',
+        noindex: true
     });
 });
 
@@ -129,10 +157,11 @@ app.get('/blog/:slug', (req, res) => {
     const posts = loadAllPosts();
     const post = posts.find(p => p.slug === req.params.slug);
     if (!post) {
-        return res.status(404).render('404', { 
+        return res.status(404).render('404', {
             title: 'Post Not Found | DDS Marine',
             description: 'The blog post you are looking for does not exist.',
-            path: req.path
+            path: req.path,
+            noindex: true
         });
     }
     res.render('blog', { 
@@ -142,6 +171,39 @@ app.get('/blog/:slug', (req, res) => {
         ogImage: post.ogImage || 'https://www.ddsmarine.com/assets/hero-ship.jpg',
         posts: [],
         post: post
+    });
+});
+
+// Intelligence routes
+app.get('/intelligence', (req, res) => {
+    const issues = loadIntelligenceIssues();
+    res.render('intelligence', {
+        title: 'DDS Weekly Maritime Intelligence | DDS Marine',
+        description: 'Weekly analysis of crude and product tanker markets, bunker pricing, sanctions and compliance, and Southeast Asia maritime risk from DDS Marine.',
+        path: '/intelligence',
+        issues: issues,
+        issue: null
+    });
+});
+
+app.get('/intelligence/:slug', (req, res) => {
+    const issues = loadAllIntelligenceIssues();
+    const issue = issues.find(i => i.slug === req.params.slug);
+    if (!issue) {
+        return res.status(404).render('404', {
+            title: 'Issue Not Found | DDS Marine',
+            description: 'The intelligence issue you are looking for does not exist.',
+            path: req.path,
+            noindex: true
+        });
+    }
+    res.render('intelligence', {
+        title: issue.title + ' | DDS Weekly Maritime Intelligence',
+        description: issue.excerpt,
+        path: '/intelligence/' + issue.slug,
+        ogImage: issue.coverImage ? 'https://www.ddsmarine.com' + issue.coverImage : 'https://www.ddsmarine.com/assets/offshore-rig.jpg',
+        issues: [],
+        issue: issue
     });
 });
 
@@ -158,10 +220,11 @@ app.post('/send-mail', (req, res) => {
 
 // 404 handler
 app.use((req, res, next) => {
-    res.status(404).render('404', { 
+    res.status(404).render('404', {
         title: 'Page Not Found | DDS Marine',
         description: 'The page you are looking for does not exist.',
-        path: req.path
+        path: req.path,
+        noindex: true
     });
 });
 

@@ -7,7 +7,8 @@
   <title><%= title %></title>
   <meta name="description" content="<%= locals.description || 'DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca.' %>" />
   <link rel="canonical" href="https://www.ddsmarine.com<%= locals.path || '/' %>" />
-  <meta name="robots" content="index,follow" />
+  <meta name="robots" content="<%= locals.noindex ? 'noindex,follow' : 'index,follow' %>" />
+  <meta name="theme-color" content="#0E2240" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="DDS Marine Energy Services" />
   <meta property="og:locale" content="en_MY" />
@@ -25,10 +26,40 @@
   <meta name="twitter:image" content="<%= locals.ogImage || 'https://www.ddsmarine.com/assets/hero-ship.jpg' %>" />
   <link rel="icon" type="image/png" href="/assets/dds-logo-transparent.png" />
   <link rel="apple-touch-icon" href="/assets/dds-logo-transparent.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MaritimeOrganization",
+    "@id": "https://www.ddsmarine.com/#organization",
+    "name": "DDS Marine Energy Services",
+    "legalName": "DDS Marine Energy Services Sdn. Bhd.",
+    "alternateName": "DDS Marine",
+    "url": "https://www.ddsmarine.com/",
+    "logo": "https://www.ddsmarine.com/assets/dds-logo-transparent.png",
+    "image": "https://www.ddsmarine.com/assets/hero-ship.jpg",
+    "description": "DDS Marine Energy Services provides STS operations, deep-draft pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca.",
+    "foundingDate": "2020",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3J-13-1 Straits Quay, Jalan Seri Tanjung Pinang, Tanjung Tokong",
+      "postalCode": "10470",
+      "addressLocality": "Pulau Pinang",
+      "addressCountry": "MY"
+    },
+    "telephone": "+60165063003",
+    "email": "info@ddsmarine.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/dds-marine-energy",
+      "https://wa.me/60165063003"
+    ],
+    "areaServed": ["Malaysia", "Singapore", "Indonesia", "Hong Kong", "India", "United Arab Emirates"],
+    "knowsAbout": ["Ship-to-Ship Transfer", "Deep Draft Pilotage", "Marine Bunkering", "Vessel Chartering", "Marine Advisory", "Mooring Master Services"]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
     rel="stylesheet">
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
   <script>
@@ -37,13 +68,15 @@
         extend: {
           fontFamily: {
             heading: ['Jost', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-            body: ['Raleway', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            body: ['"EB Garamond"', 'Georgia', 'serif'],
             bebas: ['"Bebas Neue"', 'sans-serif'],
           },
           colors: {
-            gold: { DEFAULT: '#C9A24B', light: '#E8D58A', dark: '#B8862F' },
-            navy: { DEFAULT: '#152238', deep: '#0B1422' },
-            ivory: '#F8F4EC',
+            gold: { DEFAULT: '#C8973F', light: '#DFC48A', dark: '#A87A2E' },
+            navy: { DEFAULT: '#0E2240', deep: '#081527' },
+            ivory: '#F7F3EA',
+            hairline: '#D9C48F',
+            ink: '#1C2B3A',
           },
           boxShadow: {
             gold: '0 12px 40px -12px rgba(201,162,75,0.45)',
@@ -66,15 +99,25 @@
       },
     }
   </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <style>
+    html {
+      background: #F8F4EC;
+      overscroll-behavior-y: none;
+    }
+
     body {
-      font-family: 'Raleway', sans-serif;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 500;
       background: #F8F4EC;
       color: #152238;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      overscroll-behavior-y: none;
+      min-height: 100vh;
+      min-height: 100dvh;
     }
 
     h1,
@@ -117,24 +160,31 @@
 
     .reveal {
       opacity: 0;
-      transform: translate3d(0, 32px, 0) scale(.985);
-      filter: blur(6px);
-      transition: opacity .85s cubic-bezier(.22, 1, .36, 1), transform .85s cubic-bezier(.22, 1, .36, 1), filter .85s cubic-bezier(.22, 1, .36, 1);
+      transform: translate3d(0, 22px, 0);
+      transition: opacity .7s cubic-bezier(.16,.8,.24,1), transform .7s cubic-bezier(.16,.8,.24,1);
       transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
     }
 
     .reveal.in {
       opacity: 1;
       transform: none;
-      filter: blur(0);
     }
 
     .reveal-left {
-      transform: translate3d(-32px, 24px, 0) scale(.985);
+      transform: translate3d(-36px, 0, 0);
     }
 
     .reveal-right {
-      transform: translate3d(32px, 24px, 0) scale(.985);
+      transform: translate3d(36px, 0, 0);
+    }
+
+    .reveal-scale {
+      transform: translate3d(0, 16px, 0) scale(.94);
+    }
+
+    .reveal-scale.in {
+      transform: none;
     }
 
     .float-soft {
@@ -142,12 +192,11 @@
     }
 
     .card-lift {
-      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      transition: box-shadow .2s cubic-bezier(.2,.7,.3,1), border-color .2s cubic-bezier(.2,.7,.3,1);
     }
 
     .card-lift:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px -28px rgba(11, 20, 34, .38);
+      box-shadow: 0 4px 16px rgba(14, 34, 64, .12);
     }
 
     #preloader {
@@ -234,6 +283,11 @@
       }
     }
 
+    @keyframes hero-kenburns {
+      0% { transform: scale(1) translate3d(0,0,0); }
+      100% { transform: scale(1.08) translate3d(-1%, -1%, 0); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       *,
@@ -245,7 +299,10 @@
         transition-duration: .01ms !important;
       }
 
-      .reveal {
+      .reveal,
+      .reveal-left,
+      .reveal-right,
+      .reveal-scale {
         opacity: 1 !important;
         transform: none !important;
         filter: none !important;

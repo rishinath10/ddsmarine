@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "issue-001",
+    "issueNumber": 1,
+    "title": "DDS Weekly Maritime Intelligence — Issue 001",
+    "date": "2026-07-31",
+    "coverImage": "/assets/offshore-rig.jpg",
+    "excerpt": "The inaugural issue of DDS Weekly Maritime Intelligence — covering crude and product tanker markets, Singapore and global bunker pricing, sanctions and compliance watch, and weekly fixtures across Southeast Asia.",
+    "highlights": [
+      "Crude & product tanker market overview",
+      "Singapore & global bunker pricing",
+      "Sanctions / Compliance Watch — DDS Compliance Rating",
+      "Southeast Asia Signature section",
+      "Muar / Johor STS corridor update",
+      "Weekly fixtures and port intelligence"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-001.pdf",
+    "published": true
+  },
+  {
+    "slug": "issue-002",
+    "issueNumber": 2,
+    "title": "DDS Weekly Maritime Intelligence — Issue 002",
+    "date": "2026-08-07",
+    "coverImage": "/assets/sts-operation.jpg",
+    "excerpt": "This week's issue examines the de-escalation around the Strait of Hormuz against a backdrop of still-elevated physical and route risk, alongside the usual market, bunker, and compliance intelligence.",
+    "highlights": [
+      "Hormuz de-escalation vs. elevated physical risk",
+      "Crude & product tanker market overview",
+      "Singapore & global bunker pricing",
+      "Sanctions / Compliance Watch — DDS Compliance Rating",
+      "Southeast Asia Signature section",
+      "Muar / Johor STS corridor update",
+      "Weekly fixtures and port intelligence",
+      "Geopolitical & route risk assessment"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-002.pdf",
+    "published": true
+  }
+]
