@@ -1,9 +1,5 @@
 <%- include('partials/head') %>
-</head>
-
-<body x-data="{ mobileOpen: false }">
-
-  <%- include('partials/header') %>
+<%- include('partials/header') %>
 
   <main>
     <!-- Hero Section -->
@@ -91,17 +87,3 @@
   </main>
 
   <%- include('partials/footer') %>
-
-  <script>
-    // Reveal animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
-</body>
-</html>

@@ -15,63 +15,124 @@
   </script>
 
   <%
-    var navLinks = [
+    // Grouped nav: fewer top-level items, related pages tucked into dropdowns.
+    var navItems = [
       { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
       { label: 'Services', href: '/services' },
-      { label: 'Partners', href: '/partners' },
-      { label: 'Projects', href: '/projects' },
-      { label: 'Team', href: '/team' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Intelligence', href: '/intelligence' },
-      { label: 'Contact', href: '/contact' }
+      { label: 'Company', children: [
+          { label: 'Partners', href: '/partners', desc: 'Our alliance network' },
+          { label: 'Projects', href: '/projects', desc: 'Operations delivered' },
+          { label: 'Team', href: '/team', desc: 'Who runs the ship' }
+        ] },
+      { label: 'Insights', children: [
+          { label: 'Blog', href: '/blog', desc: 'Company news & articles' },
+          { label: 'Intelligence', href: '/intelligence', desc: 'Weekly maritime briefing' }
+        ] }
     ];
     var currentPath = locals.path || '/';
     function isActive(href) {
       if (href === '/') return currentPath === '/';
       return currentPath === href || currentPath.indexOf(href + '/') === 0;
     }
+    function isGroupActive(children) {
+      return children.some(function (c) { return isActive(c.href); });
+    }
   %>
   <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="container mx-auto px-3 lg:px-6 py-2.5 lg:py-3">
-      <div class="flex items-center justify-between rounded-xl px-4 lg:px-5 h-14 lg:h-16 transition-all duration-300 border"
+    <div class="container mx-auto px-3 lg:px-6 py-2 lg:py-2.5">
+      <div class="flex items-center justify-between lg:justify-start gap-4 lg:gap-10 rounded-full px-5 lg:px-8 h-12 lg:h-14 transition-all duration-300 border lg:w-fit lg:mx-auto"
         :class="navScrolled
-          ? 'bg-navy/80 backdrop-blur-xl border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
-          : 'bg-white/10 backdrop-blur-lg border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.15)]'">
-        <a href="/" class="flex items-center gap-2.5 shrink-0">
-          <img src="/assets/dds-logo-transparent.png" alt="DDS Marine" class="h-9 w-auto" width="36" height="36" />
-          <span class="font-heading text-sm font-bold tracking-tight leading-none hidden sm:block text-ivory drop-shadow-sm">DDS MARINE ENERGY SERVICES</span>
+          ? 'bg-navy-deep/90 backdrop-blur-xl border-white/15 shadow-[0_8px_28px_rgba(0,0,0,0.35)]'
+          : 'bg-navy-deep/40 backdrop-blur-lg border-white/20 shadow-[0_8px_28px_rgba(0,0,0,0.2)]'">
+        <a href="/" class="flex items-center gap-3 shrink-0">
+          <img src="/assets/dds-logo-transparent.png" alt="DDS Marine" class="h-9 lg:h-11 w-auto" width="44" height="44" />
+          <span class="font-heading text-[12px] sm:text-[13px] font-bold tracking-tight leading-none text-ivory whitespace-nowrap">DDS MARINE ENERGY SERVICES</span>
         </a>
+
         <nav class="hidden lg:flex items-center gap-0.5">
-          <% navLinks.forEach(function(link) { %>
-            <a href="<%= link.href %>"
-              class="relative text-[13px] font-heading font-medium uppercase tracking-[0.06em] px-2.5 py-1.5 rounded-lg transition-all duration-200 <%= isActive(link.href) ? 'text-gold bg-white/10' : 'text-ivory/85 hover:text-gold hover:bg-white/10' %>">
-              <%= link.label %>
-            </a>
+          <% navItems.forEach(function(item) { %>
+            <% if (item.children) { %>
+              <div class="relative" x-data="{ open: false }" @click.outside="open = false" @keyup.escape="open = false">
+                <button type="button" @click="open = !open"
+                  class="flex items-center gap-1 text-[12px] font-heading font-medium uppercase tracking-[0.06em] px-2.5 py-1.5 rounded-md transition-all duration-200"
+                  :class="open ? 'text-gold bg-white/10' : '<%= isGroupActive(item.children) ? 'text-gold' : 'text-ivory/85' %> hover:text-gold hover:bg-white/10'">
+                  <%= item.label %>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 transition-transform duration-200" :class="open ? 'rotate-180' : ''">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+                <div x-show="open" x-cloak
+                  x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2 scale-95"
+                  x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                  x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-95"
+                  style="transform-origin: top left;"
+                  class="absolute left-0 top-full mt-2 w-64 rounded-xl bg-navy-deep/95 backdrop-blur-xl border border-white/15 shadow-[0_16px_40px_rgba(0,0,0,0.45)] p-2 overflow-hidden">
+                  <% item.children.forEach(function(child) { %>
+                    <a href="<%= child.href %>" @click="open = false"
+                      class="block px-3.5 py-2.5 rounded-lg transition-colors <%= isActive(child.href) ? 'bg-white/10' : 'hover:bg-white/5' %>">
+                      <span class="block text-sm font-heading font-semibold <%= isActive(child.href) ? 'text-gold' : 'text-ivory' %>"><%= child.label %></span>
+                      <span class="block font-heading text-xs text-ivory/50 mt-0.5"><%= child.desc %></span>
+                    </a>
+                  <% }); %>
+                </div>
+              </div>
+            <% } else { %>
+              <a href="<%= item.href %>"
+                class="relative text-[12px] font-heading font-medium uppercase tracking-[0.06em] px-2.5 py-1.5 rounded-md transition-all duration-200 <%= isActive(item.href) ? 'text-gold bg-white/10' : 'text-ivory/85 hover:text-gold hover:bg-white/10' %>">
+                <%= item.label %>
+              </a>
+            <% } %>
           <% }); %>
+          <span class="w-px h-4 bg-white/15 mx-1"></span>
+          <a href="/contact"
+            class="inline-flex items-center gap-1.5 text-[12px] font-heading font-bold uppercase tracking-[0.06em] px-3.5 py-1.5 rounded-md bg-gold text-navy hover:bg-gold-dark transition-colors">
+            Get a Quote
+          </a>
         </nav>
-        <button @click="mobileOpen = !mobileOpen" class="lg:hidden text-ivory p-2" aria-label="Toggle menu">
+
+        <button @click="mobileOpen = !mobileOpen" class="lg:hidden text-ivory p-1.5" aria-label="Toggle menu">
           <span x-show="!mobileOpen"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
               <line x1="4" x2="20" y1="12" y2="12" />
               <line x1="4" x2="20" y1="6" y2="6" />
               <line x1="4" x2="20" y1="18" y2="18" />
             </svg></span>
           <span x-show="mobileOpen" x-cloak><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
               <path d="M18 6 6 18" />
               <path d="m6 6 12 12" />
             </svg></span>
         </button>
       </div>
-      <!-- Mobile dropdown -->
-      <div x-show="mobileOpen" x-cloak x-transition
-        class="lg:hidden mt-2 rounded-xl bg-navy border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden">
+
+      <!-- Mobile dropdown: unfurls downward from the header, curtain-style -->
+      <div x-show="mobileOpen" x-cloak
+        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-3 scale-y-95"
+        x-transition:enter-end="opacity-100 translate-y-0 scale-y-100"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 scale-y-100"
+        x-transition:leave-end="opacity-0 -translate-y-2 scale-y-95"
+        style="transform-origin: top center;"
+        class="lg:hidden mt-2 rounded-xl bg-navy-deep/95 backdrop-blur-xl border border-white/15 shadow-[0_16px_40px_rgba(0,0,0,0.5)] overflow-hidden max-h-[calc(100vh-6rem)] overflow-y-auto">
         <nav class="flex flex-col p-2">
-          <% navLinks.forEach(function(link) { %>
-            <a href="<%= link.href %>"
-              class="px-4 py-3 text-base font-heading font-semibold uppercase tracking-[0.04em] rounded-lg transition-colors <%= isActive(link.href) ? 'text-gold bg-white/10' : 'text-white hover:text-gold hover:bg-white/5' %>"><%= link.label %></a>
+          <% navItems.forEach(function(item, idx) { %>
+            <% if (item.children) { %>
+              <div class="px-4 pt-3 pb-1 text-[11px] font-heading font-bold uppercase tracking-[0.15em] text-ivory/40"><%= item.label %></div>
+              <% item.children.forEach(function(child) { %>
+                <a href="<%= child.href %>"
+                  class="px-4 py-3 text-base font-heading font-semibold uppercase tracking-[0.04em] rounded-lg transition-colors <%= isActive(child.href) ? 'text-gold bg-white/10' : 'text-white hover:text-gold hover:bg-white/5' %>"><%= child.label %></a>
+              <% }); %>
+            <% } else { %>
+              <a href="<%= item.href %>"
+                class="px-4 py-3 text-base font-heading font-semibold uppercase tracking-[0.04em] rounded-lg transition-colors <%= isActive(item.href) ? 'text-gold bg-white/10' : 'text-white hover:text-gold hover:bg-white/5' %>"><%= item.label %></a>
+            <% } %>
           <% }); %>
+          <a href="/contact"
+            class="mt-2 inline-flex items-center justify-center gap-1.5 text-sm font-heading font-bold uppercase tracking-[0.06em] px-4 py-3 rounded-lg bg-gold text-navy hover:bg-gold-dark transition-colors">
+            Get a Quote
+          </a>
         </nav>
       </div>
     </div>

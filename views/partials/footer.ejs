@@ -86,6 +86,29 @@
         }
         setTimeout(hidePreloader, 2400);
 
+        // Hero background video: only starts fetching after the page has
+        // fully loaded (so the ~2.5MB clip never competes with initial
+        // paint), then cross-fades in over the static hero photo.
+        const initHeroVideo = () => {
+          const video = document.getElementById('hero-video');
+          if (!video) return;
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          const conn = navigator.connection || navigator.webkitConnection;
+          if (conn && (conn.saveData || /^(slow-2g|2g)$/.test(conn.effectiveType))) return;
+
+          const source = video.querySelector('source[data-src]');
+          if (!source) return;
+          source.src = source.getAttribute('data-src');
+          video.addEventListener('playing', () => video.classList.remove('opacity-0'), { once: true });
+          video.load();
+          video.play().catch(() => { /* autoplay blocked; static photo stays */ });
+        };
+        if (document.readyState === 'complete') {
+          initHeroVideo();
+        } else {
+          window.addEventListener('load', initHeroVideo, { once: true });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
           const heroParallax = document.getElementById('hero-parallax');
           if (heroParallax && !(window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
@@ -149,7 +172,7 @@
           const reveals = Array.from(document.querySelectorAll('.reveal'));
           reveals.forEach((el, index) => {
             if (!el.style.getPropertyValue('--reveal-delay')) {
-              el.style.setProperty('--reveal-delay', `${Math.min(index % 6, 5) * 70}ms`);
+              el.style.setProperty('--reveal-delay', `${Math.min(index % 8, 7) * 90}ms`);
             }
           });
 
