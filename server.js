@@ -90,19 +90,31 @@ function renderIssueContent(issue) {
     return empty;
   }
 
-  const renderer = new marked.Renderer();
-  renderer.heading = function ({ tokens, depth }) {
-    const text = this.parser.parseInline(tokens).replace(/<[^>]+>/g, '');
-    const slug = slugify(text);
-    return `<h${depth} id="${slug}">${this.parser.parseInline(tokens)}</h${depth}>\n`;
-  };
+  // Slugs must come from the SAME raw markdown text used for the table of
+  // contents, not from post-render HTML (which entity-escapes "&" etc. and
+  // would otherwise produce mismatched ids like "clean-amp-product-tankers"
+  // vs a toc link of "clean-product-tankers").
+  const allTokens = marked.lexer(md);
+  const headingTokens = allTokens.filter((t) => t.type === 'heading');
 
-  const html = marked.parse(md, { renderer });
+  const seen = new Map();
+  const orderedSlugs = headingTokens.map((t) => {
+    const base = slugify(t.text);
+    const count = seen.get(base) || 0;
+    seen.set(base, count + 1);
+    return count === 0 ? base : `${base}-${count + 1}`;
+  });
 
-  const toc = marked
-    .lexer(md)
-    .filter((t) => t.type === 'heading' && t.depth === 2)
-    .map((t) => ({ text: t.text, slug: slugify(t.text) }));
+  let headingIndex = 0;
+  const html = marked.parse(md).replace(/<h([1-6])>/g, (match, level) => {
+    const slug = orderedSlugs[headingIndex] || '';
+    headingIndex += 1;
+    return `<h${level} id="${slug}">`;
+  });
+
+  const toc = headingTokens
+    .map((t, i) => ({ text: t.text, slug: orderedSlugs[i], depth: t.depth }))
+    .filter((t) => t.depth === 2);
 
   const wordCount = md.split(/\s+/).filter(Boolean).length;
   const readingTimeMin = Math.max(1, Math.round(wordCount / 200));

@@ -58,5 +58,95 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-002.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-003",
+    "issueNumber": 3,
+    "title": "DDS Weekly Maritime Intelligence — Issue 003",
+    "date": "2026-08-13",
+    "coverImage": "/assets/hero-ship.jpg",
+    "excerpt": "The Hormuz blockade turns kinetic: a US Navy engagement, a Gard P&I war-risk cancellation across the Indian Ocean, Gulf of Aden and Red Sea, and the return of full Baltic Exchange freight data.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$87.05/bbl", "change": "▲ 12.1% w/w", "direction": "up" },
+      { "label": "WTI Crude", "value": "US$81.25/bbl", "change": "▼ 2.43% intraday", "direction": "down" },
+      { "label": "Singapore VLSFO", "value": "US$844.50/mt", "change": "▼ US$3.00 d/d", "direction": "down" },
+      { "label": "Singapore MGO", "value": "US$1,236.50/mt", "change": "▲ US$26.00 d/d", "direction": "up" },
+      { "label": "Baltic Dirty Tanker Index", "value": "2,663 pts", "change": "▲ 19 pts", "direction": "up" },
+      { "label": "Baltic LPG Index", "value": "19,375 pts", "change": "▲ 1,686 pts", "direction": "up" }
+    ],
+    "ceoQuote": "Two weeks ago the market was pricing a Hormuz deal. This week the US Navy fired on a ship trying to reach Iran. That is the distance between headline and reality in this trade.",
+    "riskLevel": "Severe",
+    "contentFile": "content/intelligence/issue-003.md",
+    "highlights": [
+      "US Navy engagement turns the Hormuz blockade kinetic",
+      "Gard P&I war-risk cancellation across the Indian Ocean, Gulf of Aden and Red Sea",
+      "Crude & product tanker market overview",
+      "Singapore & global bunker pricing",
+      "Sanctions & Compliance Watch",
+      "Full Baltic Exchange freight-rate breakdown restored",
+      "New: Ship Recycling & Demolition Market"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-003.pdf",
+    "published": true
+  },
+  {
+    "slug": "issue-004",
+    "issueNumber": 4,
+    "title": "DDS Weekly Maritime Intelligence — Issue 004",
+    "date": "2026-08-21",
+    "coverImage": "/assets/offshore-rig.jpg",
+    "excerpt": "The Islamabad MoU lapses: a crew fatality aboard MINOAN DIGNITY, the first Iranian seizure since June, and over 100 VLCCs withdrawn from Hormuz and Bab el-Mandeb on Beijing's guidance.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$93.62/bbl", "change": "▲ 2.18% intraday", "direction": "up" },
+      { "label": "WTI Crude", "value": "US$86.70/bbl", "change": "▲ 2.74% intraday", "direction": "up" },
+      { "label": "Murban Crude", "value": "US$101.00/bbl", "change": "▲ above US$100", "direction": "up" },
+      { "label": "Singapore VLSFO", "value": "US$836.00/mt", "change": "▲ US$3.00 d/d", "direction": "up" },
+      { "label": "Baltic Dirty Tanker Index", "value": "2,894 pts", "change": "▲ 70 pts", "direction": "up" },
+      { "label": "VLCC TCE", "value": "US$266,512/d", "change": "▲ US$15,746", "direction": "up" }
+    ],
+    "ceoQuote": "A chief engineer went to work this week and did not come home. Before we talk about worldscale points, we should sit with that.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-004.md",
+    "highlights": [
+      "MoU lapses; Iran asserts a transit permit-and-toll regime",
+      "Crew fatality aboard MINOAN DIGNITY; tanker AMARA seized",
+      "100+ VLCCs withdrawn from Hormuz and Bab el-Mandeb",
+      "New: Vessel Security & Incident Log",
+      "Zombie tanker fleet linked to Malaysia's Riau outer port limits",
+      "Full Baltic Exchange freight-rate breakdown",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-004.pdf",
+    "published": true
+  },
+  {
+    "slug": "issue-005",
+    "issueNumber": 5,
+    "title": "DDS Weekly Maritime Intelligence — Issue 005",
+    "date": "2026-08-28",
+    "coverImage": "/assets/port-sunset.jpg",
+    "excerpt": "A calmer week: no new casualty or seizure, reported Iran-Oman progress on managed transit, and a joint pledge from Malaysia, Singapore and Indonesia to keep the Malacca and Singapore Straits open.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$88.57/bbl", "change": "▼ off 4-day high", "direction": "down" },
+      { "label": "WTI Crude", "value": "US$82.25/bbl", "change": "─ broadly flat", "direction": "flat" },
+      { "label": "Singapore VLSFO", "value": "US$781.00/mt", "change": "▼ US$36.00 d/d", "direction": "down" },
+      { "label": "Baltic Dirty Tanker Index", "value": "2,801 pts", "change": "▼ 50 pts", "direction": "down" },
+      { "label": "Baltic Clean Tanker Index", "value": "1,353 pts", "change": "▲ 2 pts", "direction": "up" },
+      { "label": "VLCC TCE", "value": "US$332,541/d", "change": "▼ US$907 on the day", "direction": "down" }
+    ],
+    "ceoQuote": "A quieter week is not the same as a settled one. We should read it that way.",
+    "riskLevel": "Elevated",
+    "contentFile": "content/intelligence/issue-005.md",
+    "highlights": [
+      "No new casualty or seizure — risk level down from Critical to Elevated",
+      "Iran-Oman reported close to a managed Hormuz transit framework",
+      "Malaysia, Singapore & Indonesia pledge to keep the Straits open under UNCLOS",
+      "VLCC TCE holds above US$330,000/day despite the calmer tone",
+      "Container majors test a partial return to the Suez route",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-005.pdf",
+    "published": true
   }
 ]
