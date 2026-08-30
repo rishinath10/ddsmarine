@@ -1,121 +1,228 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-20 bg-navy-gradient overflow-hidden">
-      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #C9A24B 0%, transparent 50%);"></div>
-      <div class="container mx-auto px-4 lg:px-8 text-center relative z-10">
-        <div class="reveal">
-          <% if (locals.issue) { %>
-            <!-- Single Issue View -->
-            <a href="/intelligence" class="inline-flex items-center gap-2 text-gold-light hover:text-gold transition-colors mb-6 text-sm font-medium">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-              Back to Intelligence
-            </a>
-            <span class="text-gold text-sm font-medium tracking-widest uppercase">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
-            <h1 class="text-3xl md:text-5xl font-heading font-bold text-ivory mt-3 max-w-3xl mx-auto leading-tight"><%= issue.title %></h1>
-          <% } else { %>
-            <!-- Intelligence Archive View -->
-            <span class="text-gold text-sm font-medium tracking-widest uppercase">Premium Weekly Publication</span>
-            <h1 class="text-3xl md:text-5xl font-heading font-bold text-ivory mt-3">DDS Weekly Maritime Intelligence</h1>
-            <p class="text-ivory/60 mt-4 max-w-2xl mx-auto">Crude and product tanker markets, Singapore and global bunker pricing, sanctions and compliance watch, and Southeast Asia maritime risk — delivered weekly.</p>
-          <% } %>
-        </div>
+<% if (!locals.issue) { %>
+
+  <!-- ============ ARCHIVE VIEW ============ -->
+  <section class="relative min-h-[50vh] flex items-end overflow-hidden pt-24 pb-16">
+    <div class="absolute inset-0">
+      <img src="/assets/offshore-rig.jpg" alt="" class="photo-crisp w-full h-full object-cover" fetchpriority="high" decoding="async" />
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-deep/90 via-navy-deep/65 to-navy-deep/35"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/15 to-transparent"></div>
+    </div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+      <div class="reveal inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gold/40 bg-navy-deep/40 backdrop-blur">
+        <span class="h-1.5 w-1.5 rounded-full bg-gold animate-pulse"></span>
+        <span class="text-xs font-heading uppercase tracking-[0.3em] text-gold-light">Premium Weekly Publication</span>
       </div>
-    </section>
+      <h1 class="reveal mt-6 font-heading text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] text-ivory max-w-3xl">DDS Weekly Maritime Intelligence</h1>
+      <p class="reveal mt-5 text-lg text-ivory/70 max-w-2xl leading-relaxed">Crude and product tanker markets, Singapore and global bunker pricing, sanctions and compliance watch, and Southeast Asia maritime risk &mdash; delivered weekly, written by DDS Marine's own operators.</p>
+    </div>
+  </section>
 
-    <% if (!locals.issue) { %>
-      <!-- Intelligence Archive -->
-      <section class="py-16 lg:py-24 bg-ivory">
-        <div class="container mx-auto px-4 lg:px-8">
-          <% if (issues.length === 0) { %>
-            <div class="text-center py-16">
-              <p class="text-navy/50 text-lg">No issues published yet. Check back soon!</p>
-            </div>
-          <% } else { %>
-            <% var featured = issues[0]; var rest = issues.slice(1); %>
+  <section class="py-16 lg:py-20 bg-ivory border-b border-hairline">
+    <div class="container mx-auto px-4 lg:px-8">
+      <% if (issues.length === 0) { %>
+        <div class="text-center py-16">
+          <p class="text-navy/50 text-lg">No issues published yet. Check back soon!</p>
+        </div>
+      <% } else { %>
+        <% var featured = issues[0]; var rest = issues.slice(1); %>
 
-            <!-- Featured Latest Issue -->
-            <div class="reveal rounded-3xl bg-navy-gradient overflow-hidden shadow-elegant border border-gold/20 grid md:grid-cols-2">
-              <div class="aspect-[4/3] md:aspect-auto">
-                <img src="<%= featured.coverImage %>" alt="<%= featured.title %>" class="w-full h-full object-cover" />
-              </div>
-              <div class="p-8 md:p-10 flex flex-col justify-center">
-                <span class="text-gold text-xs font-medium tracking-widest uppercase">Latest Issue &middot; No. <%= featured.issueNumber %></span>
-                <h2 class="mt-3 font-heading text-2xl md:text-3xl font-semibold text-ivory leading-tight"><%= featured.title %></h2>
-                <p class="mt-3 text-ivory/60 text-sm leading-relaxed"><%= featured.excerpt %></p>
-                <a href="/intelligence/<%= featured.slug %>" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-gold-gradient text-navy-deep shadow-gold hover:scale-105 transition-transform w-fit">
-                  Read Issue
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </a>
-              </div>
-            </div>
-
-            <% if (rest.length > 0) { %>
-              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                <% rest.forEach(function(issue) { %>
-                  <article class="reveal bg-white rounded-2xl overflow-hidden shadow-elegant border border-slate-200/60 card-lift">
-                    <img src="<%= issue.coverImage %>" alt="<%= issue.title %>" class="w-full aspect-[16/9] object-cover" />
-                    <div class="p-8">
-                      <span class="text-xs text-navy/40">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
-                      <h3 class="text-xl font-heading font-semibold text-navy mt-2 mb-3">
-                        <a href="/intelligence/<%= issue.slug %>" class="hover:text-gold-dark transition-colors"><%= issue.title %></a>
-                      </h3>
-                      <p class="text-navy/60 text-sm leading-relaxed mb-4"><%= issue.excerpt %></p>
-                      <a href="/intelligence/<%= issue.slug %>" class="inline-flex items-center gap-1 text-gold-dark font-medium text-sm hover:text-gold transition-colors">
-                        Read More
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                      </a>
-                    </div>
-                  </article>
+        <!-- Featured Latest Issue -->
+        <div class="reveal rounded-md bg-navy overflow-hidden border border-gold/20 grid md:grid-cols-2">
+          <div class="aspect-[4/3] md:aspect-auto">
+            <img src="<%= featured.coverImage %>" alt="<%= featured.title %>" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-8 md:p-10 flex flex-col justify-center">
+            <span class="text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">Latest Issue &middot; No. <%= featured.issueNumber %></span>
+            <h2 class="mt-3 font-heading text-2xl md:text-3xl font-bold text-ivory leading-tight"><%= featured.title %></h2>
+            <p class="mt-3 text-ivory/60 text-sm leading-relaxed"><%= featured.excerpt %></p>
+            <% if (featured.stats && featured.stats.length) { %>
+              <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                <% featured.stats.slice(0, 3).forEach(function(s) { %>
+                  <div>
+                    <span class="block text-[10px] font-heading uppercase tracking-wider text-ivory/40"><%= s.label %></span>
+                    <span class="font-heading text-sm font-bold text-ivory"><%= s.value %></span>
+                  </div>
                 <% }); %>
               </div>
             <% } %>
-          <% } %>
+            <a href="/intelligence/<%= featured.slug %>" class="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded bg-gold text-navy font-heading font-bold text-sm hover:bg-gold-dark transition-colors w-fit">
+              Read Issue
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
         </div>
-      </section>
-    <% } else { %>
-      <!-- Single Issue Content -->
-      <article class="py-16 lg:py-24 bg-ivory">
-        <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
-          <div class="reveal">
-            <img src="<%= issue.coverImage %>" alt="<%= issue.title %>" class="w-full rounded-2xl shadow-elegant border border-slate-200/60" />
 
-            <p class="mt-8 text-navy/70 leading-relaxed"><%= issue.excerpt %></p>
+        <% if (rest.length > 0) { %>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <% rest.forEach(function(issue) { %>
+              <article class="reveal reveal-scale bg-white rounded-md overflow-hidden border border-hairline card-lift">
+                <img src="<%= issue.coverImage %>" alt="<%= issue.title %>" class="w-full aspect-[16/9] object-cover" />
+                <div class="p-6">
+                  <span class="text-xs text-slate-400">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
+                  <h3 class="text-lg font-heading font-bold text-navy mt-2 mb-2">
+                    <a href="/intelligence/<%= issue.slug %>" class="hover:text-gold-dark transition-colors"><%= issue.title %></a>
+                  </h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-4"><%= issue.excerpt %></p>
+                  <a href="/intelligence/<%= issue.slug %>" class="inline-flex items-center gap-1 text-gold-dark font-heading font-bold text-sm hover:text-gold transition-colors">
+                    Read More
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </article>
+            <% }); %>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+  </section>
 
-            <% if (issue.highlights && issue.highlights.length) { %>
-              <div class="mt-8 p-6 rounded-2xl bg-navy-gradient border border-gold/20">
-                <h3 class="text-gold text-xs font-medium tracking-widest uppercase mb-4">In This Issue</h3>
-                <ul class="space-y-2">
-                  <% issue.highlights.forEach(function(h) { %>
-                    <li class="flex items-start gap-3 text-ivory/80 text-sm">
-                      <span class="text-gold mt-0.5">&#9670;</span>
-                      <span><%= h %></span>
-                    </li>
-                  <% }); %>
-                </ul>
-              </div>
-            <% } %>
+<% } else { %>
 
-            <div class="mt-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <a href="<%= issue.pdfUrl %>" download class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-gold-gradient text-navy-deep shadow-gold hover:scale-105 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M21 21H3"/></svg>
-                Download Full Issue (PDF)
-              </a>
-              <a href="/contact" class="text-navy/60 hover:text-navy text-sm transition-colors">Subscribe for weekly updates &rarr;</a>
+  <!-- ============ SINGLE ISSUE VIEW ============ -->
+  <section class="relative min-h-[52vh] flex items-end overflow-hidden pt-24 pb-14">
+    <div class="absolute inset-0">
+      <img src="<%= issue.coverImage %>" alt="" class="photo-crisp w-full h-full object-cover" fetchpriority="high" decoding="async" />
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-deep/92 via-navy-deep/70 to-navy-deep/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/10 to-transparent"></div>
+    </div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+      <a href="/intelligence" class="reveal inline-flex items-center gap-2 text-gold-light hover:text-gold transition-colors mb-5 text-sm font-heading font-bold">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        Back to Intelligence
+      </a>
+      <div class="reveal flex flex-wrap items-center gap-3">
+        <span class="text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
+        <% if (locals.readingTimeMin) { %>
+          <span class="text-xs text-ivory/40">&middot; <%= readingTimeMin %> min read</span>
+        <% } %>
+        <% if (issue.riskLevel) { %>
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-heading font-bold uppercase tracking-wider text-ivory/90 border border-white/25 rounded-full px-2.5 py-1">
+            <span class="h-1.5 w-1.5 rounded-full bg-gold"></span>
+            Risk Level: <%= issue.riskLevel %>
+          </span>
+        <% } %>
+      </div>
+      <h1 class="reveal mt-4 font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory max-w-3xl leading-tight"><%= issue.title %></h1>
+      <p class="reveal mt-4 text-ivory/70 max-w-2xl leading-relaxed"><%= issue.excerpt %></p>
+      <div class="reveal mt-7 flex flex-wrap gap-3">
+        <a href="<%= issue.pdfUrl %>" download class="inline-flex items-center gap-2 px-6 py-3 rounded bg-gold text-navy font-heading font-bold text-sm hover:bg-gold-dark transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M21 21H3"/></svg>
+          Download Full PDF Report
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Executive Dashboard -->
+  <% if (issue.stats && issue.stats.length) { %>
+    <section class="bg-navy border-b border-white/10">
+      <div class="container mx-auto px-4 lg:px-8 py-10">
+        <span class="text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">Executive Market Dashboard</span>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mt-5">
+          <% issue.stats.forEach(function(s) { %>
+            <div class="rounded-md bg-white/5 border border-white/10 p-4">
+              <span class="block text-[10px] font-heading font-bold uppercase tracking-wider text-ivory/40"><%= s.label %></span>
+              <span class="block font-heading text-lg font-extrabold text-ivory mt-1"><%= s.value %></span>
+              <span class="block text-xs mt-1 <%= s.direction === 'up' ? 'text-emerald-400' : (s.direction === 'down' ? 'text-red-400' : 'text-ivory/40') %>"><%= s.change %></span>
             </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+  <% } %>
+
+  <!-- CEO pull-quote -->
+  <% if (issue.ceoQuote) { %>
+    <section class="bg-ivory">
+      <div class="container mx-auto px-4 lg:px-8 pt-14">
+        <div class="reveal max-w-3xl mx-auto border-l-4 border-gold pl-6 md:pl-8 py-1">
+          <p class="font-body italic text-xl md:text-2xl text-navy leading-snug">&ldquo;<%= issue.ceoQuote %>&rdquo;</p>
+          <p class="mt-3 text-sm text-slate-500 font-heading uppercase tracking-wider">Capt. Dinesh Naidu KC &mdash; Founder &amp; Chairman, DDS Marine Group</p>
+        </div>
+      </div>
+    </section>
+  <% } %>
+
+  <!-- Content + TOC -->
+  <section class="bg-ivory pb-20">
+    <div class="container mx-auto px-4 lg:px-8 pt-10">
+      <div class="grid lg:grid-cols-[220px_1fr] gap-10 items-start max-w-5xl mx-auto">
+
+        <!-- Table of contents -->
+        <% if (locals.toc && toc.length) { %>
+          <nav class="reveal lg:sticky lg:top-24 order-2 lg:order-1">
+            <span class="block text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold mb-3">In This Issue</span>
+            <ul class="space-y-2 border-l border-hairline pl-4">
+              <% toc.forEach(function(item) { %>
+                <li>
+                  <a href="#<%= item.slug %>" class="block text-sm text-slate-600 hover:text-gold-dark transition-colors leading-snug"><%= item.text %></a>
+                </li>
+              <% }); %>
+            </ul>
+          </nav>
+        <% } %>
+
+        <!-- Article body -->
+        <article class="reveal order-1 lg:order-2 min-w-0">
+          <div class="prose prose-lg max-w-none
+            prose-headings:font-heading prose-headings:text-navy prose-headings:font-bold
+            prose-h2:text-2xl prose-h2:mt-12 first:prose-h2:mt-0 prose-h2:mb-4 prose-h2:pb-3 prose-h2:border-b prose-h2:border-hairline
+            prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-gold-dark
+            prose-p:font-body prose-p:text-ink prose-p:leading-relaxed
+            prose-strong:text-navy prose-strong:font-semibold
+            prose-em:text-slate-500 prose-em:not-italic prose-em:text-sm
+            prose-a:text-gold-dark prose-a:no-underline hover:prose-a:underline
+            prose-ul:font-body prose-li:my-1 prose-li:marker:text-gold
+            prose-table:text-sm prose-table:border prose-table:border-hairline
+            prose-thead:bg-navy
+            prose-th:font-heading prose-th:text-ivory prose-th:uppercase prose-th:text-xs prose-th:tracking-wide prose-th:font-bold prose-th:px-4 prose-th:py-3
+            prose-td:px-4 prose-td:py-3 prose-td:border-b prose-td:border-hairline prose-td:align-top
+            prose-blockquote:border-l-4 prose-blockquote:border-gold prose-blockquote:bg-white prose-blockquote:not-italic prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:rounded-r-md prose-blockquote:text-navy prose-blockquote:shadow-sm">
+            <%- contentHtml %>
           </div>
 
-          <div class="mt-12 pt-8 border-t border-slate-200">
-            <a href="/intelligence" class="inline-flex items-center gap-2 text-navy/50 hover:text-navy transition-colors text-sm">
+          <!-- Bottom CTA -->
+          <div class="mt-12 p-8 rounded-md bg-navy border-t-4 border-gold flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+            <div>
+              <p class="font-heading text-lg font-bold text-ivory">Want the complete data set?</p>
+              <p class="text-sm text-ivory/60 mt-1">The full PDF includes fixture-level detail, the complete multi-port bunker matrix and full source attribution.</p>
+            </div>
+            <a href="<%= issue.pdfUrl %>" download class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded bg-gold text-navy font-heading font-bold text-sm hover:bg-gold-dark transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M12 15V3"/><path d="m7 10 5 5 5-5"/><path d="M21 21H3"/></svg>
+              Download PDF
+            </a>
+          </div>
+
+          <!-- Prev / Next -->
+          <div class="mt-10 pt-8 border-t border-hairline grid sm:grid-cols-2 gap-4">
+            <% if (locals.prevIssue && prevIssue) { %>
+              <a href="/intelligence/<%= prevIssue.slug %>" class="group p-5 rounded-md border border-hairline hover:border-gold/40 transition-colors">
+                <span class="text-xs font-heading font-bold uppercase tracking-wider text-slate-400">&larr; Previous Issue</span>
+                <p class="mt-1 font-heading font-bold text-navy group-hover:text-gold-dark transition-colors"><%= prevIssue.title %></p>
+              </a>
+            <% } else { %><div></div><% } %>
+            <% if (locals.nextIssue && nextIssue) { %>
+              <a href="/intelligence/<%= nextIssue.slug %>" class="group p-5 rounded-md border border-hairline hover:border-gold/40 transition-colors sm:text-right">
+                <span class="text-xs font-heading font-bold uppercase tracking-wider text-slate-400">Next Issue &rarr;</span>
+                <p class="mt-1 font-heading font-bold text-navy group-hover:text-gold-dark transition-colors"><%= nextIssue.title %></p>
+              </a>
+            <% } %>
+          </div>
+
+          <div class="mt-8">
+            <a href="/intelligence" class="inline-flex items-center gap-2 text-slate-500 hover:text-navy transition-colors text-sm">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
               Back to all issues
             </a>
           </div>
-        </div>
-      </article>
-    <% } %>
-  </main>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <%- include('partials/footer') %>
+<% } %>
+
+<%- include('partials/footer') %>

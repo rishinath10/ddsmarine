@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const { marked } = require('marked');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -63,6 +64,50 @@ function loadAllIntelligenceIssues() {
     console.error('Error loading all intelligence issues:', err.message);
     return [];
   }
+}
+
+// Slugify heading text for in-page jump-link anchors
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
+// Renders an issue's Markdown content file to HTML (with anchored headings)
+// and returns a table of contents plus an estimated reading time.
+function renderIssueContent(issue) {
+  const empty = { html: '', toc: [], readingTimeMin: 0 };
+  if (!issue || !issue.contentFile) return empty;
+
+  const filePath = path.join(__dirname, issue.contentFile);
+  let md;
+  try {
+    md = fs.readFileSync(filePath, 'utf-8');
+  } catch (err) {
+    console.error('Error loading intelligence content file:', err.message);
+    return empty;
+  }
+
+  const renderer = new marked.Renderer();
+  renderer.heading = function ({ tokens, depth }) {
+    const text = this.parser.parseInline(tokens).replace(/<[^>]+>/g, '');
+    const slug = slugify(text);
+    return `<h${depth} id="${slug}">${this.parser.parseInline(tokens)}</h${depth}>\n`;
+  };
+
+  const html = marked.parse(md, { renderer });
+
+  const toc = marked
+    .lexer(md)
+    .filter((t) => t.type === 'heading' && t.depth === 2)
+    .map((t) => ({ text: t.text, slug: slugify(t.text) }));
+
+  const wordCount = md.split(/\s+/).filter(Boolean).length;
+  const readingTimeMin = Math.max(1, Math.round(wordCount / 200));
+
+  return { html, toc, readingTimeMin };
 }
 
 // Static SEO files
@@ -187,8 +232,8 @@ app.get('/intelligence', (req, res) => {
 });
 
 app.get('/intelligence/:slug', (req, res) => {
-    const issues = loadAllIntelligenceIssues();
-    const issue = issues.find(i => i.slug === req.params.slug);
+    const allIssues = loadAllIntelligenceIssues();
+    const issue = allIssues.find(i => i.slug === req.params.slug);
     if (!issue) {
         return res.status(404).render('404', {
             title: 'Issue Not Found | DDS Marine',
@@ -197,13 +242,42 @@ app.get('/intelligence/:slug', (req, res) => {
             noindex: true
         });
     }
+
+    const published = loadIntelligenceIssues();
+    const idx = published.findIndex(i => i.slug === issue.slug);
+    const prevIssue = idx >= 0 ? published[idx + 1] : null; // older
+    const nextIssue = idx > 0 ? published[idx - 1] : null;  // newer
+
+    const { html: contentHtml, toc, readingTimeMin } = renderIssueContent(issue);
+    const ogImageUrl = issue.coverImage ? 'https://www.ddsmarine.com' + issue.coverImage : 'https://www.ddsmarine.com/assets/offshore-rig.jpg';
+
+    const articleSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'NewsArticle',
+        headline: issue.title,
+        description: issue.excerpt,
+        image: [ogImageUrl],
+        datePublished: issue.date,
+        dateModified: issue.date,
+        author: { '@type': 'Person', name: 'Capt. Dinesh Naidu KC', jobTitle: 'Founder & Chairman, DDS Marine Group' },
+        publisher: { '@id': 'https://www.ddsmarine.com/#organization' },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://www.ddsmarine.com/intelligence/' + issue.slug },
+        articleSection: (issue.highlights || []).slice(0, 6)
+    });
+
     res.render('intelligence', {
         title: issue.title + ' | DDS Weekly Maritime Intelligence',
         description: issue.excerpt,
         path: '/intelligence/' + issue.slug,
-        ogImage: issue.coverImage ? 'https://www.ddsmarine.com' + issue.coverImage : 'https://www.ddsmarine.com/assets/offshore-rig.jpg',
+        ogImage: ogImageUrl,
+        articleSchema: articleSchema,
         issues: [],
-        issue: issue
+        issue: issue,
+        contentHtml: contentHtml,
+        toc: toc,
+        readingTimeMin: readingTimeMin,
+        prevIssue: prevIssue,
+        nextIssue: nextIssue
     });
 });
 

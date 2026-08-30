@@ -6,6 +6,17 @@
     "date": "2026-07-31",
     "coverImage": "/assets/offshore-rig.jpg",
     "excerpt": "The inaugural issue of DDS Weekly Maritime Intelligence — covering crude and product tanker markets, Singapore and global bunker pricing, sanctions and compliance watch, and weekly fixtures across Southeast Asia.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$85.98/bbl", "change": "▼ 1.03% d/d", "direction": "down" },
+      { "label": "WTI Crude", "value": "US$82.47/bbl", "change": "▼ 1.34% d/d", "direction": "down" },
+      { "label": "Singapore VLSFO", "value": "US$830.50/mt", "change": "▲ US$14.50", "direction": "up" },
+      { "label": "Singapore MGO", "value": "US$1,224.50/mt", "change": "▲ US$19.50", "direction": "up" },
+      { "label": "US Crude Stocks", "value": "404.5m bbl", "change": "▼ 7.2m bbl w/w", "direction": "down" },
+      { "label": "AG Tanker Count", "value": "728 vessels", "change": "▲ Week 29 (Hormuz)", "direction": "up" }
+    ],
+    "ceoQuote": "The present tanker market is not simply a freight market; it is a risk-allocation market.",
+    "riskLevel": "High",
+    "contentFile": "content/intelligence/issue-001.md",
     "highlights": [
       "Crude & product tanker market overview",
       "Singapore & global bunker pricing",
@@ -24,6 +35,17 @@
     "date": "2026-08-07",
     "coverImage": "/assets/sts-operation.jpg",
     "excerpt": "This week's issue examines the de-escalation around the Strait of Hormuz against a backdrop of still-elevated physical and route risk, alongside the usual market, bunker, and compliance intelligence.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$79.18/bbl", "change": "▼ 11.7% w/w", "direction": "down" },
+      { "label": "WTI Crude", "value": "US$74.80/bbl", "change": "▼ 13.8% w/w", "direction": "down" },
+      { "label": "Singapore VLSFO", "value": "US$844.50/mt", "change": "▲ US$4.50 d/d", "direction": "up" },
+      { "label": "Singapore MGO", "value": "US$1,205.00/mt", "change": "─ in-range", "direction": "flat" },
+      { "label": "Baltic Dry Index", "value": "3,063 pts", "change": "▲ 2-month high", "direction": "up" },
+      { "label": "Murban Crude", "value": "US$77.94/bbl", "change": "▲ 1.41% intraday", "direction": "up" }
+    ],
+    "ceoQuote": "A falling oil price is not the same thing as a falling risk. This week, the gap between the two is the whole story.",
+    "riskLevel": "High",
+    "contentFile": "content/intelligence/issue-002.md",
     "highlights": [
       "Hormuz de-escalation vs. elevated physical risk",
       "Crude & product tanker market overview",

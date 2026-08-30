@@ -56,6 +56,9 @@
     "knowsAbout": ["Ship-to-Ship Transfer", "Deep Draft Pilotage", "Marine Bunkering", "Vessel Chartering", "Marine Advisory", "Mooring Master Services"]
   }
   </script>
+  <% if (locals.articleSchema) { %>
+  <script type="application/ld+json"><%- articleSchema %></script>
+  <% } %>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
