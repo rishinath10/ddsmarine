@@ -151,22 +151,35 @@
     <div class="container mx-auto px-4 lg:px-8 pt-10">
       <div class="grid lg:grid-cols-[220px_1fr] gap-10 items-start max-w-5xl mx-auto">
 
-        <!-- Table of contents -->
+        <!-- Table of contents: collapsible on mobile (sits above the article,
+             so it's actually usable instead of landing after 15+ sections of
+             content), sticky sidebar on desktop -->
         <% if (locals.toc && toc.length) { %>
-          <nav class="reveal lg:sticky lg:top-24 order-2 lg:order-1">
-            <span class="block text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold mb-3">In This Issue</span>
-            <ul class="space-y-2 border-l border-hairline pl-4">
-              <% toc.forEach(function(item) { %>
-                <li>
-                  <a href="#<%= item.slug %>" class="block text-sm text-slate-600 hover:text-gold-dark transition-colors leading-snug"><%= item.text %></a>
-                </li>
-              <% }); %>
-            </ul>
+          <nav class="reveal lg:sticky lg:top-24 rounded-md border border-hairline lg:border-0 overflow-hidden lg:overflow-visible bg-white lg:bg-transparent"
+            x-data="{ tocOpen: false }">
+            <button type="button" @click="tocOpen = !tocOpen"
+              class="lg:hidden w-full flex items-center justify-between gap-2 px-4 py-3">
+              <span class="text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">In This Issue</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-navy shrink-0 transition-transform duration-200" :class="tocOpen ? 'rotate-180' : ''">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+            <span class="hidden lg:block text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold mb-3">In This Issue</span>
+            <div x-show="tocOpen" x-collapse x-cloak class="lg:!block lg:!h-auto">
+              <ul class="space-y-2 border-l border-hairline pl-4 pb-4 px-4 lg:px-0 lg:pb-0">
+                <% toc.forEach(function(item) { %>
+                  <li>
+                    <a href="#<%= item.slug %>" @click="tocOpen = false" class="block text-sm text-slate-600 hover:text-gold-dark transition-colors leading-snug"><%= item.text %></a>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
           </nav>
         <% } %>
 
         <!-- Article body -->
-        <article class="reveal order-1 lg:order-2 min-w-0">
+        <article class="reveal min-w-0">
           <div class="prose prose-lg max-w-none
             prose-headings:font-heading prose-headings:text-navy prose-headings:font-bold
             prose-h2:text-2xl prose-h2:mt-12 first:prose-h2:mt-0 prose-h2:mb-4 prose-h2:pb-3 prose-h2:border-b prose-h2:border-hairline

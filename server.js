@@ -106,11 +106,18 @@ function renderIssueContent(issue) {
   });
 
   let headingIndex = 0;
-  const html = marked.parse(md).replace(/<h([1-6])>/g, (match, level) => {
-    const slug = orderedSlugs[headingIndex] || '';
-    headingIndex += 1;
-    return `<h${level} id="${slug}">`;
-  });
+  const html = marked.parse(md)
+    .replace(/<h([1-6])>/g, (match, level) => {
+      const slug = orderedSlugs[headingIndex] || '';
+      headingIndex += 1;
+      return `<h${level} id="${slug}">`;
+    })
+    // Wide tables (freight-rate grids, incident logs) are wider than a phone
+    // screen and have no responsive handling by default; without this they
+    // force the entire page layout wider, causing horizontal page scroll.
+    // Scope the scroll to the table itself instead.
+    .replace(/<table>/g, '<div class="overflow-x-auto -mx-1 px-1"><table>')
+    .replace(/<\/table>/g, '</table></div>');
 
   const toc = headingTokens
     .map((t, i) => ({ text: t.text, slug: orderedSlugs[i], depth: t.depth }))

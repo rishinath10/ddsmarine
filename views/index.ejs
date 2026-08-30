@@ -419,7 +419,46 @@
         var hqNode = networkNodes.find(function(n) { return n.hq; });
       %>
 
+      <%
+        // Purely decorative circuit-trace texture (not tied to real offices) —
+        // short orthogonal segments scattered across the box, PCB-style.
+        var circuitTraces = [
+          "10,5 10,10 18,10", "55,6 55,3 62,3", "85,20 90,20 90,28", "48,35 48,40 56,40",
+          "20,42 28,42 28,46", "65,38 65,44", "5,30 12,30 12,36", "78,5 78,10",
+          "40,8 46,8 46,14", "60,22 68,22", "15,15 15,20 22,20", "92,35 92,40 86,40",
+          "35,20 35,26", "72,28 72,34 78,34", "88,10 94,10", "2,20 2,26 8,26"
+        ];
+        var glowBursts = [
+          { x: 85, y: 24 }, { x: 50, y: 14 }, { x: 20, y: 7 }, { x: 60, y: 45 }
+        ];
+      %>
+
       <div class="reveal mt-10 md:mt-14 relative w-full max-w-4xl mx-auto aspect-[2/1] rounded-md border border-white/10 bg-white/[0.02] overflow-hidden">
+        <!-- Circuit-board texture: dot grid + scattered trace lines -->
+        <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+          <defs>
+            <pattern id="circuitDots" width="4" height="4" patternUnits="userSpaceOnUse">
+              <circle cx="0.5" cy="0.5" r="0.3" fill="#C8973F" fill-opacity="0.22" />
+            </pattern>
+          </defs>
+          <rect width="100" height="50" fill="url(#circuitDots)" />
+          <% circuitTraces.forEach(function(pts) { %>
+            <polyline points="<%= pts %>" fill="none" stroke="#C8973F" stroke-width="0.18" stroke-opacity="0.28" stroke-linecap="round" stroke-linejoin="round" />
+          <% }); %>
+          <% circuitTraces.forEach(function(pts) {
+            var first = pts.split(' ')[0];
+          %>
+            <circle cx="<%= first.split(',')[0] %>" cy="<%= first.split(',')[1] %>" r="0.45" fill="#C8973F" fill-opacity="0.35" />
+          <% }); %>
+        </svg>
+
+        <!-- Ambient glow-burst highlights, circuit-board sparkle accents -->
+        <% glowBursts.forEach(function(g, i) { %>
+          <div class="absolute pointer-events-none" style="left: <%= g.x %>%; top: <%= g.y * 2 %>%; width: 3%; padding-bottom: 3%; transform: translate(-50%, -50%);">
+            <div class="absolute inset-0 rounded-full" style="background: radial-gradient(circle, rgba(200,151,63,0.9) 0%, rgba(200,151,63,0.25) 45%, transparent 75%); animation: radar-ping 3.2s ease-in-out infinite; animation-delay: <%= i * 0.7 %>s;"></div>
+          </div>
+        <% }); %>
+
         <!-- Rotating radar sweep, centered on Penang -->
         <div class="absolute pointer-events-none" style="left: <%= hqNode.x %>%; top: <%= hqNode.y * 2 %>%; width: 160%; padding-bottom: 160%; transform: translate(-50%, -50%);">
           <div class="absolute inset-0" style="animation: sweep-rotate 10s linear infinite; background: conic-gradient(from 0deg, transparent 0deg, rgba(200,151,63,0.28) 18deg, transparent 42deg, transparent 360deg); border-radius: 9999px;"></div>
