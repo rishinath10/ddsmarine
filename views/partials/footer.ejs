@@ -203,6 +203,10 @@
             return;
           }
 
+          // threshold is intentionally near-zero, not a percentage like 0.12:
+          // a percentage threshold can never be crossed by an element taller
+          // than the viewport (e.g. a long article body), which permanently
+          // stuck such elements at opacity:0 with no way to reveal.
           const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
@@ -210,7 +214,7 @@
                 io.unobserve(entry.target);
               }
             });
-          }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+          }, { threshold: 0.01, rootMargin: '0px 0px -60px 0px' });
 
           reveals.forEach(el => io.observe(el));
         });

@@ -181,8 +181,14 @@
           </nav>
         <% } %>
 
-        <!-- Article body -->
-        <article class="reveal min-w-0">
+        <!-- Article body: intentionally NOT a .reveal element — this wrapper
+             can be thousands of pixels tall (a full weekly issue), and the
+             shared scroll-reveal observer's threshold could never be
+             satisfied by an element taller than the viewport, permanently
+             stuck it at opacity:0 while everything else on the page
+             revealed normally. Always-visible here avoids relying on
+             animation timing for the actual content. -->
+        <article class="min-w-0">
           <div class="prose prose-lg max-w-none
             prose-headings:font-heading prose-headings:text-navy prose-headings:font-bold
             prose-h2:text-2xl prose-h2:mt-12 first:prose-h2:mt-0 prose-h2:mb-4 prose-h2:pb-3 prose-h2:border-b prose-h2:border-hairline
