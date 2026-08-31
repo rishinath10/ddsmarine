@@ -102,8 +102,12 @@
       },
     }
   </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- Pinned to matching exact versions, not a floating @3.x.x range: the
+       collapse plugin and Alpine core resolving to different 3.x releases
+       independently broke x-collapse's height animation site-wide
+       (element became visible via x-show but height stayed locked at 0). -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.16.3/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.16.3/dist/cdn.min.js"></script>
 
   <style>
     html {
