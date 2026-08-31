@@ -402,93 +402,120 @@
     <div class="container mx-auto px-4 lg:px-8 relative z-10">
       <div class="max-w-2xl mx-auto text-center">
         <span class="reveal text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">Global Reach</span>
-        <h2 class="reveal mt-2 font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-ivory">Converging on the Straits of Malacca.</h2>
-        <p class="reveal mt-3 text-ivory/60 leading-relaxed">A single network radiating outward from our Penang headquarters — every route, every hub, every operation converging on the world's busiest shipping lane.</p>
+        <h2 class="reveal mt-2 font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-ivory">Anchored in Southeast Asia.</h2>
+        <p class="reveal mt-3 text-ivory/60 leading-relaxed">Our home base spans the Malay Peninsula from Penang — with a growing network reaching into the Middle East, South Asia and North Asia.</p>
       </div>
 
       <%
-        var networkNodes = [
-          { key: 'penang', label: 'Penang HQ', hq: true, x: 27, y: 30 },
-          { key: 'kl', label: 'Kuala Lumpur', x: 32, y: 35 },
-          { key: 'muar', label: 'Muar', x: 35, y: 39 },
-          { key: 'singapore', label: 'Singapore', x: 39, y: 42 },
-          { key: 'dubai', label: 'Dubai', x: 4, y: 12 },
-          { key: 'india', label: 'India', x: 14, y: 22 },
-          { key: 'hongkong', label: 'Hong Kong', x: 73, y: 11 }
+        // Coordinates share one 0-100 (x) by 0-100 (y) space with the SVG
+        // viewBox below, so no unit conversion is needed anywhere.
+        var seaNodes = [
+          { key: 'penang', label: 'Penang HQ', hq: true, x: 40, y: 20 },
+          { key: 'kl', label: 'Kuala Lumpur', x: 43, y: 37 },
+          { key: 'muar', label: 'Muar', x: 40, y: 51 },
+          { key: 'singapore', label: 'Singapore', x: 39, y: 63 }
         ];
-        var hqNode = networkNodes.find(function(n) { return n.hq; });
-      %>
+        var expansionNodes = [
+          { key: 'dubai', label: 'Dubai', x: 4, y: 6 },
+          { key: 'india', label: 'India', x: 6, y: 32 },
+          { key: 'hongkong', label: 'Hong Kong', x: 93, y: 12 }
+        ];
+        var hqNode = seaNodes.find(function(n) { return n.hq; });
 
-      <%
-        // Purely decorative circuit-trace texture (not tied to real offices) —
-        // short orthogonal segments scattered across the box, PCB-style.
+        // Simplified, stylized Southeast Asia landmass — Malay Peninsula,
+        // Sumatra and Borneo — angular facets rather than smooth coastline,
+        // to read as a circuit-board silhouette rather than a literal map.
+        var landmasses = [
+          "48,10 44,10 40,18 37,28 35,38 37,48 35,58 38,66 42,64 40,54 44,46 42,36 46,26 48,16",
+          "15,42 25,34 30,42 28,58 20,76 10,68 8,52",
+          "58,38 72,30 86,38 90,54 82,68 66,72 54,62 52,48"
+        ];
         var circuitTraces = [
-          "10,5 10,10 18,10", "55,6 55,3 62,3", "85,20 90,20 90,28", "48,35 48,40 56,40",
-          "20,42 28,42 28,46", "65,38 65,44", "5,30 12,30 12,36", "78,5 78,10",
-          "40,8 46,8 46,14", "60,22 68,22", "15,15 15,20 22,20", "92,35 92,40 86,40",
-          "35,20 35,26", "72,28 72,34 78,34", "88,10 94,10", "2,20 2,26 8,26"
+          "44,14 44,20 50,20", "38,24 38,30 44,30", "36,42 42,42 42,48", "38,55 44,55",
+          "62,36 62,44 70,44", "76,34 76,42", "66,52 74,52 74,60", "58,58 64,58",
+          "16,48 22,48 22,56", "12,58 18,58", "80,44 86,44", "70,60 76,60 76,66"
         ];
         var glowBursts = [
-          { x: 85, y: 24 }, { x: 50, y: 14 }, { x: 20, y: 7 }, { x: 60, y: 45 }
+          { x: 72, y: 48 }, { x: 18, y: 55 }, { x: 45, y: 44 }, { x: 82, y: 22 }
         ];
       %>
 
-      <div class="reveal mt-10 md:mt-14 relative w-full max-w-4xl mx-auto aspect-[2/1] rounded-md border border-white/10 bg-white/[0.02] overflow-hidden">
-        <!-- Circuit-board texture: dot grid + scattered trace lines -->
-        <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+      <div class="reveal mt-10 md:mt-14 relative w-full max-w-3xl mx-auto aspect-[5/4] rounded-md border border-white/10 bg-white/[0.02] overflow-hidden">
+        <svg viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
           <defs>
-            <pattern id="circuitDots" width="4" height="4" patternUnits="userSpaceOnUse">
-              <circle cx="0.5" cy="0.5" r="0.3" fill="#C8973F" fill-opacity="0.22" />
+            <pattern id="circuitDots" width="3.5" height="3.5" patternUnits="userSpaceOnUse">
+              <circle cx="0.5" cy="0.5" r="0.28" fill="#C8973F" fill-opacity="0.4" />
             </pattern>
+            <clipPath id="seaLandmassClip">
+              <% landmasses.forEach(function(pts) { %><polygon points="<%= pts %>" /><% }); %>
+            </clipPath>
           </defs>
-          <rect width="100" height="50" fill="url(#circuitDots)" />
-          <% circuitTraces.forEach(function(pts) { %>
-            <polyline points="<%= pts %>" fill="none" stroke="#C8973F" stroke-width="0.18" stroke-opacity="0.28" stroke-linecap="round" stroke-linejoin="round" />
+
+          <!-- Landmass outline: faint fill + hairline stroke so the
+               Southeast Asia silhouette reads even where dots are sparse -->
+          <% landmasses.forEach(function(pts) { %>
+            <polygon points="<%= pts %>" fill="#C8973F" fill-opacity="0.05" stroke="#C8973F" stroke-opacity="0.3" stroke-width="0.3" stroke-linejoin="round" />
           <% }); %>
-          <% circuitTraces.forEach(function(pts) {
-            var first = pts.split(' ')[0];
-          %>
-            <circle cx="<%= first.split(',')[0] %>" cy="<%= first.split(',')[1] %>" r="0.45" fill="#C8973F" fill-opacity="0.35" />
+
+          <!-- Circuit texture, clipped so it only appears "on land" -->
+          <g clip-path="url(#seaLandmassClip)">
+            <rect width="100" height="80" fill="url(#circuitDots)" />
+            <% circuitTraces.forEach(function(pts) { %>
+              <polyline points="<%= pts %>" fill="none" stroke="#C8973F" stroke-width="0.22" stroke-opacity="0.4" stroke-linecap="round" stroke-linejoin="round" />
+            <% }); %>
+          </g>
+
+          <!-- Static reach lines from Penang HQ to each expansion market —
+               solid, no dash animation -->
+          <% expansionNodes.forEach(function(n) { %>
+            <line x1="<%= hqNode.x %>" y1="<%= hqNode.y %>" x2="<%= n.x %>" y2="<%= n.y %>"
+              stroke="#C8973F" stroke-width="0.22" stroke-opacity="0.32" stroke-linecap="round" />
           <% }); %>
         </svg>
 
         <!-- Ambient glow-burst highlights, circuit-board sparkle accents -->
         <% glowBursts.forEach(function(g, i) { %>
-          <div class="absolute pointer-events-none" style="left: <%= g.x %>%; top: <%= g.y * 2 %>%; width: 3%; padding-bottom: 3%; transform: translate(-50%, -50%);">
+          <div class="absolute pointer-events-none" style="left: <%= g.x %>%; top: <%= g.y %>%; width: 3%; padding-bottom: 3%; transform: translate(-50%, -50%);">
             <div class="absolute inset-0 rounded-full" style="background: radial-gradient(circle, rgba(200,151,63,0.9) 0%, rgba(200,151,63,0.25) 45%, transparent 75%); animation: radar-ping 3.2s ease-in-out infinite; animation-delay: <%= i * 0.7 %>s;"></div>
           </div>
         <% }); %>
 
         <!-- Rotating radar sweep, centered on Penang -->
-        <div class="absolute pointer-events-none" style="left: <%= hqNode.x %>%; top: <%= hqNode.y * 2 %>%; width: 160%; padding-bottom: 160%; transform: translate(-50%, -50%);">
+        <div class="absolute pointer-events-none" style="left: <%= hqNode.x %>%; top: <%= hqNode.y %>%; width: 160%; padding-bottom: 160%; transform: translate(-50%, -50%);">
           <div class="absolute inset-0" style="animation: sweep-rotate 10s linear infinite; background: conic-gradient(from 0deg, transparent 0deg, rgba(200,151,63,0.28) 18deg, transparent 42deg, transparent 360deg); border-radius: 9999px;"></div>
         </div>
 
-        <!-- Route arcs -->
-        <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="absolute inset-0 w-full h-full" aria-hidden="true">
-          <% networkNodes.forEach(function(n) { if (!n.hq) {
-            var mx = (hqNode.x + n.x) / 2;
-            var my = Math.min(hqNode.y, n.y) - 9;
-          %>
-            <path d="M <%= hqNode.x %> <%= hqNode.y %> Q <%= mx %> <%= my %>, <%= n.x %> <%= n.y %>"
-              fill="none" stroke="#C8973F" stroke-width="0.25" stroke-dasharray="1.6 2.2" stroke-linecap="round"
-              style="opacity: 0.55; animation: arc-flow 3.5s linear infinite;" />
-          <% } }); %>
-        </svg>
-
-        <!-- Nodes -->
-        <% networkNodes.forEach(function(n) { %>
-          <div class="absolute flex flex-col items-center gap-1.5" style="left: <%= n.x %>%; top: <%= n.y * 2 %>%; transform: translate(-50%, -50%);">
-            <span class="relative flex items-center justify-center <%= n.hq ? 'h-3.5 w-3.5' : 'h-2 w-2' %>">
+        <!-- Southeast Asia nodes: our actual locations -->
+        <% seaNodes.forEach(function(n) { %>
+          <div class="absolute flex items-center gap-2" style="left: <%= n.x %>%; top: <%= n.y %>%; transform: translate(-50%, -50%);">
+            <span class="relative flex items-center justify-center shrink-0 <%= n.hq ? 'h-3.5 w-3.5' : 'h-2 w-2' %>">
               <% if (n.hq) { %>
                 <span class="absolute inline-flex h-full w-full rounded-full bg-gold opacity-60" style="animation: radar-ping 2.4s cubic-bezier(0,0,0.2,1) infinite;"></span>
                 <span class="absolute inline-flex h-full w-full rounded-full bg-gold opacity-40" style="animation: radar-ping 2.4s cubic-bezier(0,0,0.2,1) infinite; animation-delay: 0.8s;"></span>
               <% } %>
-              <span class="relative inline-flex rounded-full <%= n.hq ? 'h-3.5 w-3.5 bg-gold' : 'h-2 w-2 bg-ivory/70' %>"></span>
+              <span class="relative inline-flex rounded-full <%= n.hq ? 'h-3.5 w-3.5 bg-gold' : 'h-2 w-2 bg-ivory/80' %>"></span>
             </span>
-            <span class="hidden sm:block text-[9px] md:text-[10px] font-heading font-bold uppercase tracking-wider whitespace-nowrap <%= n.hq ? 'text-gold' : 'text-ivory/50' %>"><%= n.label %></span>
+            <span class="text-[9px] md:text-[10px] font-heading font-bold uppercase tracking-wider whitespace-nowrap <%= n.hq ? 'text-gold' : 'text-ivory/60' %>"><%= n.label %></span>
           </div>
         <% }); %>
+
+        <!-- Expansion nodes: markets we reach beyond the region -->
+        <% expansionNodes.forEach(function(n) { %>
+          <div class="absolute flex flex-col items-center gap-1.5" style="left: <%= n.x %>%; top: <%= n.y %>%; transform: translate(-50%, -50%);">
+            <span class="h-1.5 w-1.5 rounded-full border border-ivory/50 bg-navy-deep"></span>
+            <span class="text-[9px] md:text-[10px] font-heading font-bold uppercase tracking-wider whitespace-nowrap text-ivory/40"><%= n.label %></span>
+          </div>
+        <% }); %>
+
+        <!-- Legend -->
+        <div class="absolute bottom-3 left-3 flex items-center gap-4">
+          <span class="flex items-center gap-1.5 text-[9px] font-heading font-bold uppercase tracking-wider text-ivory/50">
+            <span class="h-2 w-2 rounded-full bg-gold"></span> Our Offices
+          </span>
+          <span class="flex items-center gap-1.5 text-[9px] font-heading font-bold uppercase tracking-wider text-ivory/40">
+            <span class="h-1.5 w-1.5 rounded-full border border-ivory/50"></span> Expansion Markets
+          </span>
+        </div>
       </div>
 
       <p class="reveal mt-6 text-center text-xs text-ivory/35">Illustrative network diagram, not to scale.</p>
