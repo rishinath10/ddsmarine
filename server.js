@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -6,6 +8,61 @@ const { marked } = require('marked');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const LEAD_TO_EMAIL = process.env.LEAD_TO_EMAIL || 'info@ddsmarine.com';
+const RESEND_FROM = process.env.RESEND_FROM || 'DDS Marine Website <onboarding@resend.dev>';
+
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Sends a contact-form submission to LEAD_TO_EMAIL via the Resend API
+// (https://api.resend.com/emails). Throws on any failure — the caller
+// decides how to handle that (never silently treat a failed send as
+// success).
+async function sendLeadEmail({ name, company, email, phone, subject, message }) {
+  if (!RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY is not set — cannot send contact form email.');
+  }
+
+  const html = `
+    <h2>New Website Enquiry</h2>
+    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+    <p><strong>Company:</strong> ${escapeHtml(company) || '&mdash;'}</p>
+    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(phone) || '&mdash;'}</p>
+    <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+    <p><strong>Message:</strong><br>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
+  `.trim();
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: RESEND_FROM,
+      to: [LEAD_TO_EMAIL],
+      reply_to: email,
+      subject: `New Website Enquiry: ${subject}`,
+      html,
+    }),
+  });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    throw new Error(`Resend API responded ${res.status}: ${body}`);
+  }
+
+  return res.json();
+}
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -189,10 +246,11 @@ app.get('/team', (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
-    res.render('contact', { 
+    res.render('contact', {
         title: 'Contact Us | DDS Marine Energy Services',
         description: 'Get in touch with DDS Marine for your maritime operations, advisory, and commercial inquiries at our Penang headquarters.',
-        path: '/contact'
+        path: '/contact',
+        formError: req.query.error === '1'
     });
 });
 
@@ -300,15 +358,22 @@ app.get('/intelligence/:slug', (req, res) => {
     });
 });
 
-// Contact form handler (replacing send_mail.php)
-app.post('/send-mail', (req, res) => {
+// Contact form handler — sends the lead to LEAD_TO_EMAIL via Resend.
+app.post('/send-mail', async (req, res) => {
     const { name, company, email, phone, subject, message } = req.body;
-    
-    // Simulate sending email since SMTP is not configured yet
-    console.log(`Received contact form submission from ${name} (${email}) - Subject: ${subject}`);
-    
-    // Redirect to thank you page
-    res.redirect('/thankyou');
+
+    if (!name || !email || !subject || !message) {
+        return res.redirect('/contact?error=1');
+    }
+
+    try {
+        await sendLeadEmail({ name, company, email, phone, subject, message });
+        console.log(`Contact form lead sent to ${LEAD_TO_EMAIL} from ${name} (${email}) - Subject: ${subject}`);
+        res.redirect('/thankyou');
+    } catch (err) {
+        console.error('Failed to send contact form email:', err.message);
+        res.redirect('/contact?error=1');
+    }
 });
 
 // 404 handler
