@@ -148,5 +148,35 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-005.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-006",
+    "issueNumber": 6,
+    "title": "DDS Weekly Maritime Intelligence — Issue 006",
+    "date": "2026-09-04",
+    "coverImage": "/assets/hero-ship.jpg",
+    "excerpt": "The pause is over: US strikes on Iranian positions triggered missile retaliation, two tankers were struck within 24 hours inside the Strait's 'safe' corridor, and Iran has blacklisted 45 tankers and extended sanctions risk to their STS counterparties.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$94.86/bbl", "change": "▲ from US$88.57 in Issue 005", "direction": "up" },
+      { "label": "WTI Crude", "value": "US$90.72/bbl", "change": "▲ from US$82.25 in Issue 005", "direction": "up" },
+      { "label": "Singapore VLSFO", "value": "US$838.00/mt", "change": "▲ US$25.50 d/d", "direction": "up" },
+      { "label": "Hormuz Transits (Kpler)", "value": "5 vessels", "change": "▼ vs. officials' claim of ~40", "direction": "down" },
+      { "label": "War-Risk Premium", "value": "3–6%+", "change": "▲ of vessel value, Gulf transits", "direction": "up" },
+      { "label": "Iran Blacklisted Tankers", "value": "45 vessels", "change": "▲ incl. ADNOC L&S, Navig8, Bahri-linked", "direction": "up" }
+    ],
+    "ceoQuote": "Believe the tracker, not the transcript. That gap is the whole story this week.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-006.md",
+    "highlights": [
+      "Risk level raised from Elevated to Critical after the first direct US strike on Iranian positions in over a month",
+      "Two tankers struck within 24 hours inside the US Navy's 'safe' southern corridor — Senegal Prosperity (naval mines) and Sidr (projectiles)",
+      "Iran blacklists 45 tankers linked to ADNOC L&S, Navig8 and Bahri, threatens STS counterparties",
+      "Credibility gap widens: officials cite ~40 vessels/18m bbl escorted vs. Kpler's tracked count of 5",
+      "Brent surges to US$94.86/bbl, up from US$88.57 in Issue 005",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-006.pdf",
+    "published": true
   }
 ]
