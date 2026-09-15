@@ -123,6 +123,31 @@ function loadAllIntelligenceIssues() {
   }
 }
 
+// Helper: load career postings from JSON
+function loadCareers() {
+  const filePath = path.join(__dirname, 'careers.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const postings = JSON.parse(data);
+    return postings.filter(p => p.published).sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (err) {
+    console.error('Error loading careers:', err.message);
+    return [];
+  }
+}
+
+// Load ALL postings (including drafts) for preview
+function loadAllCareers() {
+  const filePath = path.join(__dirname, 'careers.json');
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(data).sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (err) {
+    console.error('Error loading all careers:', err.message);
+    return [];
+  }
+}
+
 // Slugify heading text for in-page jump-link anchors
 function slugify(text) {
   return text
@@ -286,13 +311,46 @@ app.get('/blog/:slug', (req, res) => {
             noindex: true
         });
     }
-    res.render('blog', { 
+    res.render('blog', {
         title: post.title + ' | DDS Marine Blog',
         description: post.excerpt,
         path: '/blog/' + post.slug,
         ogImage: post.ogImage || 'https://www.ddsmarine.com/assets/hero-ship.jpg',
         posts: [],
         post: post
+    });
+});
+
+// Careers routes
+app.get('/careers', (req, res) => {
+    const postings = loadCareers();
+    res.render('careers', {
+        title: 'Careers | DDS Marine Energy Services',
+        description: 'Explore open roles at DDS Marine Energy Services and join our team of mariners, advisors and operators in Penang, Malaysia.',
+        path: '/careers',
+        postings: postings,
+        posting: null
+    });
+});
+
+app.get('/careers/:slug', (req, res) => {
+    const postings = loadAllCareers();
+    const posting = postings.find(p => p.slug === req.params.slug);
+    if (!posting) {
+        return res.status(404).render('404', {
+            title: 'Position Not Found | DDS Marine',
+            description: 'The job posting you are looking for does not exist.',
+            path: req.path,
+            noindex: true
+        });
+    }
+    res.render('careers', {
+        title: posting.title + ' | Careers | DDS Marine',
+        description: posting.excerpt,
+        path: '/careers/' + posting.slug,
+        ogImage: 'https://www.ddsmarine.com/assets/offshore-rig.jpg',
+        postings: [],
+        posting: posting
     });
 });
 
