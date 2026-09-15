@@ -80,7 +80,7 @@
           <div class="mt-12 p-8 rounded-2xl bg-navy border-t-4 border-gold flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
             <div>
               <p class="font-heading text-lg font-bold text-ivory">Interested in this role?</p>
-              <p class="text-sm text-ivory/60 mt-1">Send your CV and a short note to <%= posting.applyEmail || 'info@ddsmarine.com' %>, quoting &ldquo;<%= posting.title %>&rdquo; in the subject line.</p>
+              <p class="text-sm text-ivory/60 mt-1">Send your CV together with your current/expected salary and availability to <%= posting.applyEmail || 'info@ddsmarine.com' %>, quoting &ldquo;<%= posting.title %>&rdquo; in the subject line.</p>
             </div>
             <a href="mailto:<%= posting.applyEmail || 'info@ddsmarine.com' %>?subject=<%= encodeURIComponent('Application: ' + posting.title) %>"
               class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded bg-gold text-navy font-heading font-bold text-sm hover:bg-gold-dark transition-colors">
