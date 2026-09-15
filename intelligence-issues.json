@@ -178,5 +178,35 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-006.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-007",
+    "issueNumber": 7,
+    "title": "DDS Weekly Maritime Intelligence — Issue 007",
+    "date": "2026-09-11",
+    "coverImage": "/assets/sts-operation.jpg",
+    "excerpt": "The conflict widens from state-on-state strikes to attacks on merchant shipping generally: Iran claims ten vessel attacks, a laden tanker catches fire, Brent crosses US$100, and reported Houthi control of Mocha narrows the Red Sea alternative to Hormuz.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$107.63/bbl", "change": "▲ US$6.42 d/d; crossed US$100 on 9 Sep", "direction": "up" },
+      { "label": "WTI Crude", "value": "US$103.70/bbl", "change": "▲ US$6.75 d/d", "direction": "up" },
+      { "label": "Fujairah VLSFO", "value": "US$924.50/mt", "change": "▲ US$37.50 d/d; US$67 above Singapore", "direction": "up" },
+      { "label": "Dirty Tanker Tone", "value": "Very Firm", "change": "▲ Gulf-linked risk premium", "direction": "up" },
+      { "label": "Clean Tanker Tone", "value": "Very Firm", "change": "▲ Pacific and Gulf strength", "direction": "up" },
+      { "label": "VLCC Market Tone", "value": "Exceptionally Firm", "change": "▲ constrained willing tonnage", "direction": "up" }
+    ],
+    "ceoQuote": "When both chokepoints are contested at once, the corridor you can still count on stops being a convenience and becomes the business.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-007.md",
+    "highlights": [
+      "Risk level remains Critical — but the conflict has widened from state-on-state strikes to attacks on merchant shipping generally",
+      "Iran claims attacks on ten vessels near Hormuz; tanker NEW ANDROS (~2m bbl Iraqi fuel oil) catches fire",
+      "US strikes five more Iranian crude carriers on 8 September, following three on 5 September",
+      "Brent crosses US$100 for the first time this series, closing at US$107.63/bbl",
+      "Reported Houthi seizure of the port of Mocha narrows the Bab el-Mandeb alternative to Hormuz",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-007.pdf",
+    "published": true
   }
 ]
