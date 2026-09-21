@@ -208,5 +208,35 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-007.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-008",
+    "issueNumber": 8,
+    "title": "DDS Weekly Maritime Intelligence — Issue 008",
+    "date": "2026-09-18",
+    "coverImage": "/assets/offshore-rig.jpg",
+    "excerpt": "Saudi Arabia's East-West pipeline — the Kingdom's main Hormuz bypass — is confirmed damaged with repairs estimated at five to six weeks, Gulf tanker rates break US$1 million a day for the first time on record, and DDS introduces a new data-integrity standard reporting ranges and dual sources rather than single misleading figures.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$105.56/bbl", "change": "▼ Ship & Bunker, 16 Sep close; Integr8 105.83 (17 Sep)", "direction": "down" },
+      { "label": "WTI Crude", "value": "US$101.96/bbl", "change": "▼ Ship & Bunker; Integr8 98.10 is Sep contract", "direction": "down" },
+      { "label": "Singapore VLSFO", "value": "US$900–928/mt", "change": "▼ index 913.50; range, not a point figure", "direction": "down" },
+      { "label": "Fujairah VLSFO", "value": "US$1,000–1,040/mt", "change": "▲ premium over Singapore now US$95–108/mt", "direction": "up" },
+      { "label": "Gulf Tanker Rates", "value": ">US$1m/day", "change": "▲ first time on record, per Bloomberg/Baltic Exchange", "direction": "up" },
+      { "label": "Saudi East-West Pipeline", "value": "Offline", "change": "▼ 3 pumping stations damaged; 5–6 wk repair estimate", "direction": "down" }
+    ],
+    "ceoQuote": "We built a bypass for Hormuz. This week the bypass became a casualty too.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-008.md",
+    "highlights": [
+      "Saudi Arabia's East-West pipeline — the main Hormuz bypass — confirmed damaged; repairs estimated at 5-6 weeks",
+      "Gulf-pickup tanker rates break US$1 million a day for the first time on record",
+      "Second-hand VLCC values (~US$182m) now exceed newbuild pricing (~US$130m)",
+      "Iran's blacklist grows to 78 vessels, up from 45 in Issue 006",
+      "DDS introduces a new Data Integrity & Methodology standard: stated cut-offs, ranges not points, dual-source cross-checks",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-008.pdf",
+    "published": true
   }
 ]
