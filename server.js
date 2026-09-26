@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const { marked } = require('marked');
 
 const app = express();
@@ -69,9 +70,29 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
+app.use(compression());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+const SITE_URL = 'https://www.ddsmarine.com';
+const ORG_ID = SITE_URL + '/#organization';
+
+// Serialises a schema.org object for a <script type="application/ld+json">
+// block. "<" is escaped so HTML inside values (job descriptions, etc.) can
+// never close the script tag early.
+function ldJson(obj) {
+  return JSON.stringify(obj).replace(/</g, '\\u003c');
+}
+
+// Search results cut meta descriptions off around 155-160 characters, so
+// longer excerpts are trimmed at a word boundary rather than mid-word.
+function metaDescription(text, max = 155) {
+  const clean = String(text || '').replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:—–-]+$/, '') + '…';
+}
 
 // Helper: load blog posts from JSON
 function loadBlogPosts() {
@@ -213,7 +234,84 @@ function renderIssueContent(issue) {
 
 // Static SEO files
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, 'robots.txt')));
-app.get('/sitemap.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap.xml')));
+
+function latestDate(items) {
+  return items.map((i) => i.date).filter(Boolean).sort().pop() || null;
+}
+
+// Built from the JSON data files on each request, so every published blog
+// post, intelligence issue and job posting is listed automatically — no
+// hand-editing when new content goes up.
+app.get('/sitemap.xml', (req, res) => {
+  const posts = loadBlogPosts();
+  const issues = loadIntelligenceIssues();
+  const careers = loadCareers();
+
+  const entries = [
+    { loc: '/', lastmod: latestDate([...posts, ...issues]) },
+    { loc: '/about' },
+    { loc: '/services' },
+    { loc: '/partners' },
+    { loc: '/projects' },
+    { loc: '/team' },
+    { loc: '/contact' },
+    { loc: '/careers', lastmod: latestDate(careers) },
+    ...careers.map((p) => ({ loc: '/careers/' + p.slug, lastmod: p.date })),
+    { loc: '/blog', lastmod: latestDate(posts) },
+    ...posts.map((p) => ({ loc: '/blog/' + p.slug, lastmod: p.date })),
+    { loc: '/intelligence', lastmod: latestDate(issues) },
+    ...issues.map((i) => ({ loc: '/intelligence/' + i.slug, lastmod: i.date }))
+  ];
+
+  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    + entries.map((e) => `  <url><loc>${SITE_URL}${e.loc}</loc>${e.lastmod ? `<lastmod>${e.lastmod}</lastmod>` : ''}</url>`).join('\n')
+    + '\n</urlset>\n';
+
+  res.type('application/xml').send(xml);
+});
+
+// llms.txt (https://llmstxt.org) — a plain-markdown summary of the site for
+// AI assistants and answer engines. Generated from the same data files so it
+// always lists the current intelligence issues and open roles.
+app.get('/llms.txt', (req, res) => {
+  const issues = loadIntelligenceIssues();
+  const posts = loadBlogPosts();
+  const careers = loadCareers();
+
+  const lines = [
+    '# DDS Marine Energy Services',
+    '',
+    '> DDS Marine Energy Services Sdn. Bhd. is a marine energy services company headquartered in Penang, Malaysia (founded 2020). It provides ship-to-ship (STS) transfer services, deep-draft vessel pilotage, mooring master services, bunkering, ship chartering and brokerage, and marine advisory across the Straits of Malacca and Southeast Asia, with offices in Kuala Lumpur, Muar and Singapore and a network reaching Hong Kong, India and Dubai.',
+    '',
+    'Headquarters: 3J-13-1 Straits Quay, Jalan Seri Tanjung Pinang, Tanjung Tokong, 10470 Pulau Pinang, Malaysia. Phone: +60 16-506 3003. Email: info@ddsmarine.com. Founder & Chairman: Capt. Dinesh Naidu KC.',
+    '',
+    '## Company',
+    '',
+    `- [Services](${SITE_URL}/services): STS services provider, marine advisory for the Malacca Straits, mooring master services, POAC services, deep-draft vessel pilotage, bunker survey, OVID inspection, oil spill response, deslopping and tank cleaning, fresh water and provision supply, oil and gas consultancy, ship chartering and brokerage, marine insurance claims, yacht repairs/sales/marketing, bunker fuel supply, DP survey and DP trial, and pre-purchase inspections.`,
+    `- [About](${SITE_URL}/about): company history since 2020 and operating principles.`,
+    `- [Projects](${SITE_URL}/projects): examples of completed marine operations.`,
+    `- [Partners](${SITE_URL}/partners): industry partners and alliance network.`,
+    `- [Team](${SITE_URL}/team): leadership and specialists.`,
+    `- [Contact](${SITE_URL}/contact): enquiries and office locations.`,
+    '',
+    '## DDS Weekly Maritime Intelligence',
+    '',
+    'A weekly briefing on crude and product tanker markets, Singapore and Fujairah bunker pricing, sanctions and compliance, and Southeast Asia maritime and STS risk, written by DDS Marine with named sources for every figure.',
+    '',
+    ...issues.map((i) => `- [Issue ${String(i.issueNumber).padStart(3, '0')}: ${i.headline || i.title}](${SITE_URL}/intelligence/${i.slug}) (${i.date}): ${i.excerpt}`),
+    ''
+  ];
+
+  if (posts.length) {
+    lines.push('## Blog', '', ...posts.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}) (${p.date}): ${p.excerpt}`), '');
+  }
+  if (careers.length) {
+    lines.push('## Careers', '', ...careers.map((p) => `- [${p.title}](${SITE_URL}/careers/${p.slug}) — ${p.type}, ${p.location}: ${p.excerpt}`), '');
+  }
+
+  res.type('text/plain; charset=utf-8').send(lines.join('\n'));
+});
 
 // Routes
 app.get('/', (req, res) => {
@@ -311,11 +409,27 @@ app.get('/blog/:slug', (req, res) => {
             noindex: true
         });
     }
+    const postImage = post.ogImage || SITE_URL + '/assets/hero-ship.jpg';
+    const articleSchema = ldJson({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        image: [postImage],
+        datePublished: post.date,
+        dateModified: post.date,
+        author: { '@type': 'Person', name: post.author },
+        publisher: { '@id': ORG_ID },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': SITE_URL + '/blog/' + post.slug },
+        keywords: (post.tags || []).join(', ')
+    });
+
     res.render('blog', {
         title: post.title + ' | DDS Marine Blog',
-        description: post.excerpt,
+        description: metaDescription(post.excerpt),
         path: '/blog/' + post.slug,
-        ogImage: post.ogImage || 'https://www.ddsmarine.com/assets/hero-ship.jpg',
+        ogImage: postImage,
+        articleSchema: articleSchema,
         posts: [],
         post: post
     });
@@ -344,11 +458,44 @@ app.get('/careers/:slug', (req, res) => {
             noindex: true
         });
     }
+    // JobPosting structured data makes the role eligible for Google's job
+    // search listings. validThrough is only emitted when a posting sets it —
+    // no expiry date is invented.
+    const employmentTypes = { 'full-time': 'FULL_TIME', 'part-time': 'PART_TIME', 'contract': 'CONTRACTOR', 'temporary': 'TEMPORARY', 'internship': 'INTERN' };
+    const jobSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'JobPosting',
+        title: posting.title,
+        description: posting.description,
+        datePosted: posting.date,
+        employmentType: employmentTypes[String(posting.type || '').toLowerCase()] || undefined,
+        hiringOrganization: {
+            '@type': 'Organization',
+            '@id': ORG_ID,
+            name: 'DDS Marine Energy Services',
+            sameAs: SITE_URL,
+            logo: SITE_URL + '/assets/dds-logo-transparent.png'
+        },
+        jobLocation: {
+            '@type': 'Place',
+            address: {
+                '@type': 'PostalAddress',
+                addressLocality: posting.addressLocality || undefined,
+                addressRegion: posting.addressRegion || undefined,
+                addressCountry: posting.addressCountry || 'MY'
+            }
+        },
+        occupationalCategory: posting.department,
+        directApply: false
+    };
+    if (posting.validThrough) jobSchema.validThrough = posting.validThrough;
+
     res.render('careers', {
         title: posting.title + ' | Careers | DDS Marine',
-        description: posting.excerpt,
+        description: metaDescription(posting.excerpt),
         path: '/careers/' + posting.slug,
-        ogImage: 'https://www.ddsmarine.com/assets/offshore-rig.jpg',
+        ogImage: SITE_URL + '/assets/offshore-rig.jpg',
+        articleSchema: ldJson(jobSchema),
         postings: [],
         posting: posting
     });
@@ -386,23 +533,28 @@ app.get('/intelligence/:slug', (req, res) => {
     const { html: contentHtml, toc, readingTimeMin } = renderIssueContent(issue);
     const ogImageUrl = issue.coverImage ? 'https://www.ddsmarine.com' + issue.coverImage : 'https://www.ddsmarine.com/assets/offshore-rig.jpg';
 
-    const articleSchema = JSON.stringify({
+    const issueNo = String(issue.issueNumber).padStart(3, '0');
+    const pageTitle = issue.headline
+        ? `Issue ${issueNo}: ${issue.headline} | DDS Marine`
+        : issue.title + ' | DDS Marine';
+
+    const articleSchema = ldJson({
         '@context': 'https://schema.org',
         '@type': 'NewsArticle',
-        headline: issue.title,
+        headline: issue.headline ? `DDS Maritime Intelligence Issue ${issueNo}: ${issue.headline}` : issue.title,
         description: issue.excerpt,
         image: [ogImageUrl],
         datePublished: issue.date,
         dateModified: issue.date,
         author: { '@type': 'Person', name: 'Capt. Dinesh Naidu KC', jobTitle: 'Founder & Chairman, DDS Marine Group' },
-        publisher: { '@id': 'https://www.ddsmarine.com/#organization' },
-        mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://www.ddsmarine.com/intelligence/' + issue.slug },
+        publisher: { '@id': ORG_ID },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': SITE_URL + '/intelligence/' + issue.slug },
         articleSection: (issue.highlights || []).slice(0, 6)
     });
 
     res.render('intelligence', {
-        title: issue.title + ' | DDS Weekly Maritime Intelligence',
-        description: issue.excerpt,
+        title: pageTitle,
+        description: metaDescription(issue.excerpt),
         path: '/intelligence/' + issue.slug,
         ogImage: ogImageUrl,
         articleSchema: articleSchema,
