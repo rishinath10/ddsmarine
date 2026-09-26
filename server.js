@@ -153,14 +153,31 @@ function loadAllIntelligenceIssues() {
   }
 }
 
-// Helper: load homepage FAQs from JSON
-function loadFaqs() {
+// Helper: load FAQ sections from JSON. Each section has an id, a title and
+// items of { question, answer (trusted HTML, may contain links), featured? }.
+// The /faq page, its FAQPage schema, the homepage preview and llms.txt all
+// read this one file, so they can never disagree.
+function loadFaqSections() {
   try {
-    return JSON.parse(fs.readFileSync(path.join(__dirname, 'faqs.json'), 'utf-8'));
+    return JSON.parse(fs.readFileSync(path.join(__dirname, 'faq.json'), 'utf-8'));
   } catch (err) {
-    console.error('Error loading FAQs:', err.message);
+    console.error('Error loading FAQ:', err.message);
     return [];
   }
+}
+
+// Site-relative links in an answer, made absolute for structured data and
+// llms.txt (mailto: and full URLs are left as they are).
+function absolutiseLinks(html) {
+  return String(html).replace(/href="\//g, `href="${SITE_URL}/`);
+}
+
+// HTML answer -> plain markdown (links become [text](url)) for llms.txt.
+function answerToMarkdown(html) {
+  return absolutiseLinks(html)
+    .replace(/<a href="([^"]+)">([^<]+)<\/a>/g, '[$2]($1)')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&');
 }
 
 // Helper: load career postings from JSON
@@ -274,6 +291,7 @@ app.get('/sitemap.xml', (req, res) => {
     { loc: '/projects' },
     { loc: '/team' },
     { loc: '/contact' },
+    { loc: '/faq' },
     { loc: '/careers', lastmod: latestDate(careers) },
     ...careers.map((p) => ({ loc: '/careers/' + p.slug, lastmod: p.date })),
     { loc: '/blog', lastmod: latestDate(posts) },
@@ -328,9 +346,13 @@ app.get('/llms.txt', (req, res) => {
   if (careers.length) {
     lines.push('## Careers', '', ...careers.map((p) => `- [${p.title}](${SITE_URL}/careers/${p.slug}) — ${p.type}, ${p.location}: ${p.excerpt}`), '');
   }
-  const faqs = loadFaqs();
-  if (faqs.length) {
-    lines.push('## FAQ', '', ...faqs.flatMap((f) => [`### ${f.question}`, '', f.answer, '']));
+  const faqSections = loadFaqSections();
+  if (faqSections.length) {
+    lines.push('## FAQ', '', `Full list: ${SITE_URL}/faq`, '');
+    faqSections.forEach((s) => {
+      lines.push(`### ${s.title}`, '');
+      s.items.forEach((item) => lines.push(`**${item.question}**`, '', answerToMarkdown(item.answer), ''));
+    });
   }
 
   res.type('text/plain; charset=utf-8').send(lines.join('\n'));
@@ -340,28 +362,47 @@ app.get('/llms.txt', (req, res) => {
 app.get('/', (req, res) => {
     const blogPosts = loadBlogPosts();
     const intelligenceIssues = loadIntelligenceIssues();
-    const faqs = loadFaqs();
-
-    // FAQPage structured data is built from the same list the page renders,
-    // so the marked-up answers always match the visible ones.
-    const faqSchema = faqs.length ? ldJson({
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqs.map((f) => ({
-            '@type': 'Question',
-            name: f.question,
-            acceptedAnswer: { '@type': 'Answer', text: f.answer }
-        }))
-    }) : null;
+    // Homepage shows a short preview of the featured questions only. It
+    // carries no FAQPage schema — the full, marked-up FAQ lives on /faq, so
+    // the same questions are never marked up on two pages.
+    const faqs = loadFaqSections().flatMap((s) => s.items).filter((i) => i.featured);
 
     res.render('index', {
         title: 'DDS Marine Energy Services | Marine Operations Malaysia',
         description: 'DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca.',
         path: '/',
-        articleSchema: faqSchema,
         blogPosts: blogPosts,
         faqs: faqs,
         latestIssue: intelligenceIssues[0] || null
+    });
+});
+
+app.get('/faq', (req, res) => {
+    const sections = loadFaqSections();
+
+    // FAQPage schema is generated from the same sections the page renders,
+    // so every marked-up question and answer is visible on the page, word
+    // for word. Answer links are made absolute; the text is unchanged.
+    const faqSchema = ldJson({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': SITE_URL + '/faq#faqpage',
+        url: SITE_URL + '/faq',
+        name: 'Frequently Asked Questions About DDS Marine',
+        publisher: { '@id': ORG_ID },
+        mainEntity: sections.flatMap((s) => s.items).map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: { '@type': 'Answer', text: absolutiseLinks(item.answer) }
+        }))
+    });
+
+    res.render('faq', {
+        title: 'Frequently Asked Questions | DDS Marine',
+        description: "Find answers about DDS Marine's STS operations, tanker chartering, bunkering, marine advisory and POAC services in Malaysia and the Straits of Malacca.",
+        path: '/faq',
+        articleSchema: faqSchema,
+        sections: sections
     });
 });
 

@@ -1,0 +1,210 @@
+[
+  {
+    "id": "about",
+    "title": "About DDS Marine",
+    "items": [
+      {
+        "question": "What is DDS Marine?",
+        "answer": "DDS Marine Energy Services is a Malaysia-based marine energy and maritime services company providing ship-to-ship (STS) operations, marine advisory, mooring master services, POAC services, deep-draft vessel pilotage, bunker surveys, bunkering, ship chartering and other marine support services.",
+        "featured": true
+      },
+      {
+        "question": "Where is DDS Marine based?",
+        "answer": "DDS Marine is headquartered in Penang, Malaysia, with an operational network supporting maritime activities across Southeast Asia and international maritime markets."
+      },
+      {
+        "question": "What areas does DDS Marine serve?",
+        "answer": "DDS Marine provides marine services across the Straits of Malacca and Southeast Asia, with an international network supporting operations, chartering, bunkering and marine advisory."
+      },
+      {
+        "question": "What marine services does DDS Marine provide?",
+        "answer": "DDS Marine provides STS transfers, mooring master services, POAC services, deep-draft vessel pilotage, bunker surveys, bunkering, ship chartering and brokerage, marine advisory, tank cleaning, fresh water and provisions, DP surveys and trials, pre-purchase inspections, marine insurance claims support and oil and gas consultancy. <a href=\"/services\">See our full list of services</a>."
+      },
+      {
+        "question": "Who provides marine services in Malaysia?",
+        "answer": "DDS Marine provides a range of marine services in Malaysia, including STS operations, deep-draft pilotage, mooring master services, bunkering, bunker surveys, ship chartering, marine advisory and vessel support services."
+      },
+      {
+        "question": "Does DDS Marine operate internationally?",
+        "answer": "Yes. DDS Marine is headquartered in Malaysia and maintains an international maritime network supporting activities across Southeast Asia and other international maritime markets."
+      }
+    ]
+  },
+  {
+    "id": "sts",
+    "title": "STS & Ship-to-Ship Operations",
+    "items": [
+      {
+        "question": "Does DDS Marine provide ship-to-ship (STS) transfer services?",
+        "answer": "Yes. DDS Marine provides ship-to-ship transfer support across the Straits of Malacca, including mooring master coordination, fender and lightering support, operational coordination, documentation and certification. <a href=\"/services#sts-services\">Learn more about our STS services</a>.",
+        "featured": true
+      },
+      {
+        "question": "What is a ship-to-ship (STS) transfer?",
+        "answer": "A ship-to-ship transfer is a marine operation in which cargo, fuel or other materials are transferred between two vessels at sea or at an approved anchorage, without either vessel needing to berth at a terminal."
+      },
+      {
+        "question": "Where does DDS Marine conduct STS operations?",
+        "answer": "DDS Marine supports STS operations at designated locations in the Straits of Malacca and other suitable operating areas, subject to operational, regulatory, weather, vessel and port requirements."
+      },
+      {
+        "question": "Who provides STS services in the Straits of Malacca?",
+        "answer": "DDS Marine Energy Services is a Malaysia-based marine services provider offering STS transfer support, mooring master coordination, POAC services and related marine operations across the Straits of Malacca."
+      },
+      {
+        "question": "Does DDS Marine provide mooring masters for STS operations?",
+        "answer": "Yes. DDS Marine provides mooring master services for STS, FSO and offshore operations. <a href=\"/services#mooring-master\">Learn more about our mooring master services</a>."
+      },
+      {
+        "question": "What is a POAC in an STS operation?",
+        "answer": "POAC stands for Person-in-Overall-Command. The POAC provides overall operational command and coordination during an STS operation and helps ensure the operation is planned and executed according to applicable safety and operational requirements."
+      },
+      {
+        "question": "Does DDS Marine provide POAC services?",
+        "answer": "Yes. DDS Marine provides POAC services for STS and other complex marine operations, including multi-vessel operations and safety-focused coordination."
+      }
+    ]
+  },
+  {
+    "id": "bunkering",
+    "title": "Bunkering & Marine Support",
+    "items": [
+      {
+        "question": "Does DDS Marine provide bunker fuel supply in Malaysia?",
+        "answer": "Yes. DDS Marine coordinates bunker fuel supply through its supplier network at designated Malaysian ports, including VLSFO, MGO and HSFO, subject to availability and applicable requirements. <a href=\"/services#bunker-fuel-supply\">Learn more about our bunker fuel supply</a>.",
+        "featured": true
+      },
+      {
+        "question": "Who provides bunker fuel services in Malaysia?",
+        "answer": "DDS Marine coordinates bunker fuel supply through its supplier network at designated Malaysian ports, including VLSFO, MGO and HSFO."
+      },
+      {
+        "question": "What types of marine fuel can DDS Marine arrange?",
+        "answer": "DDS Marine can arrange VLSFO, MGO and HSFO bunker fuel through its supplier network, subject to availability, location, vessel requirements and applicable specifications."
+      },
+      {
+        "question": "Does DDS Marine provide bunker quantity and quality surveys?",
+        "answer": "Yes. DDS Marine provides independent bunker surveys covering quantity and quality verification, documentation and bunker fuel compliance checks. <a href=\"/services#bunker-survey\">Learn more about our bunker surveys</a>."
+      },
+      {
+        "question": "Does DDS Marine provide tank cleaning and deslopping services?",
+        "answer": "Yes. DDS Marine provides tank-cleaning services for product tankers between cargoes, including slop reception and disposal in accordance with applicable requirements."
+      },
+      {
+        "question": "Can DDS Marine arrange fresh water and vessel provisions?",
+        "answer": "Yes. DDS Marine provides fresh water, bonded stores and vessel provisions at designated anchorages and berths."
+      }
+    ]
+  },
+  {
+    "id": "chartering",
+    "title": "Ship Chartering & Brokerage",
+    "items": [
+      {
+        "question": "Does DDS Marine provide tanker chartering and shipbroking services?",
+        "answer": "Yes. DDS Marine provides ship chartering and brokerage services covering vessel sourcing, charter-party negotiations, post-fixture activities and vessel operations. <a href=\"/services#chartering-brokerage\">Explore our tanker chartering and brokerage services</a>.",
+        "featured": true
+      },
+      {
+        "question": "Where can I find tanker chartering services in Malaysia?",
+        "answer": "DDS Marine provides tanker chartering and shipbroking services from Malaysia, supporting vessel sourcing, charter-party negotiations, post-fixture activities and vessel operations."
+      },
+      {
+        "question": "What types of tankers does DDS Marine charter?",
+        "answer": "DDS Marine's chartering activities include tanker segments such as VLCC, Suezmax, Aframax and MR vessels, subject to current market requirements and available tonnage."
+      },
+      {
+        "question": "Can DDS Marine help charterers find suitable vessels?",
+        "answer": "Yes. DDS Marine can support charterers with vessel sourcing, commercial negotiations, charter-party arrangements and post-fixture coordination, depending on the vessel, cargo, trading area and requirements."
+      },
+      {
+        "question": "Can shipowners work with DDS Marine to fix their vessels?",
+        "answer": "Yes. DDS Marine works with vessel owners, charterers and traders and can support commercial opportunities through its tanker chartering and brokerage network."
+      }
+    ]
+  },
+  {
+    "id": "advisory",
+    "title": "Marine Advisory & Risk",
+    "items": [
+      {
+        "question": "Does DDS Marine provide marine advisory services?",
+        "answer": "Yes. DDS Marine provides marine advisory covering route and risk assessment, regulatory and compliance guidance, marine operations and independent third-party counsel. <a href=\"/services#marine-advisory\">Learn more about our marine advisory services</a>."
+      },
+      {
+        "question": "Can DDS Marine advise on operations in the Straits of Malacca?",
+        "answer": "Yes. DDS Marine provides marine advisory services focused on the Straits of Malacca, including operational planning, route considerations, risk assessment and regulatory requirements."
+      },
+      {
+        "question": "Who provides marine advisory services for the Straits of Malacca?",
+        "answer": "DDS Marine provides marine advisory for the Straits of Malacca, including route and risk assessment, regulatory and compliance guidance and independent marine counsel."
+      },
+      {
+        "question": "Does DDS Marine provide maritime risk and compliance support?",
+        "answer": "Yes. DDS Marine provides marine advisory and compliance-related support, incorporating relevant maritime safety, regulatory and risk-management considerations."
+      }
+    ]
+  },
+  {
+    "id": "vessel-operations",
+    "title": "Vessel Operations & Inspection",
+    "items": [
+      {
+        "question": "Does DDS Marine provide deep-draft vessel pilotage?",
+        "answer": "Yes. DDS Marine provides deep-draft vessel pilotage for vessels navigating restricted waterways and approaching terminals, using licensed deep-draft pilots with relevant navigation expertise. <a href=\"/services#deep-draft-pilotage\">Learn more about our deep-draft pilotage</a>."
+      },
+      {
+        "question": "Does DDS Marine provide vessel pre-purchase inspections?",
+        "answer": "Yes. DDS Marine provides independent pre-purchase technical and condition inspections for prospective vessel buyers evaluating second-hand tonnage."
+      },
+      {
+        "question": "Does DDS Marine provide DP surveys and DP trials?",
+        "answer": "Yes. DDS Marine provides Dynamic Positioning (DP) capability surveys, trials and certification support, with reporting against applicable industry guidance."
+      },
+      {
+        "question": "Does DDS Marine assist with marine insurance claims?",
+        "answer": "Yes. DDS Marine provides marine insurance claims support for owners, charterers and insurers, including coordination with surveyors, legal counsel and relevant documentation."
+      }
+    ]
+  },
+  {
+    "id": "commercial",
+    "title": "Commercial Enquiries",
+    "items": [
+      {
+        "question": "How can I arrange an STS operation in the Straits of Malacca?",
+        "answer": "To arrange an STS operation with DDS Marine, provide the vessel details, cargo information, intended location, proposed dates, operational requirements and other relevant voyage information. DDS Marine can then assess the requirements and coordinate the appropriate marine services. <a href=\"/contact\">Contact our team</a>."
+      },
+      {
+        "question": "How can I request a bunker supply from DDS Marine?",
+        "answer": "Contact DDS Marine with the vessel name, IMO number, port or anchorage, estimated delivery date, fuel grade, required quantity and relevant specifications. DDS Marine can coordinate the requirement through its bunker supplier network."
+      },
+      {
+        "question": "How can I charter a tanker through DDS Marine?",
+        "answer": "Contact DDS Marine with your cargo, vessel size, trading area, laycan, duration and other commercial requirements. DDS Marine's chartering team can assess suitable tonnage and available market opportunities."
+      },
+      {
+        "question": "How can I request marine advisory services from DDS Marine?",
+        "answer": "Contact DDS Marine with details of the vessel, operation, location, timeframe and the specific challenge or requirement. DDS Marine can assess the scope and determine the appropriate advisory and operational support."
+      },
+      {
+        "question": "Does DDS Marine provide 24/7 marine operational support?",
+        "answer": "DDS Marine maintains operational readiness for marine activities including mooring master and STS operations. Specific 24/7 coverage and response arrangements should be confirmed with the DDS Marine operations team based on project requirements."
+      },
+      {
+        "question": "How do I contact DDS Marine for marine services?",
+        "answer": "Contact DDS Marine at <a href=\"mailto:info@ddsmarine.com\">info@ddsmarine.com</a> or through the contact details published on the official DDS Marine website. Visit our <a href=\"/contact\">contact page</a> for current office and enquiry information."
+      }
+    ]
+  },
+  {
+    "id": "intelligence",
+    "title": "Maritime Intelligence",
+    "items": [
+      {
+        "question": "What is DDS Weekly Maritime Intelligence?",
+        "answer": "DDS Weekly Maritime Intelligence is DDS Marine's maritime intelligence publication covering tanker markets, bunker pricing, sanctions and compliance developments, Southeast Asian maritime risk and selected maritime market intelligence. <a href=\"/intelligence\">Read the latest DDS Weekly Maritime Intelligence</a>."
+      }
+    ]
+  }
+]

@@ -1,0 +1,136 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<!-- No-JS fallback: without JavaScript the accordion can't open, so show
+     every answer instead. -->
+<noscript><style>.faq-panel[hidden]{display:block !important}</style></noscript>
+
+<style>
+  .faq-panel:not([hidden]) { animation: faq-reveal .22s ease-out; }
+  @keyframes faq-reveal { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .faq-panel:not([hidden]) { animation: none; } }
+</style>
+
+<section class="relative min-h-[52vh] flex items-end overflow-hidden pt-24 pb-16">
+  <div class="absolute inset-0">
+    <img src="/assets/sts-operation.jpg" alt="" class="photo-crisp w-full h-full object-cover" fetchpriority="high" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-r from-navy-deep/90 via-navy-deep/65 to-navy-deep/35"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/20 to-transparent"></div>
+  </div>
+  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+    <div class="reveal inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gold/40 bg-navy-deep/40 backdrop-blur">
+      <span class="h-1.5 w-1.5 rounded-full bg-gold animate-pulse"></span>
+      <span class="text-xs font-heading uppercase tracking-[0.3em] text-gold-light">FAQ</span>
+    </div>
+    <h1 class="reveal mt-6 font-heading text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] text-ivory max-w-4xl">Frequently Asked Questions About DDS Marine</h1>
+    <p class="reveal mt-6 text-lg text-ivory/80 max-w-2xl leading-relaxed">Find answers to common questions about DDS Marine's marine services, ship-to-ship operations, tanker chartering, bunkering, marine advisory and vessel support services.</p>
+  </div>
+</section>
+
+<section class="py-16 lg:py-24 bg-ivory">
+  <div class="container mx-auto px-4 lg:px-8">
+
+    <!-- Category navigation, mobile: swipeable chip row -->
+    <nav aria-label="FAQ categories" class="lg:hidden -mx-4 px-4 mb-10 overflow-x-auto">
+      <ul class="flex gap-2 w-max pb-1">
+        <% sections.forEach(function(section, sIdx) { %>
+          <li>
+            <a href="#<%= section.id %>" class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 rounded-full border border-hairline bg-white text-xs font-heading font-bold uppercase tracking-wide text-navy hover:border-gold hover:text-gold-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-colors">
+              <span class="text-gold-dark"><%= String(sIdx + 1).padStart(2, '0') %></span><%= section.title %>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    </nav>
+
+    <div class="grid lg:grid-cols-[260px_1fr] gap-10 lg:gap-16 items-start">
+
+      <!-- Category navigation, desktop: sticky list -->
+      <nav aria-label="FAQ categories" class="hidden lg:block lg:sticky lg:top-28">
+        <span class="block text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold mb-4">Categories</span>
+        <ul class="space-y-1 border-l border-hairline">
+          <% sections.forEach(function(section, sIdx) { %>
+            <li>
+              <a href="#<%= section.id %>" class="group flex items-baseline gap-3 -ml-px border-l-2 border-transparent pl-4 py-1.5 text-sm font-heading text-slate-600 hover:border-gold hover:text-navy focus-visible:outline-none focus-visible:border-gold focus-visible:text-navy transition-colors">
+                <span class="text-xs font-bold text-gold-dark tabular-nums"><%= String(sIdx + 1).padStart(2, '0') %></span>
+                <span><%= section.title %></span>
+              </a>
+            </li>
+          <% }); %>
+        </ul>
+        <a href="/contact" class="mt-8 inline-flex items-center text-navy font-heading font-bold text-sm border-b border-gold pb-0.5 hover:text-gold-dark transition-colors">Ask our team &rarr;</a>
+      </nav>
+
+      <!-- FAQ sections. Answers are always in the HTML; closed panels use the
+           hidden attribute, toggled by the small script below. -->
+      <div class="min-w-0 space-y-14 lg:space-y-16">
+        <% var qCount = 0; %>
+        <% sections.forEach(function(section, sIdx) { %>
+          <section id="<%= section.id %>" aria-labelledby="<%= section.id %>-heading" class="scroll-mt-28">
+            <div class="flex items-baseline gap-4 pb-4 border-b-2 border-navy">
+              <span class="font-heading text-sm font-bold text-gold-dark tabular-nums"><%= String(sIdx + 1).padStart(2, '0') %></span>
+              <h2 id="<%= section.id %>-heading" class="font-heading text-2xl md:text-3xl font-bold text-navy"><%= section.title %></h2>
+            </div>
+
+            <div class="divide-y divide-hairline border-b border-hairline">
+              <% section.items.forEach(function(item, iIdx) { %>
+                <% qCount++; var qId = section.id + '-' + (iIdx + 1); var open = (qCount === 1); %>
+                <div>
+                  <h3>
+                    <button type="button" id="q-<%= qId %>" aria-expanded="<%= open ? 'true' : 'false' %>" aria-controls="a-<%= qId %>" data-faq-trigger
+                      class="group scroll-mt-28 flex w-full min-h-[56px] items-start justify-between gap-6 py-5 text-left font-heading text-base md:text-lg font-semibold text-navy hover:text-gold-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory rounded-sm transition-colors">
+                      <span><%= item.question %></span>
+                      <span class="mt-0.5 shrink-0 grid place-items-center h-7 w-7 rounded-full border border-gold/50 text-gold-dark transition-transform duration-200 group-aria-expanded:rotate-45 group-aria-expanded:bg-gold group-aria-expanded:text-navy group-aria-expanded:border-gold" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3.5 h-3.5"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                      </span>
+                    </button>
+                  </h3>
+                  <div id="a-<%= qId %>" role="region" aria-labelledby="q-<%= qId %>" class="faq-panel" <%= open ? '' : 'hidden' %>>
+                    <p class="pb-6 pr-2 md:pr-14 text-base text-slate-600 leading-relaxed [&_a]:text-gold-dark [&_a]:font-semibold [&_a]:underline [&_a]:decoration-gold/40 [&_a]:underline-offset-4 hover:[&_a]:decoration-gold-dark"><%- item.answer %></p>
+                  </div>
+                </div>
+              <% }); %>
+            </div>
+          </section>
+        <% }); %>
+
+        <!-- Closing CTA -->
+        <div class="rounded-md bg-navy p-8 md:p-12 border-t-4 border-gold">
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-ivory">Still have a question?</h2>
+          <p class="mt-3 text-ivory/70 max-w-xl leading-relaxed">Tell us about your vessel, cargo or operation and the DDS Marine team will get back to you.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/contact" class="inline-flex items-center px-6 py-3 rounded bg-gold text-navy font-heading font-bold text-sm hover:bg-gold-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-navy">Contact Our Team</a>
+            <a href="/services" class="inline-flex items-center px-6 py-3 rounded border border-white/30 text-ivory font-heading font-bold text-sm hover:bg-white hover:text-navy transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-navy">View Our Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var triggers = document.querySelectorAll('[data-faq-trigger]');
+
+    function setOpen(button, open) {
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.getElementById(button.getAttribute('aria-controls')).hidden = !open;
+    }
+
+    triggers.forEach(function (button) {
+      button.addEventListener('click', function () {
+        setOpen(button, button.getAttribute('aria-expanded') !== 'true');
+      });
+    });
+
+    // Opening /faq#q-sts-1 (a link to a specific question) expands it.
+    function openFromHash() {
+      var target = location.hash && document.getElementById(location.hash.slice(1));
+      if (target && target.hasAttribute('data-faq-trigger')) setOpen(target, true);
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  })();
+</script>
+
+<%- include('partials/footer') %>
