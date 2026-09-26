@@ -238,5 +238,35 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-008.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-009",
+    "issueNumber": 9,
+    "title": "DDS Weekly Maritime Intelligence — Issue 009",
+    "date": "2026-09-25",
+    "coverImage": "/assets/port-sunset.jpg",
+    "excerpt": "Saudi Arabia's East-West pipeline restarts — and Yanbu comes under Houthi missile fire. Oman STS volumes quadruple, pushing VLCC earnings to a record near US$1.27m/day, while phased US–Iran deal talk briefly drags Brent below US$100.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$104.9–105.7/bbl", "change": "▲ Friday band, two sources; week low 97.69", "direction": "up" },
+      { "label": "WTI Crude", "value": "US$92.4–93.1/bbl", "change": "▼ November contract; partly a contract roll", "direction": "down" },
+      { "label": "Singapore VLSFO", "value": "US$853–895/mt", "change": "▼ S&B index 874.00; 913.50 in Issue 008", "direction": "down" },
+      { "label": "Fujairah VLSFO", "value": "US$980–1,014.5/mt", "change": "▲ premium over Singapore US$85–122/mt", "direction": "up" },
+      { "label": "VLCC Earnings", "value": "~US$1.27m/day", "change": "▲ new record, LSEG via Reuters (21 Sep)", "direction": "up" },
+      { "label": "Saudi East-West Pipeline", "value": "Restarted", "change": "▲ 22 Sep; no Yanbu loadings confirmed yet", "direction": "up" }
+    ],
+    "ceoQuote": "The bypass is back. The risk simply moved to the other coast.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-009.md",
+    "highlights": [
+      "Saudi East-West pipeline restarts on 22 September — then Houthi missiles are fired at Yanbu",
+      "VLCC earnings hit a record near US$1.27m/day as Saudi STS off Oman quadruples to ~3.6m bpd",
+      "Hormuz traffic still in single digits: 9 commodity vessels on Thursday vs a pre-conflict norm above 125",
+      "Brent dips below US$100 on phased US–Iran deal talk, then recovers to ~US$105",
+      "For the first time in this series, every tanker segment DDS tracks scores Firm or better",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-009.pdf",
+    "published": true
   }
 ]
