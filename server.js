@@ -70,6 +70,15 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
+// Send the bare domain to www with a permanent redirect, so there is one
+// canonical host for search engines and visitors.
+app.use((req, res, next) => {
+  const host = (req.get('host') || '').toLowerCase();
+  if (host === 'ddsmarine.com' || host.startsWith('ddsmarine.com:')) {
+    return res.redirect(301, SITE_URL + req.originalUrl);
+  }
+  next();
+});
 app.use(compression());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.urlencoded({ extended: true }));
