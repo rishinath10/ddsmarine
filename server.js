@@ -153,6 +153,16 @@ function loadAllIntelligenceIssues() {
   }
 }
 
+// Helper: load homepage FAQs from JSON
+function loadFaqs() {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(__dirname, 'faqs.json'), 'utf-8'));
+  } catch (err) {
+    console.error('Error loading FAQs:', err.message);
+    return [];
+  }
+}
+
 // Helper: load career postings from JSON
 function loadCareers() {
   const filePath = path.join(__dirname, 'careers.json');
@@ -318,6 +328,10 @@ app.get('/llms.txt', (req, res) => {
   if (careers.length) {
     lines.push('## Careers', '', ...careers.map((p) => `- [${p.title}](${SITE_URL}/careers/${p.slug}) — ${p.type}, ${p.location}: ${p.excerpt}`), '');
   }
+  const faqs = loadFaqs();
+  if (faqs.length) {
+    lines.push('## FAQ', '', ...faqs.flatMap((f) => [`### ${f.question}`, '', f.answer, '']));
+  }
 
   res.type('text/plain; charset=utf-8').send(lines.join('\n'));
 });
@@ -326,11 +340,27 @@ app.get('/llms.txt', (req, res) => {
 app.get('/', (req, res) => {
     const blogPosts = loadBlogPosts();
     const intelligenceIssues = loadIntelligenceIssues();
+    const faqs = loadFaqs();
+
+    // FAQPage structured data is built from the same list the page renders,
+    // so the marked-up answers always match the visible ones.
+    const faqSchema = faqs.length ? ldJson({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer }
+        }))
+    }) : null;
+
     res.render('index', {
         title: 'DDS Marine Energy Services | Marine Operations Malaysia',
         description: 'DDS Marine provides STS operations, pilotage, bunkering, chartering and marine advisory from Penang across the Straits of Malacca.',
         path: '/',
+        articleSchema: faqSchema,
         blogPosts: blogPosts,
+        faqs: faqs,
         latestIssue: intelligenceIssues[0] || null
     });
 });

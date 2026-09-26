@@ -564,6 +564,35 @@
     </div>
   </section>
 
+  <!-- FAQ: native <details> so answers are always in the HTML (readable by
+       search engines and AI crawlers) and open without JavaScript. Content
+       comes from faqs.json, the same source as the FAQPage schema. -->
+  <% if (locals.faqs && faqs.length) { %>
+    <section class="py-16 md:py-20 bg-ivory border-b border-hairline" id="faq">
+      <div class="container mx-auto px-4 lg:px-8 grid lg:grid-cols-[1fr_1.6fr] gap-10 lg:gap-16 items-start">
+        <div class="lg:sticky lg:top-28">
+          <span class="reveal text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">FAQ</span>
+          <h2 class="reveal mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">Frequently asked questions</h2>
+          <p class="reveal mt-3 text-ink max-w-sm leading-relaxed">Quick answers about our services, where we operate and how to reach us. Can't find what you need?</p>
+          <a href="/contact" class="reveal mt-5 inline-flex items-center text-navy font-heading font-bold text-sm border-b border-gold pb-0.5 hover:text-gold-dark transition-colors">Ask our team &rarr;</a>
+        </div>
+        <div class="divide-y divide-hairline border-y border-hairline">
+          <% faqs.forEach(function(faq) { %>
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-heading text-base md:text-lg font-semibold text-navy hover:text-gold-dark transition-colors [&::-webkit-details-marker]:hidden">
+                <span><%= faq.question %></span>
+                <span class="mt-1 shrink-0 grid place-items-center h-6 w-6 rounded-full border border-gold/50 text-gold-dark transition-transform duration-200 group-open:rotate-45" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-3.5 h-3.5"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                </span>
+              </summary>
+              <p class="mt-3 pr-10 text-slate-600 leading-relaxed"><%= faq.answer %></p>
+            </details>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+  <% } %>
+
   <!-- Final CTA -->
   <section class="py-16">
     <div class="container mx-auto px-4 lg:px-8">
