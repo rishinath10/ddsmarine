@@ -277,5 +277,36 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-009.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-010",
+    "issueNumber": 10,
+    "title": "DDS Weekly Maritime Intelligence — Issue 010",
+    "headline": "Diesel Crisis as Gulf Exports Recover",
+    "date": "2026-10-02",
+    "coverImage": "/assets/hero-ship.jpg",
+    "excerpt": "Gulf oil exports hit their highest since the war began and Yanbu loads again — but three tankers are struck in Hormuz, the US sends a third carrier, and diesel becomes the crisis as China halts fuel exports and the G7 releases 100m barrels.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$102.3–102.7/bbl", "change": "▼ Friday band; dipped to 98.43 on G7 release news", "direction": "down" },
+      { "label": "WTI Crude", "value": "US$91.1–91.3/bbl", "change": "▼ one-month intraday low of 88.06", "direction": "down" },
+      { "label": "Singapore VLSFO", "value": "US$770.5–825/mt", "change": "▼ S&B index 789.00; 874.00 in Issue 009", "direction": "down" },
+      { "label": "Fujairah VLSFO", "value": "US$947.5–1,241/mt", "change": "▲ three sources disagree; two cluster at US$948–980", "direction": "up" },
+      { "label": "Middle East Oil Exports", "value": "12.8m bpd", "change": "▲ September, highest since the war began (Kpler)", "direction": "up" },
+      { "label": "Hormuz Tanker Strikes", "value": "3 tankers hit", "change": "▼ 29–30 Sep; all crew safe; two transiting dark", "direction": "down" }
+    ],
+    "ceoQuote": "When every gauge reads maximum, read the gauges more carefully.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-010.md",
+    "highlights": [
+      "Gulf oil exports reach ~12.8m bpd in September, the highest since the war began (Kpler)",
+      "Three Liberia-flagged tankers struck in Hormuz on 29–30 September; at least two were transiting dark",
+      "Diesel becomes the crisis: China halts most October fuel exports and the G7 agrees a 100m-barrel reserve release",
+      "Fujairah VLSFO premium over Singapore widens to US$158–191/mt on corroborated figures",
+      "For the first time in this series, every tanker segment DDS tracks scores 5/5",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-010.pdf",
+    "published": true
   }
 ]
