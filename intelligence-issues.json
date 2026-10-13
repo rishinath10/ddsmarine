@@ -308,5 +308,36 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-010.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-011",
+    "issueNumber": 11,
+    "title": "DDS Weekly Maritime Intelligence — Issue 011",
+    "headline": "Record Attack Week as Strikes Reach Deeper",
+    "date": "2026-10-09",
+    "coverImage": "/assets/sts-operation.jpg",
+    "excerpt": "At least 13 tankers are struck in eight days, the most of the war, as attacks reach gas carriers and a tanker off Qatar. Exports shift to the Red Sea and Oman coast, VLCC earnings hit a record near US$1.4m/day, and DDS corrects Issue 010's bunker figures.",
+    "stats": [
+      { "label": "Brent Crude", "value": "US$104.4–104.7/bbl", "change": "▲ up about 2% on the week; touched 105.46", "direction": "up" },
+      { "label": "WTI Crude", "value": "US$91.7–91.9/bbl", "change": "▬ roughly flat; Hurricane Isaias shut in Gulf output", "direction": "flat" },
+      { "label": "Tanker Attacks", "value": "13+ in 8 days", "change": "▲ 29 Sep–6 Oct (UANI); highest weekly count of the war", "direction": "up" },
+      { "label": "Singapore VLSFO", "value": "~US$880–905/mt", "change": "▼ ENGINE, 7–9 Oct; lead times 10–15 days", "direction": "down" },
+      { "label": "Fujairah VLSFO", "value": "US$960–1,002/mt", "change": "▲ Bunker Index; premium US$75–82 over Singapore", "direction": "up" },
+      { "label": "VLCC Earnings", "value": "~US$1.4m/day", "change": "▲ new record on Gulf–East Asia, per Bloomberg", "direction": "up" }
+    ],
+    "ceoQuote": "Exports found a way around the Strait. The attacks are now finding a way around the exports.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-011.md",
+    "highlights": [
+      "At least 13 tankers hit in eight days, the highest weekly count of the war",
+      "Attacks reach an LNG carrier, an LPG carrier and a tanker 51 nm off Qatar, deep inside the Gulf",
+      "Hormuz transits fall to a two-month low while Red Sea and Gulf of Oman coast exports rise to 6.7m bpd",
+      "VLCC earnings hit a reported record near US$1.4m/day",
+      "Correction: Issue 010's Fujairah premium was about US$85/mt, not US$158–191",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-011.pdf",
+    "published": true
   }
 ]
