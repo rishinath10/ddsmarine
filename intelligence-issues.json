@@ -339,5 +339,66 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-011.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-012",
+    "issueNumber": 12,
+    "title": "DDS Weekly Maritime Intelligence — Issue 012",
+    "headline": "Ships Sunk, Oil Back Above $100",
+    "date": "2026-10-16",
+    "coverImage": "/assets/port-sunset.jpg",
+    "excerpt": "The attacks cross a new line as ships are sunk, including the Singapore-flagged GFS Pride. Brent nears US$110 and WTI tops US$100, Singapore fuel oil runs short with lead times up to 18 days, and VLCCs become the first segment to ease.",
+    "stats": [
+      {
+        "label": "Brent Crude",
+        "value": "US$109.3–109.7/bbl",
+        "change": "▲ up about 5% on the week",
+        "direction": "up"
+      },
+      {
+        "label": "WTI Crude",
+        "value": "US$100.8–101.6/bbl",
+        "change": "▲ above US$100; largest US stock draw of the war",
+        "direction": "up"
+      },
+      {
+        "label": "Ships Sunk This Week",
+        "value": "2",
+        "change": "▲ GFS Pride (all 21 crew safe) and Cape Dao",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore VLSFO",
+        "value": "US$909–935/mt",
+        "change": "▲ four sources; lead times 11–18 days",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore HSFO",
+        "value": "US$850–905/mt",
+        "change": "▲ up about US$100 in two weeks",
+        "direction": "up"
+      },
+      {
+        "label": "Fujairah Premium",
+        "value": "US$50–66/mt",
+        "change": "▼ narrowest since late August",
+        "direction": "down"
+      }
+    ],
+    "ceoQuote": "Our industry measures risk in money. This week it had to be measured in ships lost.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-012.md",
+    "highlights": [
+      "Two ships sunk, including the Singapore-flagged container ship GFS Pride; all 21 crew evacuated",
+      "Attacks spread to container ships, Sohar anchorage and the UAE coast; two seafarers missing",
+      "Brent nears US$110 and WTI tops US$100 after the largest US crude stock draw of the war",
+      "Singapore HSFO up about US$100 in two weeks; VLSFO lead times stretch to 18 days",
+      "VLCCs become the first segment on the DDS index to ease",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-012.pdf",
+    "published": true
   }
 ]
