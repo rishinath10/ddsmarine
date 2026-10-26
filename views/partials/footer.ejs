@@ -4,12 +4,6 @@
         <img src="/assets/dds-logo-transparent.png" alt="DDS Marine" class="h-16 w-auto" width="64" height="64" />
         <p class="text-sm text-slate-600 leading-relaxed">DDS Marine Energy Services Sdn. Bhd. (1552670-D)</p>
         <p class="text-sm font-heading italic text-gold-dark">"Fueling Global Trade, Connecting Continents"</p>
-        <% if (typeof visitorCount === 'number') { %>
-          <p class="inline-flex items-center gap-1.5 text-xs text-slate-500">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-            <span><%= visitorCount.toLocaleString('en-US') %> <%= visitorCount === 1 ? 'visitor' : 'visitors' %></span>
-          </p>
-        <% } %>
       </div>
       <div>
         <h4 class="text-sm font-heading uppercase tracking-[0.25em] text-navy font-semibold mb-4">Navigate</h4>
@@ -229,6 +223,22 @@
         });
       })();
   </script>
+  <!-- Floating visitor counter: bottom-left, mirroring the contact widget on
+       the right. Server-rendered, so no JavaScript. -->
+  <% if (typeof visitorCount === 'number') { %>
+    <div class="fixed bottom-6 left-6 z-40 pointer-events-none">
+      <div class="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-navy-deep/85 backdrop-blur-md border border-gold/30 shadow-[0_8px_24px_rgba(0,0,0,0.25)] pl-3 pr-4 py-2 sm:py-2.5"
+        title="Unique visitors to ddsmarine.com">
+        <span class="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-60"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-gold"></span>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-gold-light shrink-0" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="font-heading text-xs sm:text-sm font-semibold text-ivory tabular-nums whitespace-nowrap"><%= visitorCount.toLocaleString('en-US') %> <span class="font-normal text-ivory/70"><%= visitorCount === 1 ? 'visitor' : 'visitors' %></span></span>
+      </div>
+    </div>
+  <% } %>
+
   <!-- Floating Contact Widget -->
   <div x-data="{ contactOpen: false }" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
     <!-- Expanded Menu -->
