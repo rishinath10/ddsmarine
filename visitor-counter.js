@@ -5,7 +5,7 @@
 // and old hashes are discarded, so no IP address is ever stored and
 // yesterday's visitors cannot be re-identified. No cookies are used.
 //
-// The count lives in DATA_DIR/visitors.json. In production DATA_DIR must be
+// The real count lives in DATA_DIR/visitors.json. In production DATA_DIR must be
 // a persistent volume, otherwise every redeploy starts again from zero.
 const fs = require('fs');
 const path = require('path');
@@ -14,6 +14,12 @@ const crypto = require('crypto');
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
 const FILE = path.join(DATA_DIR, 'visitors.json');
 const SAVE_INTERVAL_MS = 30 * 1000;
+
+// Starting number shown before any counted visits (set by the site owner).
+// It is added only for display: visitors.json keeps the real counted total,
+// so the starting number can be changed or removed later without losing
+// data. Override with the VISITOR_COUNT_START environment variable.
+const START = Number.parseInt(process.env.VISITOR_COUNT_START || '12328', 10) || 0;
 
 // Crawlers, link previews, uptime monitors and scripts are not visitors.
 const BOT_PATTERN = /bot|crawl|spider|slurp|archiver|preview|facebookexternalhit|embedly|whatsapp|telegram|discord|slack|curl|wget|python|httpclient|axios|node-fetch|go-http|java\/|okhttp|headless|lighthouse|pagespeed|monitor|uptime|pingdom|gptbot|claude|perplexity|bytespider|semrush|ahrefs|mj12/i;
@@ -85,7 +91,7 @@ function visitorCounter(req, res, next) {
     }
   }
 
-  res.locals.visitorCount = state.total;
+  res.locals.visitorCount = START + state.total;
   next();
 }
 
