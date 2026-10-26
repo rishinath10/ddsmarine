@@ -4,6 +4,12 @@
         <img src="/assets/dds-logo-transparent.png" alt="DDS Marine" class="h-16 w-auto" width="64" height="64" />
         <p class="text-sm text-slate-600 leading-relaxed">DDS Marine Energy Services Sdn. Bhd. (1552670-D)</p>
         <p class="text-sm font-heading italic text-gold-dark">"Fueling Global Trade, Connecting Continents"</p>
+        <% if (typeof visitorCount === 'number') { %>
+          <p class="inline-flex items-center gap-1.5 text-xs text-slate-500">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span><%= visitorCount.toLocaleString('en-US') %> <%= visitorCount === 1 ? 'visitor' : 'visitors' %></span>
+          </p>
+        <% } %>
       </div>
       <div>
         <h4 class="text-sm font-heading uppercase tracking-[0.25em] text-navy font-semibold mb-4">Navigate</h4>

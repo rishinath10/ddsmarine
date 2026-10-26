@@ -6,6 +6,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const { marked } = require('marked');
+const { visitorCounter } = require('./visitor-counter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -81,6 +82,10 @@ app.use((req, res, next) => {
 });
 app.use(compression());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+// Behind Dokploy's Traefik proxy (one hop): use X-Forwarded-For so each
+// visitor's real IP reaches the visitor counter, not the proxy's.
+app.set('trust proxy', 1);
+app.use(visitorCounter);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
