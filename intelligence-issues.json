@@ -400,5 +400,66 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-012.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-013",
+    "issueNumber": 13,
+    "title": "DDS Weekly Maritime Intelligence — Issue 013",
+    "headline": "War Widens to Saudi Arabia, Brent Near $117",
+    "date": "2026-10-23",
+    "coverImage": "/assets/offshore-rig.jpg",
+    "excerpt": "Houthi attacks reach Saudi Arabia's Eastern Province and Aramco evacuates Dhahran, Brent hits a five-month high near US$117, OFAC sanctions a Singapore agency, and the Fujairah premium almost disappears as Singapore fuel tightens.",
+    "stats": [
+      {
+        "label": "Brent Crude",
+        "value": "US$116.7–116.9/bbl",
+        "change": "▲ five-month high; up about 6% on the week",
+        "direction": "up"
+      },
+      {
+        "label": "WTI Crude",
+        "value": "US$103.3–103.4/bbl",
+        "change": "▲ up about 4% on Friday",
+        "direction": "up"
+      },
+      {
+        "label": "Hormuz Crossings",
+        "value": "120 a week",
+        "change": "▼ down 41% in the week to 18 Oct (MarineTraffic)",
+        "direction": "down"
+      },
+      {
+        "label": "Singapore VLSFO",
+        "value": "US$937–975/mt",
+        "change": "▲ three sources; up about US$30–40",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore HSFO",
+        "value": "US$876–900/mt",
+        "change": "▲ Hi-5 spread about US$44; fuel-oil stocks down 6%",
+        "direction": "up"
+      },
+      {
+        "label": "Fujairah Premium",
+        "value": "US$33–40/mt",
+        "change": "▼ narrowest in this series",
+        "direction": "down"
+      }
+    ],
+    "ceoQuote": "In a week of claims and counter-claims, the only safe position is the verified one.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-013.md",
+    "highlights": [
+      "Houthi attacks reach Saudi Arabia's Eastern Province; Aramco evacuates Dhahran and US diplomats are ordered out",
+      "Confirmed attacks off Saudi Arabia, the UAE, Iraq and Oman; Iran's claim of seven more remains unverified",
+      "OFAC sanctions a Singapore shipping agency for servicing Iranian-linked tonnage",
+      "Brent hits a five-month high near US$117",
+      "Fujairah premium narrows to US$33–40/mt as Singapore fuel tightens",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-013.pdf",
+    "published": true
   }
 ]
