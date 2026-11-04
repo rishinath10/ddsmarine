@@ -461,5 +461,66 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-013.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-014",
+    "issueNumber": 14,
+    "title": "DDS Weekly Maritime Intelligence — Issue 014",
+    "headline": "Limpet Mines and $1,000 Singapore Fuel",
+    "date": "2026-10-30",
+    "coverImage": "/assets/hero-ship.jpg",
+    "excerpt": "A tanker is disabled by limpet mines off Khasab in what appears to be the war's first such attack, Singapore VLSFO passes US$1,000 and is now dearer than Fujairah, and US allies are reportedly told to prepare for strikes after the 3 November midterms.",
+    "stats": [
+      {
+        "label": "Brent Crude",
+        "value": "US$113.4–116.6/bbl",
+        "change": "▲ Jan close; expiring Dec near 116.5; October up 10%+",
+        "direction": "up"
+      },
+      {
+        "label": "WTI Crude",
+        "value": "US$103.4–104.1/bbl",
+        "change": "▬ little changed on the week",
+        "direction": "flat"
+      },
+      {
+        "label": "Confirmed Incidents",
+        "value": "121",
+        "change": "▲ IMO count since the war began; 24 seafarers killed",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore VLSFO",
+        "value": "US$998–1,020/mt",
+        "change": "▲ above US$1,000 for the first time in this series",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore HSFO",
+        "value": "US$902–916/mt",
+        "change": "▲ October average highest since Nov 2021",
+        "direction": "up"
+      },
+      {
+        "label": "Fujairah Premium",
+        "value": "–US$5 to –12/mt",
+        "change": "▼ negative: Singapore now dearer than Fujairah",
+        "direction": "down"
+      }
+    ],
+    "ceoQuote": "When Singapore fuel costs more than Fujairah fuel, the war has reached our own bunker market.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-014.md",
+    "highlights": [
+      "Tanker Louise 1 disabled by limpet mines from a small boat off Khasab; all 27 crew safe",
+      "Iran claims five more tankers hit on 'unauthorised' routes; CENTCOM says main lanes are clear of mines",
+      "Singapore VLSFO passes US$1,000/mt and is now dearer than Fujairah",
+      "US allies reportedly told to prepare for strikes after the 3 November midterms",
+      "VLCCs ease for a third week as more ships become available",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-014.pdf",
+    "published": true
   }
 ]
