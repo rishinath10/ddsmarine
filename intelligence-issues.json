@@ -522,5 +522,66 @@
     ],
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-014.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-015",
+    "issueNumber": 15,
+    "title": "DDS Weekly Maritime Intelligence — Issue 015",
+    "headline": "Peace Priced In, Not Delivered",
+    "date": "2026-11-06",
+    "coverImage": "/assets/hero-ship.jpg",
+    "excerpt": "Brent falls about 13.5% after the US midterms and Singapore bunkers drop up to US$200/mt, but tankers are hit off Saudi Arabia and Qatar, Iran claims mine strikes and JMIC keeps the Hormuz threat at SEVERE.",
+    "stats": [
+      {
+        "label": "Brent Crude",
+        "value": "US$97.8–98.5/bbl",
+        "change": "▼ down about 13.5%; steepest weekly fall since March 2020",
+        "direction": "down"
+      },
+      {
+        "label": "WTI Crude",
+        "value": "US$90.3–91.0/bbl",
+        "change": "▼ down about 12.5% on the week",
+        "direction": "down"
+      },
+      {
+        "label": "Attacks Since Sunday",
+        "value": "5+",
+        "change": "▲ at least five Gulf incidents (Reuters); JMIC threat SEVERE",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore VLSFO",
+        "value": "US$820–885/mt",
+        "change": "▼ down about US$130–180 from above US$1,000",
+        "direction": "down"
+      },
+      {
+        "label": "Singapore HSFO",
+        "value": "US$703–715/mt",
+        "change": "▼ down about US$200, the sharpest fall of any grade",
+        "direction": "down"
+      },
+      {
+        "label": "Fujairah Premium",
+        "value": "US$0–22/mt",
+        "change": "▲ back to positive; the two hubs are roughly level",
+        "direction": "up"
+      }
+    ],
+    "ceoQuote": "Oil traders have priced in peace. The ships in the Gulf are still waiting for it.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-015.md",
+    "highlights": [
+      "Brent falls about 13.5% after the US midterms, its steepest weekly fall since March 2020",
+      "Tankers hit by projectiles off Ras Al Khafji and north of Qatar; Iran claims four tankers destroyed by mines (unverified)",
+      "US destroys a missile launcher on Qeshm; Iran sends proposal through Qatar but sets conditions",
+      "Singapore VLSFO falls to US$820–885/mt and HSFO by about US$200; Singapore and Fujairah now roughly level",
+      "VLCC easing pauses as STS in the Gulf of Oman ties up ships",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-015.pdf",
+    "published": true
   }
 ]
