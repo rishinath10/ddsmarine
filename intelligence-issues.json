@@ -942,5 +942,448 @@
     },
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-015.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-016",
+    "issueNumber": 16,
+    "title": "DDS Weekly Maritime Intelligence — Issue 016",
+    "headline": "A Cheaper Market, Not a Safer Sea",
+    "date": "2026-11-13",
+    "coverImage": "/assets/hero-ship.jpg",
+    "excerpt": "At least seven tankers are attacked in a week and crew are injured, yet Brent slips and VLCC freight halves from October's record. DDS lowers its crude tanker scores to 4/5 for the first time.",
+    "stats": [
+      {
+        "label": "Brent Crude",
+        "value": "US$95.8–96.1/bbl",
+        "change": "▼ about 2% lower; fell to about US$90.6 on Tuesday, a ten-week low",
+        "direction": "down"
+      },
+      {
+        "label": "WTI Crude",
+        "value": "US$88.5–88.6/bbl",
+        "change": "▼ about 2% lower on the week",
+        "direction": "down"
+      },
+      {
+        "label": "Tankers Attacked",
+        "value": "7+",
+        "change": "▲ in the week to 11 Nov (UKMTO); 163 incidents since 28 February",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore VLSFO",
+        "value": "US$899–905/mt",
+        "change": "▲ up about US$20–80; lead times 10–17 days",
+        "direction": "up"
+      },
+      {
+        "label": "VLCC Freight",
+        "value": "About –50%",
+        "change": "▼ from October's record (Reuters); DDS score cut to 4/5",
+        "direction": "down"
+      },
+      {
+        "label": "Fujairah Premium",
+        "value": "–US$60 to +5/mt",
+        "change": "▬ sources disagree; level on ENGINE, Fujairah cheaper on Integr8",
+        "direction": "flat"
+      }
+    ],
+    "ceoQuote": "Freight has halved. The attacks have not. We must not mistake a cheaper market for a safer sea.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-016.md",
+    "highlights": [
+      "At least seven tankers attacked in a week; Dominica Prosperity set on fire off Ras Al Khaimah, crew injured on Fujairah Energy",
+      "US forces disable the bulker Huda after she leaves an Iranian port",
+      "Talks stall: Trump says the US does not need a deal; Iran rules out UN inspectors",
+      "OPEC+ output back to 97% of pre-war levels; Brent about 2% lower",
+      "VLCC rates halve from October's record; DDS lowers crude tanker scores to 4/5",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "dashboard": {
+      "dataCutoff": "2026-11-13",
+      "coverage": "7 – 13 November 2026",
+      "summary": "The war at sea intensified this week while the markets that depend on it eased. The risk to crews has not fallen; only the price of carrying the risk has.",
+      "bluf": [
+        {
+          "title": "Seven or more tankers attacked",
+          "text": "UKMTO counted at least seven tankers attacked in the week to 11 November. Dominica Prosperity was set on fire off Ras Al Khaimah and crew were injured on Fujairah Energy."
+        },
+        {
+          "title": "Crude tanker scores cut to 4/5",
+          "text": "VLCC rates are about half of October's record (Reuters). DDS lowers VLCC, Suezmax and Aframax from 5 to 4, the first downgrade since the index began."
+        },
+        {
+          "title": "Talks stall",
+          "text": "President Trump said \"we don't need a deal with Iran\". Iran denies talks and has ruled out the return of UN inspectors."
+        },
+        {
+          "title": "Singapore VLSFO back near US$900",
+          "text": "VLSFO recovered to US$899–905/mt. Fuel-oil stocks rose 4%, but lead times are still 10–17 days."
+        }
+      ],
+      "oil": [
+        {
+          "label": "Brent crude",
+          "value": "US$95.8–96.1/bbl",
+          "note": "About 2% lower on the week; second weekly fall",
+          "direction": "down",
+          "source": "Trading Economics / oilprice.com"
+        },
+        {
+          "label": "WTI crude",
+          "value": "US$88.5–88.6/bbl",
+          "note": "About 2% lower on the week",
+          "direction": "down",
+          "source": "Trading Economics / oilprice.com"
+        },
+        {
+          "label": "Murban",
+          "value": "US$94.9/bbl",
+          "note": "Below Brent as Gulf supply returns",
+          "direction": "down",
+          "source": "oilprice.com"
+        }
+      ],
+      "brentWeek": [
+        {
+          "label": "Fri 6 Nov",
+          "value": 98.15,
+          "kind": "close, mid of 97.8–98.5"
+        },
+        {
+          "label": "Mon 9 Nov",
+          "value": 96.54,
+          "kind": "17:00 SGT"
+        },
+        {
+          "label": "Tue 10 Nov",
+          "value": 90.59,
+          "kind": "17:00 SGT"
+        },
+        {
+          "label": "Wed 11 Nov",
+          "value": 91.55,
+          "kind": "17:00 SGT"
+        },
+        {
+          "label": "Thu 12 Nov",
+          "value": 92.76,
+          "kind": "settle"
+        },
+        {
+          "label": "Fri 13 Nov",
+          "value": 95.95,
+          "kind": "close, mid of 95.8–96.1"
+        }
+      ],
+      "brentWeekNote": "US$/bbl; Friday closes, ENGINE 17:00 Singapore snapshots Monday to Wednesday, Integr8 settle on Thursday",
+      "baseCase": "Brent trades US$88–102 next week. Returning Gulf supply caps prices; stalled talks, the IAEA Board meeting and continuing attacks support them.",
+      "bunkers": [
+        {
+          "grade": "VLSFO",
+          "hub": "Singapore",
+          "low": 899,
+          "high": 905,
+          "prevLow": 820,
+          "prevHigh": 885
+        },
+        {
+          "grade": "HSFO",
+          "hub": "Singapore",
+          "low": 660,
+          "high": 720,
+          "prevLow": 703,
+          "prevHigh": 715
+        },
+        {
+          "grade": "LSMGO",
+          "hub": "Singapore",
+          "low": 1220,
+          "high": 1340,
+          "prevLow": 1140,
+          "prevHigh": 1260
+        },
+        {
+          "grade": "VLSFO",
+          "hub": "Fujairah",
+          "low": 845,
+          "high": 904,
+          "prevLow": 843,
+          "prevHigh": 885
+        },
+        {
+          "grade": "HSFO",
+          "hub": "Fujairah",
+          "low": 565,
+          "high": 634,
+          "prevLow": 635,
+          "prevHigh": 665
+        }
+      ],
+      "bunkerNote": "Ranges span Integr8 (early 12 Nov) and DDS estimates for 13 Nov built from ENGINE's reported trades and daily changes. The two sources are US$59 apart on Fujairah VLSFO, so get a firm quote at both hubs. Singapore lead times are 10–17 days.",
+      "premiumHistory": [
+        {
+          "issue": 7,
+          "label": "10 Sep",
+          "low": 67,
+          "high": 67
+        },
+        {
+          "issue": 8,
+          "label": "18 Sep",
+          "low": 95,
+          "high": 108
+        },
+        {
+          "issue": 9,
+          "label": "25 Sep",
+          "low": 85,
+          "high": 122
+        },
+        {
+          "issue": 10,
+          "label": "2 Oct",
+          "low": 85,
+          "high": 85
+        },
+        {
+          "issue": 11,
+          "label": "9 Oct",
+          "low": 75,
+          "high": 82
+        },
+        {
+          "issue": 12,
+          "label": "16 Oct",
+          "low": 50,
+          "high": 66
+        },
+        {
+          "issue": 13,
+          "label": "23 Oct",
+          "low": 33,
+          "high": 40
+        },
+        {
+          "issue": 14,
+          "label": "30 Oct",
+          "low": -12,
+          "high": -5
+        },
+        {
+          "issue": 15,
+          "label": "6 Nov",
+          "low": 0,
+          "high": 22
+        },
+        {
+          "issue": 16,
+          "label": "13 Nov",
+          "low": -60,
+          "high": 5
+        }
+      ],
+      "incidentsNote": "Of eight incidents in the week to 11 November, three ships continued, three needed assistance and two outcomes are unknown (UKMTO).",
+      "incidents": [
+        {
+          "status": "confirmed",
+          "vessel": "Dominica Prosperity (crude tanker, Liberia)",
+          "date": "11 Nov",
+          "location": "14 nm NW of Ras Al Khaimah",
+          "outcome": "Engine room hit; fire; 22 crew evacuated by the UAE Coast Guard.",
+          "source": "UKMTO / gCaptain"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "NCC Fajr (tanker)",
+          "date": "11 Nov",
+          "location": "North of Khasab",
+          "outcome": "Hit; reclassified as an attack; crew safe.",
+          "source": "UKMTO / gCaptain"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Fujairah Energy (tanker)",
+          "date": "10 Nov",
+          "location": "Arabian Gulf",
+          "outcome": "Crew injured and taken ashore; others safe.",
+          "source": "UKMTO / gCaptain"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "ADNOC L&S vessel",
+          "date": "10 Nov",
+          "location": "UAE waters",
+          "outcome": "Damaged; extent not stated.",
+          "source": "gCaptain"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Tanker, not named",
+          "date": "10 Nov",
+          "location": "19 nm NE of Lima, Oman",
+          "outcome": "Projectile; crew safe.",
+          "source": "UKMTO / gCaptain"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Two tankers, not named",
+          "date": "7 Nov",
+          "location": "Off Khasab and in the strait",
+          "outcome": "One fire (crew evacuated); one hit (crew safe).",
+          "source": "UKMTO / gCaptain"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Huda (bulk carrier, St Kitts & Nevis)",
+          "date": "7 Nov",
+          "location": "18 nm E of Khor Fakkan",
+          "outcome": "Disabled by US forces after calling at an Iranian port; crew status unknown.",
+          "source": "CENTCOM / Maritime Executive"
+        },
+        {
+          "status": "claim",
+          "vessel": "Four tankers; one LNG carrier",
+          "date": "12–13 Nov",
+          "location": "Strait of Hormuz",
+          "outcome": "Iranian claims of explosions and a mine strike.",
+          "source": "Iranian media / oilprice.com"
+        }
+      ],
+      "hormuz": [
+        {
+          "value": "163",
+          "label": "Incidents since 28 February, up from 135 on 19 October",
+          "source": "UKMTO, 13 Nov"
+        },
+        {
+          "value": "~211",
+          "label": "Ships waiting east of Hormuz",
+          "source": "JMIC"
+        },
+        {
+          "value": "65%",
+          "label": "Traffic below pre-war levels",
+          "source": "UKMTO"
+        },
+        {
+          "value": "147",
+          "label": "Vessels redirected since the US blockade restarted in July",
+          "source": "CENTCOM"
+        }
+      ],
+      "riskAdvice": "Attacks are frequent and now reach UAE waters. Confirm war-risk and hull cover at nomination for any call in the Gulf, including UAE ports and anchorages. Keep anti-boarding and night-watch measures in place, report suspicious approaches to UKMTO, and avoid any call at Iranian ports.",
+      "freight": [
+        {
+          "market": "VLCC",
+          "score": 4,
+          "trend": "down",
+          "trendLabel": "Down from 5",
+          "read": "About half of October's record."
+        },
+        {
+          "market": "Suezmax",
+          "score": 4,
+          "trend": "down",
+          "trendLabel": "Down from 5",
+          "read": "Rates dropped sharply."
+        },
+        {
+          "market": "Aframax",
+          "score": 4,
+          "trend": "down",
+          "trendLabel": "Down from 5",
+          "read": "Rates dropped sharply."
+        },
+        {
+          "market": "LR2",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Gulf diesel and jet."
+        },
+        {
+          "market": "LR1",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Firm alongside LR2."
+        },
+        {
+          "market": "MR Pacific",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Asian distillate shortage."
+        },
+        {
+          "market": "MR Atlantic",
+          "score": 5,
+          "trend": "down",
+          "trendLabel": "Softer",
+          "read": "US distillate stocks build."
+        },
+        {
+          "market": "LPG",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "VLGC earnings remain very high."
+        },
+        {
+          "market": "LNG",
+          "score": 4,
+          "trend": "up",
+          "trendLabel": "Firmer",
+          "read": "Europe enters winter with the lowest gas stocks of the 2020s; Pakistan short of LNG."
+        }
+      ],
+      "freightSignal": "For the first time since the index began, crude tanker segments move down, to 4/5. Product tankers, LPG and Singapore-linked clean trades stay at 5/5. The split reflects where shortages remain: in refined products, not in crude.",
+      "outlookPeriod": "14 to 20 November 2026",
+      "outlook": [
+        {
+          "market": "Crude oil",
+          "base": "Brent US$88–102.",
+          "up": "Attack on a loading terminal; IAEA confrontation.",
+          "down": "More Gulf supply; US stock builds."
+        },
+        {
+          "market": "Crude tankers",
+          "base": "Easing; 4/5.",
+          "up": "Renewed shuttle and STS demand.",
+          "down": "Faster return of Hormuz traffic."
+        },
+        {
+          "market": "Product tankers",
+          "base": "Firm on Asian diesel and jet shortage.",
+          "up": "More Russian refinery outages.",
+          "down": "US and European stocks rebuild."
+        },
+        {
+          "market": "Bunkers",
+          "base": "Singapore VLSFO US$860–940; hubs close.",
+          "up": "Prices follow Brent higher.",
+          "down": "Rising Singapore stocks shorten lead times."
+        },
+        {
+          "market": "Southeast Asia",
+          "base": "Tight supply; long lead times.",
+          "up": "Port Klang distillate shortage.",
+          "down": "ASEAN stockpile eases regional anxiety."
+        }
+      ],
+      "watch": [
+        "The IAEA Board of Governors meeting next week, and Iran's response.",
+        "Whether attacks continue in UAE waters and at anchorages off Fujairah and Khor Fakkan.",
+        "Any sign of talks resuming after Trump's \"no need for a deal\" comment.",
+        "Whether crude tanker rates keep falling, or level off at the new 4/5 range.",
+        "Singapore lead times, and whether higher fuel-oil stocks start to shorten them."
+      ],
+      "sources": "Integr8 Fuels, ENGINE, oilprice.com, Trading Economics, UKMTO and JMIC (via gCaptain, Middle East Eye), CENTCOM (via Maritime Executive), Al Jazeera, CBS News and DDS Marine market intelligence."
+    },
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-016.pdf",
+    "published": true
   }
 ]

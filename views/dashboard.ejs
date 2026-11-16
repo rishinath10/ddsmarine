@@ -75,8 +75,11 @@
       var fill = neg ? '#B4232A' : (isLast ? '#A87A2E' : '#0E2240');
       // Solid bar from zero to the near edge of the range, lighter band across the range itself.
       var near = neg ? r.high : r.low;
+      // A range that straddles zero has no solid part: only the band is drawn.
+      var straddle = r.low < 0 && r.high > 0;
+      if (straddle) near = 0;
       s += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + Math.min(y(0), y(near)).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(1.5, Math.abs(y(0) - y(near))).toFixed(1) + '" fill="' + fill + '"/>';
-      if (r.high !== r.low) s += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + y(r.high).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (y(r.low) - y(r.high)).toFixed(1) + '" fill="' + fill + '" fill-opacity="0.35"/>';
+      if (r.high !== r.low) s += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + y(r.high).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (y(r.low) - y(r.high)).toFixed(1) + '" fill="' + fill + '" fill-opacity="' + (straddle ? 0.6 : 0.35) + '"/>';
       var txt = r.low === r.high ? num(r.low) : (r.low < 0 ? num(r.low) + ' to ' + num(r.high) : num(r.low) + '–' + num(r.high));
       s += '<text x="' + cx.toFixed(1) + '" y="' + (neg ? bot + 12 : top - 5).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="' + (isLast ? 700 : 500) + '" fill="' + (neg ? '#B4232A' : (isLast ? '#A87A2E' : '#0E2240')) + '">' + txt.replace(/-/g, '−') + '</text>';
       s += '<text x="' + cx.toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="9" fill="#64748B">' + esc(r.label) + '</text>';
@@ -141,7 +144,7 @@
     <!-- 01 Overview -->
     <section id="overview" class="scroll-mt-28">
       <span class="<%= eyebrow %>">01 &middot; Bottom line</span>
-      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">This week in four points</h2>
+      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">This week in <%= dash && dash.bluf ? ['', 'one point', 'two points', 'three points', 'four points', 'five points'][dash.bluf.length] || 'brief' : 'brief' %></h2>
       <% if (dash && dash.bluf) { %>
         <div class="mt-7 grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <% dash.bluf.forEach(function (b, i) { %>
@@ -201,7 +204,7 @@
           <figure class="<%= card %> p-5">
             <figcaption>
               <span class="block font-heading text-sm font-bold text-navy">Brent through the week</span>
-              <span class="block font-heading text-xs text-slate-500">US$/bbl; closes and settles, with intraday lows on Tuesday and Wednesday</span>
+              <span class="block font-heading text-xs text-slate-500"><%= dash.brentWeekNote || 'US$/bbl; closes and settles, with intraday lows on Tuesday and Wednesday' %></span>
             </figcaption>
             <div class="mt-3"><%- lineChart(dash.brentWeek.map(function (p) { return { label: p.label.replace(/^\w+ /, ''), value: p.value }; }), { unit: 'US$', dp: 2, aria: 'Brent crude price through the week' }) %></div>
           </figure>
@@ -327,7 +330,7 @@
               </span>
               <span class="font-heading text-sm font-bold text-navy tabular-nums"><%= f.score %>/5</span>
             </span>
-            <span class="col-start-2 sm:col-start-auto font-heading text-xs font-bold uppercase tracking-[0.06em] <%= f.trend === 'up' ? 'text-gold-dark' : 'text-slate-500' %>"><%= f.trend === 'up' ? '▲' : (f.trend === 'down' ? '▼' : '▬') %> <%= f.trendLabel %></span>
+            <span class="col-start-2 sm:col-start-auto font-heading text-xs font-bold uppercase tracking-[0.06em] <%= f.trend === 'flat' ? 'text-slate-500' : 'text-gold-dark' %>"><%= f.trend === 'up' ? '▲' : (f.trend === 'down' ? '▼' : '▬') %> <%= f.trendLabel %></span>
             <span class="col-start-2 sm:col-start-auto text-sm text-ink leading-snug"><%= f.read %></span>
           </div>
         <% }); %>
