@@ -581,6 +581,365 @@
       "Southeast Asia & STS Operations",
       "Seven-Day Outlook"
     ],
+    "dashboard": {
+      "dataCutoff": "2026-11-06",
+      "coverage": "31 October – 6 November 2026",
+      "summary": "The oil market priced in peace this week; the sea did not. Lower prices are welcome; they are not a sign that the route is safe.",
+      "bluf": [
+        {
+          "title": "Oil falls on the US midterms",
+          "text": "Brent fell about 13.5% to US$97.8–98.5/bbl, its steepest weekly fall since March 2020, after touching about US$94.66 on Wednesday."
+        },
+        {
+          "title": "Attacks continue in the Gulf",
+          "text": "Tankers were hit by two projectiles each off Ras Al Khafji (1 Nov) and north of Qatar (4 Nov). JMIC keeps the Hormuz threat level at SEVERE."
+        },
+        {
+          "title": "Iranian mine claims, unverified",
+          "text": "The IRGC claims four tankers destroyed by mines and two vessels seized on 4 November. None of this is verified."
+        },
+        {
+          "title": "Singapore bunkers drop sharply",
+          "text": "VLSFO fell about US$130–180/mt to US$820–885 and HSFO about US$200. Singapore and Fujairah VLSFO are now roughly level."
+        }
+      ],
+      "oil": [
+        {
+          "label": "Brent crude",
+          "value": "US$97.8–98.5/bbl",
+          "note": "Down about 13.5% from US$113.4",
+          "direction": "down",
+          "source": "Trading Economics / oilprice.com"
+        },
+        {
+          "label": "WTI crude",
+          "value": "US$90.3–91.0/bbl",
+          "note": "Down about 12.5% on the week",
+          "direction": "down",
+          "source": "Trading Economics / oilprice.com"
+        },
+        {
+          "label": "Murban",
+          "value": "US$99.2/bbl",
+          "note": "Gulf physical crude weaker; Dubai in contango",
+          "direction": "down",
+          "source": "oilprice.com"
+        }
+      ],
+      "brentWeek": [
+        {
+          "label": "Fri 30 Oct",
+          "value": 113.4,
+          "kind": "close"
+        },
+        {
+          "label": "Mon 2 Nov",
+          "value": 104.77,
+          "kind": "close"
+        },
+        {
+          "label": "Tue 3 Nov",
+          "value": 100.8,
+          "kind": "intraday low"
+        },
+        {
+          "label": "Wed 4 Nov",
+          "value": 94.66,
+          "kind": "intraday low"
+        },
+        {
+          "label": "Thu 5 Nov",
+          "value": 98.29,
+          "kind": "settle"
+        },
+        {
+          "label": "Fri 6 Nov",
+          "value": 98.15,
+          "kind": "close, mid of 97.8–98.5"
+        }
+      ],
+      "baseCase": "Brent trades US$90–108 next week. Talks through Qatar and weaker physical markets pull prices down; a serious attack or a breakdown in talks could add US$10 quickly.",
+      "bunkers": [
+        {
+          "grade": "VLSFO",
+          "hub": "Singapore",
+          "low": 820,
+          "high": 885,
+          "prevLow": 998,
+          "prevHigh": 1020
+        },
+        {
+          "grade": "HSFO",
+          "hub": "Singapore",
+          "low": 703,
+          "high": 715,
+          "prevLow": 902,
+          "prevHigh": 916
+        },
+        {
+          "grade": "LSMGO",
+          "hub": "Singapore",
+          "low": 1140,
+          "high": 1260,
+          "prevLow": 1278,
+          "prevHigh": 1302
+        },
+        {
+          "grade": "VLSFO",
+          "hub": "Fujairah",
+          "low": 843,
+          "high": 885,
+          "prevLow": 990,
+          "prevHigh": 990
+        },
+        {
+          "grade": "HSFO",
+          "hub": "Fujairah",
+          "low": 635,
+          "high": 665,
+          "prevLow": 764,
+          "prevHigh": 764
+        }
+      ],
+      "bunkerNote": "Ranges span Integr8 (early 6 Nov) and DDS estimates built from ENGINE's published prices and daily changes. Lead times in Singapore are still 13–15 days for VLSFO and HSFO.",
+      "premiumHistory": [
+        {
+          "issue": 7,
+          "label": "10 Sep",
+          "low": 67,
+          "high": 67
+        },
+        {
+          "issue": 8,
+          "label": "18 Sep",
+          "low": 95,
+          "high": 108
+        },
+        {
+          "issue": 9,
+          "label": "25 Sep",
+          "low": 85,
+          "high": 122
+        },
+        {
+          "issue": 10,
+          "label": "2 Oct",
+          "low": 85,
+          "high": 85
+        },
+        {
+          "issue": 11,
+          "label": "9 Oct",
+          "low": 75,
+          "high": 82
+        },
+        {
+          "issue": 12,
+          "label": "16 Oct",
+          "low": 50,
+          "high": 66
+        },
+        {
+          "issue": 13,
+          "label": "23 Oct",
+          "low": 33,
+          "high": 40
+        },
+        {
+          "issue": 14,
+          "label": "30 Oct",
+          "low": -12,
+          "high": -5
+        },
+        {
+          "issue": 15,
+          "label": "6 Nov",
+          "low": 0,
+          "high": 22
+        }
+      ],
+      "incidentsNote": "Reuters counted at least five vessel incidents in the Gulf since Sunday 1 November.",
+      "incidents": [
+        {
+          "status": "confirmed",
+          "vessel": "Tanker, not named",
+          "date": "4 Nov",
+          "location": "50 nm N of Madinat ash Shamal, Qatar",
+          "outcome": "Hit by two projectiles; damage and crew status unclear.",
+          "source": "Baird Maritime / Reuters"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Tanker, not named",
+          "date": "1 Nov",
+          "location": "72 nm E of Ras Al Khafji, Saudi Arabia",
+          "outcome": "Two projectiles on the port side; crew accounted for.",
+          "source": "gCaptain / UKMTO"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Merchant vessel, not named",
+          "date": "1 Nov",
+          "location": "Strait of Hormuz",
+          "outcome": "UKMTO warning 191-26; details unknown.",
+          "source": "gCaptain / UKMTO"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Al Mayeda (LNG carrier, Nakilat)",
+          "date": "30 Oct",
+          "location": "40 nm S of Lavan Island",
+          "outcome": "Hit by objects; fire; no injuries; operational. Reported after Issue 014.",
+          "source": "Nakilat / gCaptain"
+        },
+        {
+          "status": "claim",
+          "vessel": "Two tankers and a tug",
+          "date": "5 Nov",
+          "location": "\"Unauthorised\" routes",
+          "outcome": "IRGC claim of fires.",
+          "source": "IRGC / ENGINE"
+        },
+        {
+          "status": "claim",
+          "vessel": "Four tankers",
+          "date": "4 Nov",
+          "location": "South of the strait",
+          "outcome": "IRGC claim: destroyed by mines; two vessels seized.",
+          "source": "IRGC / oilprice.com"
+        }
+      ],
+      "hormuz": [
+        {
+          "value": "18",
+          "label": "Confirmed attacks in the strait since 6 October",
+          "source": "JMIC, 1 Nov"
+        },
+        {
+          "value": "~490",
+          "label": "Vessels waiting outside the strait",
+          "source": "1 Nov"
+        },
+        {
+          "value": "119",
+          "label": "US-facilitated transits, 29–31 October",
+          "source": ""
+        },
+        {
+          "value": "56%",
+          "label": "Throughput against pre-war levels",
+          "source": "ANZ, 4 Nov"
+        }
+      ],
+      "riskAdvice": "Confirm war-risk and hull cover at nomination for any call in the Gulf, including Saudi and Qatari waters. Keep anti-boarding and night-watch measures in place, report any approach by small craft to UKMTO, and do not relax security on the strength of price moves or press reports of a deal.",
+      "freight": [
+        {
+          "market": "VLCC",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Easing paused",
+          "read": "Ships tied up in Gulf of Oman STS; owners decline Hormuz voyages."
+        },
+        {
+          "market": "Suezmax",
+          "score": 5,
+          "trend": "up",
+          "trendLabel": "Firmer",
+          "read": "Demand and rates rising."
+        },
+        {
+          "market": "Aframax",
+          "score": 5,
+          "trend": "up",
+          "trendLabel": "Firmer",
+          "read": "Demand and rates rising."
+        },
+        {
+          "market": "LR2",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Gulf diesel and jet."
+        },
+        {
+          "market": "LR1",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Firm alongside LR2."
+        },
+        {
+          "market": "MR Pacific",
+          "score": 5,
+          "trend": "up",
+          "trendLabel": "Firmer",
+          "read": "Lower Chinese diesel exports."
+        },
+        {
+          "market": "MR Atlantic",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "US diesel at records."
+        },
+        {
+          "market": "LPG",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "VLGC earnings remain very high."
+        },
+        {
+          "market": "LNG",
+          "score": 4,
+          "trend": "flat",
+          "trendLabel": "Mixed",
+          "read": "European gas fell on deal hopes; IEA warns of a gas crunch into 2027."
+        }
+      ],
+      "freightSignal": "Oil fell about 13% this week; freight did not follow. Until ships can move freely through Hormuz, every tanker segment stays at 5/5.",
+      "outlookPeriod": "7 to 13 November 2026",
+      "outlook": [
+        {
+          "market": "Crude oil",
+          "base": "Brent US$90–108.",
+          "up": "A major attack or talks collapse.",
+          "down": "Agreement on a first step through Qatar."
+        },
+        {
+          "market": "VLCC",
+          "base": "Firm; easing paused.",
+          "up": "Owners refuse more Hormuz voyages.",
+          "down": "Blockade lifted; ships released from STS."
+        },
+        {
+          "market": "Product tankers",
+          "base": "Firm on diesel shortage.",
+          "up": "Lower Chinese exports deepen Asian deficit.",
+          "down": "Faster recovery in Gulf refinery runs."
+        },
+        {
+          "market": "Bunkers",
+          "base": "Singapore VLSFO US$800–900; hubs level.",
+          "up": "Prices rebound on new attacks.",
+          "down": "More Gulf fuel oil reaches Asia."
+        },
+        {
+          "market": "Southeast Asia",
+          "base": "Lower prices; long lead times.",
+          "up": "Port Klang supply tightens further.",
+          "down": "Lead times shorten as cargoes arrive."
+        }
+      ],
+      "watch": [
+        "The US response to Iran's proposal through Qatar, and any first steps on the blockade.",
+        "Whether attacks continue in Saudi and Qatari waters, and whether any Iranian mine claims are confirmed.",
+        "Any OFAC general licence or delisting that changes the rules on Iranian oil or shipping.",
+        "Singapore bunker prices and lead times: whether supply catches up with the fall in price.",
+        "Whether VLCC rates resume easing or firm again."
+      ],
+      "sources": "Integr8 Fuels, ENGINE, oilprice.com, Trading Economics, gCaptain, Baird Maritime (Reuters), UKMTO, JMIC, ANZ and DDS Marine market intelligence."
+    },
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-015.pdf",
     "published": true
   }

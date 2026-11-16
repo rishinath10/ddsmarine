@@ -1,0 +1,392 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<%
+  var issue = dashboard.issue;
+  var dash = dashboard.dash;
+  var issueNo = dashboard.issueNo;
+  var risk = String(issue.riskLevel || '').toUpperCase();
+  var riskIsHigh = ['CRITICAL', 'SEVERE', 'HIGH'].indexOf(risk) !== -1;
+
+  function esc(v) {
+    return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function num(v, dp) {
+    return Number(v).toLocaleString('en-US', { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 });
+  }
+  // Round axis bounds outwards to a tidy step so gridlines land on whole numbers.
+  function axis(min, max, steps) {
+    var raw = (max - min) / steps || 1;
+    var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    var step = [1, 2, 2.5, 5, 10].map(function (m) { return m * mag; }).filter(function (s) { return s >= raw; })[0];
+    var lo = Math.floor(min / step) * step, hi = Math.ceil(max / step) * step, ticks = [];
+    for (var t = lo; t <= hi + step / 2; t += step) ticks.push(Math.round(t * 100) / 100);
+    return { lo: lo, hi: hi, ticks: ticks };
+  }
+
+  // Single-series line chart. points: [{ label, value }]. The last point is
+  // the current reading and is the only one emphasised; the high and low are
+  // labelled so the chart can be read without hovering.
+  function lineChart(points, opts) {
+    var W = 380, H = 200, L = 34, R = 44, T = 16, B = 26;
+    var vals = points.map(function (p) { return p.value; });
+    var ax = axis(Math.min.apply(null, vals), Math.max.apply(null, vals), 4);
+    var x = function (i) { return L + (W - L - R) * (points.length === 1 ? 0.5 : i / (points.length - 1)); };
+    var y = function (v) { return T + (H - T - B) * (1 - (v - ax.lo) / (ax.hi - ax.lo)); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" class="w-full h-auto" role="img" aria-label="' + esc(opts.aria) + '" font-family="Jost, sans-serif">';
+    ax.ticks.forEach(function (t) {
+      s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(t).toFixed(1) + '" y2="' + y(t).toFixed(1) + '" stroke="#E9E0CB" stroke-width="1"/>';
+      s += '<text x="' + (L - 6) + '" y="' + (y(t) + 3.5).toFixed(1) + '" text-anchor="end" font-size="10" fill="#64748B">' + num(t) + '</text>';
+    });
+    s += '<polyline fill="none" stroke="#0E2240" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="' +
+      points.map(function (p, i) { return x(i).toFixed(1) + ',' + y(p.value).toFixed(1); }).join(' ') + '"/>';
+    var last = points.length - 1, hiI = vals.indexOf(Math.max.apply(null, vals)), loI = vals.indexOf(Math.min.apply(null, vals));
+    points.forEach(function (p, i) {
+      var isLast = i === last;
+      s += '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p.value).toFixed(1) + '" r="' + (isLast ? 4.5 : 2.5) + '" fill="' + (isLast ? '#A87A2E' : '#0E2240') + '" stroke="#fff" stroke-width="1.5"><title>' + esc(p.label) + ': ' + esc(opts.unit) + num(p.value, opts.dp) + '</title></circle>';
+    });
+    [hiI, loI].forEach(function (i, k) {
+      if (i === last || (k === 1 && i === hiI)) return;
+      s += '<text x="' + x(i).toFixed(1) + '" y="' + (y(points[i].value) + (k === 0 ? -8 : 15)).toFixed(1) + '" text-anchor="' + (i === 0 ? 'start' : 'middle') + '" font-size="10" font-weight="600" fill="#0E2240">' + num(points[i].value, opts.dp) + '</text>';
+    });
+    s += '<text x="' + (x(last) + 8).toFixed(1) + '" y="' + (y(points[last].value) + 4).toFixed(1) + '" font-size="11.5" font-weight="700" fill="#A87A2E">' + num(points[last].value, opts.dp) + '</text>';
+    var every = Math.ceil(points.length / 5);
+    points.forEach(function (p, i) {
+      if (i !== last && (i % every !== 0 || last - i < every)) return;
+      s += '<text x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="' + (i === 0 ? 'start' : (i === last ? 'end' : 'middle')) + '" font-size="10" fill="#64748B">' + esc(p.label) + '</text>';
+    });
+    return s + '</svg>';
+  }
+
+  // Floating-bar chart of a low–high range per issue around a zero line.
+  function rangeChart(rows, opts) {
+    var W = 380, H = 200, L = 34, R = 8, T = 22, B = 26;
+    var ax = axis(Math.min(0, Math.min.apply(null, rows.map(function (r) { return r.low; }))), Math.max.apply(null, rows.map(function (r) { return r.high; })), 4);
+    var band = (W - L - R) / rows.length, bw = Math.min(22, band * 0.6);
+    var y = function (v) { return T + (H - T - B) * (1 - (v - ax.lo) / (ax.hi - ax.lo)); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" class="w-full h-auto" role="img" aria-label="' + esc(opts.aria) + '" font-family="Jost, sans-serif">';
+    ax.ticks.forEach(function (t) {
+      s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(t).toFixed(1) + '" y2="' + y(t).toFixed(1) + '" stroke="' + (t === 0 ? '#0E2240' : '#E9E0CB') + '" stroke-width="1"/>';
+      s += '<text x="' + (L - 6) + '" y="' + (y(t) + 3.5).toFixed(1) + '" text-anchor="end" font-size="10" fill="#64748B">' + num(t) + '</text>';
+    });
+    rows.forEach(function (r, i) {
+      var cx = L + band * (i + 0.5), isLast = i === rows.length - 1, neg = r.high <= 0 && r.low < 0;
+      var top = y(Math.max(r.high, 0)), bot = y(Math.min(r.low, 0));
+      var fill = neg ? '#B4232A' : (isLast ? '#A87A2E' : '#0E2240');
+      // Solid bar from zero to the near edge of the range, lighter band across the range itself.
+      var near = neg ? r.high : r.low;
+      s += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + Math.min(y(0), y(near)).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(1.5, Math.abs(y(0) - y(near))).toFixed(1) + '" fill="' + fill + '"/>';
+      if (r.high !== r.low) s += '<rect x="' + (cx - bw / 2).toFixed(1) + '" y="' + y(r.high).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (y(r.low) - y(r.high)).toFixed(1) + '" fill="' + fill + '" fill-opacity="0.35"/>';
+      var txt = r.low === r.high ? num(r.low) : (r.low < 0 ? num(r.low) + ' to ' + num(r.high) : num(r.low) + '–' + num(r.high));
+      s += '<text x="' + cx.toFixed(1) + '" y="' + (neg ? bot + 12 : top - 5).toFixed(1) + '" text-anchor="middle" font-size="9.5" font-weight="' + (isLast ? 700 : 500) + '" fill="' + (neg ? '#B4232A' : (isLast ? '#A87A2E' : '#0E2240')) + '">' + txt.replace(/-/g, '−') + '</text>';
+      s += '<text x="' + cx.toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="9" fill="#64748B">' + esc(r.label) + '</text>';
+    });
+    return s + '</svg>';
+  }
+
+  var shortDate = function (iso) {
+    var d = new Date(iso + 'T00:00:00Z');
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+  };
+  var sections = [{ id: 'overview', label: 'Overview' }];
+  if (dash) {
+    sections.push({ id: 'oil', label: 'Oil' }, { id: 'bunkers', label: 'Bunkers' }, { id: 'incidents', label: 'Incidents' }, { id: 'freight', label: 'Freight' }, { id: 'outlook', label: 'Outlook' });
+  }
+  var eyebrow = 'text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold-dark';
+  var card = 'bg-white rounded-md border border-hairline';
+%>
+
+<!-- Header band -->
+<section class="relative bg-navy-deep pt-28 lg:pt-32 pb-10 overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none opacity-[0.04]"
+    style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 56px 56px;"></div>
+  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-[1fr_auto] gap-8 items-end">
+      <div>
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-gold/40">
+          <span class="h-1.5 w-1.5 rounded-full bg-gold"></span>
+          <span class="text-[11px] font-heading font-bold uppercase tracking-[0.2em] text-gold-light">Weekly status &middot; Issue <%= issueNo %></span>
+        </div>
+        <h1 class="mt-5 font-heading text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.08] text-ivory max-w-3xl">Maritime Risk &amp; Market Dashboard</h1>
+        <p class="mt-4 text-lg text-ivory/70 max-w-2xl leading-relaxed"><%= (dash && dash.summary) || issue.excerpt %></p>
+        <p class="mt-5 font-heading text-sm text-ivory/60">
+          Data as of <span class="text-ivory font-semibold"><%= formatDate((dash && dash.dataCutoff) || issue.date) %></span><% if (dash && dash.coverage) { %> &middot; covering <%= dash.coverage %><% } %>
+        </p>
+      </div>
+      <% if (risk) { %>
+        <div class="rounded-md border <%= riskIsHigh ? 'border-red-400/50 bg-red-500/10' : 'border-gold/40 bg-white/5' %> px-6 py-5 lg:min-w-[240px]">
+          <span class="block text-[10px] font-heading font-bold uppercase tracking-[0.16em] text-ivory/60">DDS risk level &middot; Gulf &amp; Hormuz</span>
+          <span class="mt-1.5 flex items-center gap-2.5">
+            <span class="h-2.5 w-2.5 rounded-full <%= riskIsHigh ? 'bg-red-400' : 'bg-gold' %>"></span>
+            <span class="font-heading text-3xl font-extrabold tracking-tight <%= riskIsHigh ? 'text-red-300' : 'text-gold-light' %>"><%= risk %></span>
+          </span>
+          <span class="mt-1.5 block font-heading text-xs text-ivory/50">Reviewed weekly by DDS Marine</span>
+        </div>
+      <% } %>
+    </div>
+
+    <nav class="mt-9 -mx-4 px-4 overflow-x-auto" aria-label="Dashboard sections">
+      <div class="flex gap-2 w-max">
+        <% sections.forEach(function (s) { %>
+          <a href="#<%= s.id %>" class="shrink-0 px-4 py-2 rounded-full border border-white/20 text-xs font-heading font-bold uppercase tracking-[0.08em] text-ivory/80 hover:border-gold hover:text-gold transition-colors"><%= s.label %></a>
+        <% }); %>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<div class="bg-ivory">
+  <div class="container mx-auto px-4 lg:px-8 py-12 lg:py-16 space-y-14 lg:space-y-20">
+
+    <!-- 01 Overview -->
+    <section id="overview" class="scroll-mt-28">
+      <span class="<%= eyebrow %>">01 &middot; Bottom line</span>
+      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">This week in four points</h2>
+      <% if (dash && dash.bluf) { %>
+        <div class="mt-7 grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          <% dash.bluf.forEach(function (b, i) { %>
+            <div class="<%= card %> p-6 border-t-2 border-t-gold">
+              <span class="font-heading text-2xl font-extrabold text-hairline">0<%= i + 1 %></span>
+              <h3 class="mt-2 font-heading text-base font-bold text-navy leading-snug"><%= b.title %></h3>
+              <p class="mt-2 text-[15px] text-ink leading-relaxed"><%= b.text %></p>
+            </div>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <ul class="mt-6 space-y-2">
+          <% (issue.highlights || []).forEach(function (h) { %><li class="flex gap-2 text-ink"><span class="mt-2.5 h-1.5 w-1.5 rounded-sm bg-gold shrink-0"></span><span><%= h %></span></li><% }); %>
+        </ul>
+      <% } %>
+
+      <% if (issue.stats && issue.stats.length) { %>
+        <div class="mt-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+          <% issue.stats.forEach(function (s) { %>
+            <div class="<%= card %> p-4">
+              <span class="block text-[10px] font-heading font-bold uppercase tracking-[0.1em] text-slate-500"><%= s.label %></span>
+              <span class="block mt-1 font-heading text-lg font-extrabold text-navy leading-tight tabular-nums"><%= s.value %></span>
+              <span class="block mt-1.5 text-xs text-slate-600 leading-snug"><%= s.change %></span>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </section>
+
+    <% if (dash) { %>
+
+    <!-- 02 Oil -->
+    <section id="oil" class="scroll-mt-28">
+      <span class="<%= eyebrow %>">02 &middot; Oil</span>
+      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">Crude benchmarks</h2>
+      <div class="mt-7 grid sm:grid-cols-3 gap-3">
+        <% dash.oil.forEach(function (o) { %>
+          <div class="<%= card %> p-5">
+            <span class="block text-[10px] font-heading font-bold uppercase tracking-[0.1em] text-slate-500"><%= o.label %> &middot; Friday close</span>
+            <span class="block mt-1 font-heading text-2xl font-extrabold text-navy tabular-nums"><%= o.value %></span>
+            <span class="block mt-1.5 text-sm text-ink"><%= o.direction === 'down' ? '▼' : (o.direction === 'up' ? '▲' : '▬') %> <%= o.note %></span>
+            <span class="block mt-2 font-heading text-[11px] text-slate-500"><%= o.source %></span>
+          </div>
+        <% }); %>
+      </div>
+      <div class="mt-4 grid lg:grid-cols-2 gap-4">
+        <% if (dashboard.history.brent.length > 1) { %>
+          <figure class="<%= card %> p-5">
+            <figcaption>
+              <span class="block font-heading text-sm font-bold text-navy">Brent by issue</span>
+              <span class="block font-heading text-xs text-slate-500">US$/bbl at each Friday cut-off, Issue <%= String(dashboard.history.brent[0].issueNumber).padStart(3, '0') %> to <%= issueNo %> (mid-point where a range was reported)</span>
+            </figcaption>
+            <div class="mt-3"><%- lineChart(dashboard.history.brent.map(function (p) { return { label: shortDate(p.date), value: p.value }; }), { unit: 'US$', dp: 1, aria: 'Brent crude price at each weekly issue' }) %></div>
+          </figure>
+        <% } %>
+        <% if (dash.brentWeek) { %>
+          <figure class="<%= card %> p-5">
+            <figcaption>
+              <span class="block font-heading text-sm font-bold text-navy">Brent through the week</span>
+              <span class="block font-heading text-xs text-slate-500">US$/bbl; closes and settles, with intraday lows on Tuesday and Wednesday</span>
+            </figcaption>
+            <div class="mt-3"><%- lineChart(dash.brentWeek.map(function (p) { return { label: p.label.replace(/^\w+ /, ''), value: p.value }; }), { unit: 'US$', dp: 2, aria: 'Brent crude price through the week' }) %></div>
+          </figure>
+        <% } %>
+      </div>
+      <% if (dash.baseCase) { %>
+        <div class="mt-4 rounded-md bg-navy p-6 border-l-4 border-gold">
+          <span class="text-[11px] font-heading font-bold uppercase tracking-[0.14em] text-gold">DDS base case</span>
+          <p class="mt-1.5 text-ivory/90 leading-relaxed"><%= dash.baseCase %></p>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- 03 Bunkers -->
+    <section id="bunkers" class="scroll-mt-28">
+      <span class="<%= eyebrow %>">03 &middot; Bunkers</span>
+      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">Singapore &amp; Fujairah</h2>
+      <div class="mt-7 <%= card %> overflow-x-auto">
+        <table class="w-full text-left">
+          <thead class="bg-navy">
+            <tr class="font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-ivory">
+              <th class="px-3 sm:px-4 py-3">Hub &amp; grade</th><th class="px-3 sm:px-4 py-3 text-right">This week, US$/mt</th><th class="hidden sm:table-cell px-4 py-3 text-right">Last week</th><th class="px-3 sm:px-4 py-3 text-right">Change<span class="hidden sm:inline"> (mid-points)</span></th>
+            </tr>
+          </thead>
+          <tbody class="font-heading text-sm text-navy tabular-nums">
+            <% dash.bunkers.forEach(function (b) {
+              var rng = function (lo, hi) { return lo === hi ? '~' + num(lo) : num(lo) + '–' + num(hi); };
+              var chg = Math.round((b.low + b.high) / 2 - (b.prevLow + b.prevHigh) / 2); %>
+              <tr class="border-t border-hairline">
+                <td class="px-3 sm:px-4 py-3"><span class="text-slate-600"><%= b.hub %></span> <span class="font-bold"><%= b.grade %></span></td>
+                <td class="px-3 sm:px-4 py-3 text-right font-bold whitespace-nowrap"><%= rng(b.low, b.high) %></td>
+                <td class="hidden sm:table-cell px-4 py-3 text-right text-slate-600 whitespace-nowrap"><%= rng(b.prevLow, b.prevHigh) %></td>
+                <td class="px-3 sm:px-4 py-3 text-right whitespace-nowrap"><%= chg < 0 ? '▼ ' : (chg > 0 ? '▲ ' : '') %><%= num(Math.abs(chg)) %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <% if (dash.bunkerNote) { %><p class="mt-3 text-sm text-slate-600 max-w-3xl"><%= dash.bunkerNote %></p><% } %>
+      <div class="mt-4 grid lg:grid-cols-2 gap-4">
+        <% if (dashboard.history.vlsfo.length > 1) { %>
+          <figure class="<%= card %> p-5">
+            <figcaption>
+              <span class="block font-heading text-sm font-bold text-navy">Singapore VLSFO by issue</span>
+              <span class="block font-heading text-xs text-slate-500">US$/mt at each Friday cut-off (mid-point where a range was reported; issues without a Singapore figure omitted)</span>
+            </figcaption>
+            <div class="mt-3"><%- lineChart(dashboard.history.vlsfo.map(function (p) { return { label: shortDate(p.date), value: p.value }; }), { unit: 'US$', dp: 0, aria: 'Singapore VLSFO price at each weekly issue' }) %></div>
+          </figure>
+        <% } %>
+        <% if (dash.premiumHistory) { %>
+          <figure class="<%= card %> p-5">
+            <figcaption>
+              <span class="block font-heading text-sm font-bold text-navy">Fujairah VLSFO premium over Singapore</span>
+              <span class="block font-heading text-xs text-slate-500">US$/mt, range across sources; below zero means Singapore was dearer</span>
+            </figcaption>
+            <div class="mt-3"><%- rangeChart(dash.premiumHistory, { aria: 'Fujairah VLSFO premium over Singapore by issue' }) %></div>
+          </figure>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- 04 Incidents -->
+    <section id="incidents" class="scroll-mt-28">
+      <span class="<%= eyebrow %>">04 &middot; Hormuz &amp; Gulf</span>
+      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">Incident tracker</h2>
+      <%
+        var confirmed = dash.incidents.filter(function (i) { return i.status === 'confirmed'; });
+        var claims = dash.incidents.filter(function (i) { return i.status === 'claim'; });
+      %>
+      <p class="mt-3 text-ink max-w-3xl">Confirmed incidents and unverified claims are kept apart. A claim stays a claim until UKMTO, a flag state or an owner confirms it. <%= dash.incidentsNote || '' %></p>
+      <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <% dash.hormuz.forEach(function (h) { %>
+          <div class="<%= card %> p-4">
+            <span class="block font-heading text-2xl md:text-3xl font-extrabold text-navy tabular-nums"><%= h.value %></span>
+            <span class="block mt-1 text-sm text-ink leading-snug"><%= h.label %></span>
+            <% if (h.source) { %><span class="block mt-1.5 font-heading text-[11px] text-slate-500"><%= h.source %></span><% } %>
+          </div>
+        <% }); %>
+      </div>
+      <div class="mt-4 grid lg:grid-cols-2 gap-4 items-start">
+        <% [{ title: 'Reported by named sources', rows: confirmed, claim: false }, { title: 'Iranian claims, unverified', rows: claims, claim: true }].forEach(function (group) { %>
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="h-2.5 w-2.5 <%= group.claim ? 'rotate-45 border-2 border-red-700' : 'rounded-full bg-navy' %>"></span>
+              <h3 class="font-heading text-sm font-bold uppercase tracking-[0.08em] text-navy"><%= group.title %> &middot; <%= group.rows.length %></h3>
+            </div>
+            <div class="mt-3 space-y-3">
+              <% group.rows.forEach(function (inc) { %>
+                <article class="<%= card %> p-5 border-l-4 <%= group.claim ? 'border-l-red-700 border-dashed' : 'border-l-navy' %>">
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h4 class="font-heading text-base font-bold text-navy"><%= inc.vessel %></h4>
+                    <span class="font-heading text-xs font-bold uppercase tracking-[0.08em] <%= group.claim ? 'text-red-700' : 'text-slate-500' %>"><%= group.claim ? 'Unverified claim' : 'Reported' %></span>
+                  </div>
+                  <p class="mt-1 font-heading text-xs text-slate-600"><%= inc.date %> &middot; <%= inc.location %></p>
+                  <p class="mt-2 text-[15px] text-ink leading-relaxed"><%= inc.outcome %></p>
+                  <p class="mt-2 font-heading text-[11px] text-slate-500">Source: <%= inc.source %></p>
+                </article>
+              <% }); %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      <% if (dash.riskAdvice) { %>
+        <div class="mt-4 rounded-md border border-red-700/30 bg-red-50 p-6">
+          <span class="text-[11px] font-heading font-bold uppercase tracking-[0.14em] text-red-800">DDS risk level: <%= risk %></span>
+          <p class="mt-1.5 text-ink leading-relaxed"><%= dash.riskAdvice %></p>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- 05 Freight -->
+    <section id="freight" class="scroll-mt-28">
+      <span class="<%= eyebrow %>">05 &middot; Freight</span>
+      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">DDS freight sentiment</h2>
+      <p class="mt-3 text-ink max-w-3xl">DDS Marine's own 1–5 assessment (1 weak, 3 balanced, 5 exceptionally firm). Not a third-party benchmark or a freight quotation.</p>
+      <div class="mt-6 <%= card %> divide-y divide-hairline">
+        <% dash.freight.forEach(function (f) { %>
+          <div class="grid grid-cols-[84px_1fr] sm:grid-cols-[110px_150px_110px_1fr] items-center gap-x-4 gap-y-1.5 px-5 py-3.5">
+            <span class="font-heading text-sm font-bold text-navy"><%= f.market %></span>
+            <span class="flex items-center gap-2.5" aria-label="<%= f.score %> out of 5">
+              <span class="flex gap-[3px]" aria-hidden="true">
+                <% for (var k = 1; k <= 5; k++) { %><span class="h-3 w-4 rounded-[2px] <%= k <= f.score ? 'bg-navy' : 'bg-navy/10' %>"></span><% } %>
+              </span>
+              <span class="font-heading text-sm font-bold text-navy tabular-nums"><%= f.score %>/5</span>
+            </span>
+            <span class="col-start-2 sm:col-start-auto font-heading text-xs font-bold uppercase tracking-[0.06em] <%= f.trend === 'up' ? 'text-gold-dark' : 'text-slate-500' %>"><%= f.trend === 'up' ? '▲' : (f.trend === 'down' ? '▼' : '▬') %> <%= f.trendLabel %></span>
+            <span class="col-start-2 sm:col-start-auto text-sm text-ink leading-snug"><%= f.read %></span>
+          </div>
+        <% }); %>
+      </div>
+      <% if (dash.freightSignal) { %>
+        <div class="mt-4 rounded-md bg-navy p-6 border-l-4 border-gold">
+          <span class="text-[11px] font-heading font-bold uppercase tracking-[0.14em] text-gold">DDS market signal</span>
+          <p class="mt-1.5 text-ivory/90 leading-relaxed"><%= dash.freightSignal %></p>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- 06 Outlook -->
+    <section id="outlook" class="scroll-mt-28">
+      <span class="<%= eyebrow %>">06 &middot; Outlook</span>
+      <h2 class="mt-2 font-heading text-2xl md:text-3xl font-bold text-navy">Seven days ahead<% if (dash.outlookPeriod) { %>: <%= dash.outlookPeriod %><% } %></h2>
+      <div class="mt-7 grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <% dash.outlook.forEach(function (o) { %>
+          <div class="<%= card %> p-5">
+            <h3 class="font-heading text-base font-bold text-navy"><%= o.market %></h3>
+            <p class="mt-2 text-[15px] text-ink"><span class="font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500 block">Base case</span><%= o.base %></p>
+            <div class="mt-3 pt-3 border-t border-hairline grid grid-cols-2 gap-4">
+              <p class="text-sm text-ink leading-snug"><span class="font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500 block">▲ Upside risk</span><%= o.up %></p>
+              <p class="text-sm text-ink leading-snug"><span class="font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-slate-500 block">▼ Downside risk</span><%= o.down %></p>
+            </div>
+          </div>
+        <% }); %>
+        <% if (dash.watch) { %>
+          <div class="rounded-md bg-navy p-5">
+            <h3 class="font-heading text-base font-bold text-gold">Watch list</h3>
+            <ul class="mt-3 space-y-2.5">
+              <% dash.watch.forEach(function (w) { %>
+                <li class="flex gap-2.5 text-sm text-ivory/85 leading-snug"><span class="mt-1.5 h-1.5 w-1.5 rounded-sm bg-gold shrink-0"></span><span><%= w %></span></li>
+              <% }); %>
+            </ul>
+          </div>
+        <% } %>
+      </div>
+    </section>
+
+    <% } %>
+
+    <!-- Full issue -->
+    <section class="rounded-md bg-navy border-t-4 border-gold p-7 md:p-9 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div class="max-w-2xl">
+        <p class="font-heading text-xl font-bold text-ivory">Issue <%= issueNo %><% if (issue.headline) { %>: <%= issue.headline %><% } %></p>
+        <p class="mt-2 text-ivory/70 leading-relaxed">This dashboard summarises the latest DDS Weekly Maritime Intelligence. The full issue has the sourcing for every figure, the compliance watch and the Southeast Asia &amp; STS section.</p>
+      </div>
+      <div class="flex flex-wrap gap-3 shrink-0">
+        <a href="/intelligence/<%= issue.slug %>" class="inline-flex items-center px-6 py-3 rounded bg-gold text-navy font-heading font-bold text-sm hover:bg-gold-dark transition-colors">Read the full issue</a>
+        <% if (issue.pdfUrl) { %><a href="<%= issue.pdfUrl %>" download class="inline-flex items-center px-6 py-3 rounded border border-white/30 text-ivory font-heading font-bold text-sm hover:border-gold hover:text-gold transition-colors">Download PDF</a><% } %>
+      </div>
+    </section>
+
+    <p class="text-sm text-slate-600 max-w-4xl leading-relaxed">
+      <% if (dash && dash.sources) { %><span class="font-heading font-bold text-navy">Sources:</span> <%= dash.sources %> <% } %>
+      Updated with each weekly issue. For general information only; not investment, legal, sanctions, insurance, navigational or chartering advice. Verify all data independently before acting.
+    </p>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

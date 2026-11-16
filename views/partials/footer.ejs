@@ -66,9 +66,14 @@
     </div>
     <div class="border-t border-slate-200">
       <div
-        class="container mx-auto px-4 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+        class="container mx-auto px-4 lg:px-8 pt-6 pb-24 sm:pb-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-slate-500">
         <p>&copy; 2026 DDS Marine Energy Services Sdn. Bhd. (1552670-D). All rights reserved.</p>
         <p>Fueling Global Trade, Connecting Continents.</p>
+        <%# Phones: the floating visitor pill would sit on top of page text,
+           so the count is shown here in the footer instead. %>
+        <% if (typeof visitorCount === 'number') { %>
+          <p class="sm:hidden tabular-nums"><%= visitorCount.toLocaleString('en-US') %> <%= visitorCount === 1 ? 'visitor' : 'visitors' %></p>
+        <% } %>
       </div>
     </div>
   </footer>
@@ -226,7 +231,7 @@
   <!-- Floating visitor counter: bottom-left, mirroring the contact widget on
        the right. Server-rendered, so no JavaScript. -->
   <% if (typeof visitorCount === 'number') { %>
-    <div class="fixed bottom-6 left-6 z-40 pointer-events-none">
+    <div class="hidden sm:block fixed bottom-6 left-6 z-40 pointer-events-none">
       <div class="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-navy-deep/85 backdrop-blur-md border border-gold/30 shadow-[0_8px_24px_rgba(0,0,0,0.25)] pl-3 pr-4 py-2 sm:py-2.5"
         title="Unique visitors to ddsmarine.com">
         <span class="relative flex h-2 w-2 shrink-0" aria-hidden="true">

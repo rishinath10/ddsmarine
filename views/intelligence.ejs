@@ -61,7 +61,7 @@
               <article class="reveal reveal-scale bg-white rounded-md overflow-hidden border border-hairline card-lift">
                 <img src="<%= issue.coverImage %>" alt="<%= issue.title %>" class="w-full aspect-[16/9] object-cover" />
                 <div class="p-6">
-                  <span class="text-xs text-slate-400">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
+                  <span class="text-xs text-slate-400">Issue <%= issue.issueNumber %> &middot; <%= formatDate(issue.date) %></span>
                   <h3 class="text-lg font-heading font-bold text-navy mt-2 mb-2">
                     <a href="/intelligence/<%= issue.slug %>" class="hover:text-gold-dark transition-colors"><%= issue.title %></a>
                   </h3>
@@ -94,7 +94,7 @@
         Back to Intelligence
       </a>
       <div class="reveal flex flex-wrap items-center gap-3">
-        <span class="text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">Issue <%= issue.issueNumber %> &middot; <%= issue.date %></span>
+        <span class="text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">Issue <%= issue.issueNumber %> &middot; <%= formatDate(issue.date) %></span>
         <% if (locals.readingTimeMin) { %>
           <span class="text-xs text-ivory/40">&middot; <%= readingTimeMin %> min read</span>
         <% } %>

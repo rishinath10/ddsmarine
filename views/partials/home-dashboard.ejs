@@ -1,0 +1,60 @@
+<%# Homepage preview of /dashboard. Reads the same loadDashboard() object as
+   the full page, so the two can never show different figures. %>
+<%
+  var hd = dashboard, hIssue = hd.issue, hDash = hd.dash;
+  var hRisk = String(hIssue.riskLevel || '').toUpperCase();
+  var hRiskHigh = ['CRITICAL', 'SEVERE', 'HIGH'].indexOf(hRisk) !== -1;
+%>
+<section class="py-16 md:py-20 bg-navy">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="grid lg:grid-cols-[1fr_auto] gap-6 items-end">
+      <div class="reveal max-w-2xl">
+        <span class="text-xs font-heading font-bold uppercase tracking-[0.14em] text-gold">Maritime Dashboard &middot; Updated weekly</span>
+        <h2 class="mt-2 font-heading text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-ivory">Risk and markets at a glance</h2>
+        <p class="mt-3 text-ivory/70 leading-relaxed"><%= (hDash && hDash.summary) || hIssue.excerpt %></p>
+      </div>
+      <div class="reveal flex flex-wrap items-center gap-x-5 gap-y-2">
+        <% if (hRisk) { %>
+          <span class="inline-flex items-center gap-2 rounded-full border <%= hRiskHigh ? 'border-red-400/50 bg-red-500/10' : 'border-gold/40' %> px-3.5 py-1.5">
+            <span class="h-2 w-2 rounded-full <%= hRiskHigh ? 'bg-red-400' : 'bg-gold' %>"></span>
+            <span class="font-heading text-[11px] font-bold uppercase tracking-[0.12em] <%= hRiskHigh ? 'text-red-200' : 'text-gold-light' %>">Risk level: <%= hRisk %></span>
+          </span>
+        <% } %>
+        <span class="font-heading text-xs text-ivory/55">Data as of <%= formatDate((hDash && hDash.dataCutoff) || hIssue.date) %></span>
+      </div>
+    </div>
+
+    <% if (hIssue.stats && hIssue.stats.length) { %>
+      <div class="reveal mt-9 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+        <% hIssue.stats.forEach(function (s) { %>
+          <div class="rounded-md bg-white/5 border border-white/10 p-4">
+            <span class="block text-[10px] font-heading font-bold uppercase tracking-[0.1em] text-ivory/50"><%= s.label %></span>
+            <span class="block mt-1 font-heading text-lg font-extrabold text-ivory leading-tight tabular-nums"><%= s.value %></span>
+            <span class="block mt-1.5 text-xs text-ivory/60 leading-snug"><%= s.change %></span>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <% if (hDash && hDash.bluf) { %>
+      <div class="reveal mt-3 grid md:grid-cols-3 gap-3">
+        <% hDash.bluf.slice(0, 3).forEach(function (b, i) { %>
+          <div class="rounded-md bg-navy-deep border border-white/10 p-5">
+            <span class="font-heading text-sm font-extrabold text-gold">0<%= i + 1 %></span>
+            <h3 class="mt-1 font-heading text-base font-bold text-ivory leading-snug"><%= b.title %></h3>
+            <p class="mt-1.5 text-sm text-ivory/70 leading-relaxed"><%= b.text %></p>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <div class="reveal mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+      <a href="/dashboard" class="inline-flex items-center gap-2 px-6 py-3 rounded bg-gold text-navy font-heading font-bold text-sm hover:bg-gold-dark transition-colors">
+        Open the dashboard
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="/intelligence/<%= hIssue.slug %>" class="inline-flex items-center text-ivory font-heading font-bold text-sm border-b border-gold pb-0.5 hover:text-gold transition-colors">Read Issue <%= hd.issueNo %><% if (hIssue.headline) { %>: <%= hIssue.headline %><% } %> &rarr;</a>
+      <a href="/intelligence" class="inline-flex items-center text-ivory/70 font-heading font-bold text-sm hover:text-gold transition-colors">All issues &rarr;</a>
+    </div>
+  </div>
+</section>

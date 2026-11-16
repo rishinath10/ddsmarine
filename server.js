@@ -70,6 +70,14 @@ async function sendLeadEmail({ name, company, email, phone, subject, message }) 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// "2026-11-06" -> "6 November 2026" for display. Anything unparseable is
+// shown as it was written rather than as "Invalid Date".
+app.locals.formatDate = function (iso) {
+  const d = new Date(String(iso) + 'T00:00:00Z');
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+};
+
 // Middleware
 // Send the bare domain to www with a permanent redirect, so there is one
 // canonical host for search engines and visitors.
@@ -273,6 +281,49 @@ function renderIssueContent(issue) {
   return { html, toc, readingTimeMin };
 }
 
+// ---------- Dashboard ----------
+// Mid-point of the numbers in a stat value: "US$97.8–98.5/bbl" -> 98.15,
+// "US$830.50/mt" -> 830.5. Returns null when the value holds no number.
+function statMidpoint(value) {
+  const nums = (String(value || '').match(/\d[\d,]*(?:\.\d+)?/g) || []).map((n) => parseFloat(n.replace(/,/g, '')));
+  if (!nums.length) return null;
+  return nums.reduce((a, b) => a + b, 0) / nums.length;
+}
+
+// One point per published issue for a stat label, oldest first — the
+// history behind the dashboard's trend charts. Issues that did not carry
+// the stat are skipped rather than guessed.
+function statHistory(issues, label) {
+  return issues
+    .slice()
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map((i) => {
+      const stat = (i.stats || []).find((s) => s.label === label);
+      const value = stat ? statMidpoint(stat.value) : null;
+      return value === null ? null : { issueNumber: i.issueNumber, date: i.date, value, text: stat.value };
+    })
+    .filter(Boolean);
+}
+
+// The dashboard always reflects the newest published issue. Its detailed
+// sections come from that issue's optional "dashboard" block in
+// intelligence-issues.json; the headline figures, risk level and trend
+// charts come from fields every issue already has.
+function loadDashboard() {
+  const issues = loadIntelligenceIssues();
+  const issue = issues[0] || null;
+  if (!issue) return null;
+  return {
+    issue,
+    issueNo: String(issue.issueNumber).padStart(3, '0'),
+    dash: issue.dashboard || null,
+    history: {
+      brent: statHistory(issues, 'Brent Crude'),
+      vlsfo: statHistory(issues, 'Singapore VLSFO')
+    }
+  };
+}
+
 // Static SEO files
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, 'robots.txt')));
 
@@ -301,6 +352,7 @@ app.get('/sitemap.xml', (req, res) => {
     ...careers.map((p) => ({ loc: '/careers/' + p.slug, lastmod: p.date })),
     { loc: '/blog', lastmod: latestDate(posts) },
     ...posts.map((p) => ({ loc: '/blog/' + p.slug, lastmod: p.date })),
+    { loc: '/dashboard', lastmod: latestDate(issues) },
     { loc: '/intelligence', lastmod: latestDate(issues) },
     ...issues.map((i) => ({ loc: '/intelligence/' + i.slug, lastmod: i.date }))
   ];
@@ -338,6 +390,8 @@ app.get('/llms.txt', (req, res) => {
     `- [Contact](${SITE_URL}/contact): enquiries and office locations.`,
     '',
     '## DDS Weekly Maritime Intelligence',
+    '',
+    `- [Maritime Risk & Market Dashboard](${SITE_URL}/dashboard): one-page view of the latest issue — risk level, Hormuz and Gulf incidents, oil and bunker prices, freight sentiment and the seven-day outlook. Updated weekly.`,
     '',
     'A weekly briefing on crude and product tanker markets, Singapore and Fujairah bunker pricing, sanctions and compliance, and Southeast Asia maritime and STS risk, written by DDS Marine with named sources for every figure.',
     '',
@@ -378,7 +432,8 @@ app.get('/', (req, res) => {
         path: '/',
         blogPosts: blogPosts,
         faqs: faqs,
-        latestIssue: intelligenceIssues[0] || null
+        latestIssue: intelligenceIssues[0] || null,
+        dashboard: loadDashboard()
     });
 });
 
@@ -583,6 +638,25 @@ app.get('/careers/:slug', (req, res) => {
         articleSchema: ldJson(jobSchema),
         postings: [],
         posting: posting
+    });
+});
+
+// Dashboard: a one-page view of the latest weekly issue's key figures.
+app.get('/dashboard', (req, res) => {
+    const dashboard = loadDashboard();
+    if (!dashboard) {
+        return res.status(404).render('404', {
+            title: 'Dashboard Not Available | DDS Marine',
+            description: 'The maritime dashboard is not available yet.',
+            path: req.path,
+            noindex: true
+        });
+    }
+    res.render('dashboard', {
+        title: 'Maritime Risk & Market Dashboard | DDS Marine',
+        description: 'Weekly dashboard of Hormuz and Gulf incidents, Brent and WTI, Singapore and Fujairah bunker prices, tanker freight sentiment and the seven-day outlook.',
+        path: '/dashboard',
+        dashboard: dashboard
     });
 });
 
