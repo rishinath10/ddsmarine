@@ -46,5 +46,24 @@
       "market alert"
     ],
     "published": true
+  },
+  {
+    "slug": "transpetro-underway-ship-to-ship-operations",
+    "title": "Transpetro Moves Toward Underway Ship-to-Ship Operations",
+    "date": "2026-11-21",
+    "author": "DDS Marine Intelligence Desk",
+    "excerpt": "Petrobras' logistics arm is preparing to transfer petroleum and fuels between vessels sailing alongside each other at sea, with launch targeted for January 2027.",
+    "description": "Transpetro targets January 2027 for underway STS transfers. What it means for export logistics, tanker utilisation and STS risk allocation.",
+    "ogImage": "https://www.ddsmarine.com/assets/blog-transpetro-underway-sts-share.jpg",
+    "ogImageAlt": "DDS Marine news brief: Transpetro moves toward underway ship-to-ship operations, with a planned launch in January 2027",
+    "ogImageWidth": 1200,
+    "ogImageHeight": 630,
+    "content": "<figure class=\"not-prose my-2\"><picture><source srcset=\"/assets/blog-transpetro-underway-sts.webp\" type=\"image/webp\" /><img src=\"/assets/blog-transpetro-underway-sts.jpg\" alt=\"DDS Marine news brief: Transpetro moves toward underway ship-to-ship operations\" width=\"1200\" height=\"1500\" class=\"block w-full max-w-[640px] h-auto mx-auto rounded-2xl shadow-sm\" /></picture></figure><p>Transpetro, the logistics subsidiary of Petrobras, is moving toward ship-to-ship (STS) transfers carried out while both vessels are under way, with a launch targeted for January 2027.</p><p>The company already runs conventional STS transfers between stationary vessels and reported hundreds of these operations in 2025. The new model would allow petroleum and fuels to be transferred between vessels sailing alongside each other at sea.</p><p>The initiative is part of Transpetro’s strategy to become an integrated logistics provider for both Petrobras and third-party customers. It comes alongside rising Brazilian oil production and an expanding fleet that includes new dynamically positioned shuttle tankers.</p><h2>Why it matters</h2><ul><li>Greater flexibility in crude export logistics</li><li>An alternative to conventional terminal operations</li><li>More efficient use of tanker capacity</li><li>New openings for maritime service providers</li></ul><h2>Key risk areas</h2><ul><li>IBAMA environmental authorisation</li><li>Operational and marine safety procedures</li><li>Vessel compatibility and technical standards</li><li>Weather and operational limitations</li><li>Allocation of cargo-transfer and pollution liabilities</li><li>Insurance and indemnity provisions</li><li>Responsibility among shipowners, cargo owners and service providers</li></ul><aside class=\"not-prose my-10 bg-white border-l-4 border-navy rounded-r-md shadow-sm px-6 py-5 md:px-8 md:py-6\"><p class=\"font-heading text-xs font-bold uppercase tracking-[0.16em] text-gold-dark\">DDS Perspective</p><p class=\"mt-2 text-lg leading-relaxed text-navy\">Moving STS from a fixed position to vessels under way raises the bar on compatibility checks, weather windows and clear allocation of responsibility between owners, cargo interests and service providers. Contracts will need to evolve alongside operations.</p></aside><p><em>Source: <a href=\"https://murayama.com.br/en/2026/08/26/transpetro-moves-toward-underway-ship-to-ship-operations/\" target=\"_blank\" rel=\"noopener\">MAFM Advogados newsletter</a>, 26 August 2026. Summary and perspective by DDS Marine Group.</em></p>",
+    "tags": [
+      "STS Operations",
+      "Brazil",
+      "industry update"
+    ],
+    "published": true
   }
 ]

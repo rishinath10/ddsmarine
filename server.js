@@ -554,7 +554,7 @@ app.get('/blog/:slug', (req, res) => {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: post.title,
-        description: post.excerpt,
+        description: post.description || post.excerpt,
         image: [postImage],
         datePublished: post.date,
         dateModified: post.date,
@@ -566,9 +566,17 @@ app.get('/blog/:slug', (req, res) => {
 
     res.render('blog', {
         title: post.title + ' | DDS Marine Blog',
-        description: metaDescription(post.excerpt),
+        // An optional "description" field overrides the excerpt for search
+        // and share previews; the excerpt still drives the blog cards.
+        description: metaDescription(post.description || post.excerpt),
         path: '/blog/' + post.slug,
+        ogType: 'article',
+        ogTitle: post.title,
+        ogImageAlt: post.ogImageAlt || post.title,
+        articlePublished: post.date,
         ogImage: postImage,
+        ogImageWidth: post.ogImage ? post.ogImageWidth : 1920,
+        ogImageHeight: post.ogImage ? post.ogImageHeight : 1080,
         articleSchema: articleSchema,
         posts: [],
         post: post
