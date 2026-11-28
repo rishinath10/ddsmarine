@@ -1837,5 +1837,471 @@
     },
     "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-017.pdf",
     "published": true
+  },
+  {
+    "slug": "issue-018",
+    "issueNumber": 18,
+    "title": "DDS Weekly Maritime Intelligence — Issue 018",
+    "headline": "The War Comes Ashore",
+    "date": "2026-11-27",
+    "coverImage": "/assets/hero-ship.jpg",
+    "excerpt": "A Houthi strike kills a worker at Saudi Arabia's Jazan refinery and two technicians die in Kuwait. Seven ships are hit around Musandam, Brent rises to about US$97, and Singapore lead times ease to 12–14 days.",
+    "stats": [
+      {
+        "label": "Brent Crude",
+        "value": "About US$97/bbl",
+        "change": "▲ Friday morning, Jan contract; about 7% higher, first weekly rise in four",
+        "direction": "up"
+      },
+      {
+        "label": "WTI Crude",
+        "value": "About US$86/bbl",
+        "change": "▲ about 3% higher on the week (The National)",
+        "direction": "up"
+      },
+      {
+        "label": "Ships Struck",
+        "value": "7",
+        "change": "▲ around Musandam, 20–22 November (UKMTO); 10 tankers in a week (JMIC)",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore VLSFO",
+        "value": "US$861–895/mt",
+        "change": "▲ up about US$30–65; lead times ease to 12–14 days",
+        "direction": "up"
+      },
+      {
+        "label": "Singapore HSFO",
+        "value": "US$605–655/mt",
+        "change": "▲ up to about US$40, after a low of US$573 on Monday",
+        "direction": "up"
+      },
+      {
+        "label": "Fujairah Premium",
+        "value": "–US$23 to –46/mt",
+        "change": "▬ Singapore VLSFO stays dearer than Fujairah (ENGINE)",
+        "direction": "flat"
+      }
+    ],
+    "ceoQuote": "Oil rose 7% this week. The true cost of the week was counted in lives, not dollars.",
+    "riskLevel": "Critical",
+    "contentFile": "content/intelligence/issue-018.md",
+    "highlights": [
+      "Seven ships hit around Musandam in three days, including three VLCCs within 17 minutes",
+      "Houthi strike on Saudi Arabia's Jazan refinery kills a worker; Ras Tanura targeted",
+      "Two Italian technicians killed by drone debris in Kuwait; Iran denies involvement",
+      "Brent rises about 7% to around US$97, its first weekly rise in four weeks",
+      "Singapore VLSFO US$861–895, with lead times easing to 12–14 days",
+      "OFAC targets Iran's shadow banking networks; scrutiny of activity off Malaysia rises",
+      "Southeast Asia & STS Operations",
+      "Seven-Day Outlook"
+    ],
+    "dashboard": {
+      "dataCutoff": "2026-11-27",
+      "coverage": "20 – 27 November 2026",
+      "summary": "The war came ashore in Saudi Arabia and Kuwait this week, and it cost lives. For our corridor, Singapore fuel is dearer but quicker to deliver.",
+      "bluf": [
+        {
+          "title": "Seven ships hit around Musandam",
+          "text": "Seven ships were hit in three days, including three loaded VLCCs within 17 minutes on 22 November and a bulker at the Dibba anchorage. All crews were reported safe."
+        },
+        {
+          "title": "Lives lost ashore",
+          "text": "A Houthi strike on the Jazan refinery killed a worker and halted some operations; two Italian technicians were killed by drone debris in Kuwait."
+        },
+        {
+          "title": "Oil rises for the first time in a month",
+          "text": "Brent (January contract) rose about 7% to around US$97 as attacks reached Saudi refineries. It rolls to February on 30 November."
+        },
+        {
+          "title": "Singapore dearer but faster",
+          "text": "VLSFO rose to US$861–895/mt, but lead times eased to 12–14 days and LSMGO to 5–8. December slots are already being booked."
+        }
+      ],
+      "oil": [
+        {
+          "label": "Brent crude (Jan)",
+          "value": "About US$97/bbl",
+          "note": "About 7% higher on the week; first weekly rise in four",
+          "direction": "up",
+          "source": "ENGINE / The National / Integr8"
+        },
+        {
+          "label": "WTI crude",
+          "value": "About US$86/bbl",
+          "note": "About 3% higher on the week",
+          "direction": "up",
+          "source": "The National / Integr8"
+        },
+        {
+          "label": "Hormuz outflow",
+          "value": "9.25m b/d",
+          "note": "54% of pre-war levels (17.14m b/d)",
+          "direction": "flat",
+          "source": "Kpler, seven days to 24 Nov"
+        }
+      ],
+      "oilPriceNote": "Friday morning",
+      "brentWeek": [
+        {
+          "label": "Fri 20 Nov",
+          "value": 91.0,
+          "kind": "Issue 017"
+        },
+        {
+          "label": "Mon 23 Nov",
+          "value": 88.47,
+          "kind": "ENGINE"
+        },
+        {
+          "label": "Tue 24 Nov",
+          "value": 91.0,
+          "kind": "Maritime Executive"
+        },
+        {
+          "label": "Wed 25 Nov",
+          "value": 94.61,
+          "kind": "close"
+        },
+        {
+          "label": "Thu 26 Nov",
+          "value": 96.57,
+          "kind": "settle"
+        },
+        {
+          "label": "Fri 27 Nov",
+          "value": 97.35,
+          "kind": "morning, mid of 97.2–97.5"
+        }
+      ],
+      "brentWeekNote": "US$/bbl, January contract; ENGINE, Integr8, The National, Maritime Executive and Argus readings to Friday morning",
+      "baseCase": "Brent (February contract) trades US$88–100 next week. A hit on a Saudi export terminal or a direct US–Iran exchange could push it above US$100; a pause in attacks would let the surplus reassert itself.",
+      "bunkers": [
+        {
+          "grade": "VLSFO",
+          "hub": "Singapore",
+          "low": 861,
+          "high": 895,
+          "prevLow": 829,
+          "prevHigh": 829
+        },
+        {
+          "grade": "HSFO",
+          "hub": "Singapore",
+          "low": 605,
+          "high": 655,
+          "prevLow": 608,
+          "prevHigh": 615
+        },
+        {
+          "grade": "LSMGO",
+          "hub": "Singapore",
+          "low": 1100,
+          "high": 1130,
+          "prevLow": 1124,
+          "prevHigh": 1140
+        },
+        {
+          "grade": "VLSFO",
+          "hub": "Fujairah",
+          "low": 815,
+          "high": 815,
+          "prevLow": 791,
+          "prevHigh": 815
+        },
+        {
+          "grade": "HSFO",
+          "hub": "Fujairah",
+          "low": 585,
+          "high": 585,
+          "prevLow": 540,
+          "prevHigh": 540
+        }
+      ],
+      "bunkerNote": "Singapore ranges span ENGINE (12:00 SGT, 26 Nov) and Integr8 (early 27 Nov); Fujairah figures are Integr8 indications. Singapore lead times: VLSFO 12–14 days, LSMGO 5–8, HSFO ~10. Forward paper points lower: Singapore 0.5% falls from about US$747 to US$627 three months out (Integr8).",
+      "premiumHistory": [
+        {
+          "issue": 7,
+          "label": "10 Sep",
+          "low": 67,
+          "high": 67
+        },
+        {
+          "issue": 8,
+          "label": "18 Sep",
+          "low": 95,
+          "high": 108
+        },
+        {
+          "issue": 9,
+          "label": "25 Sep",
+          "low": 85,
+          "high": 122
+        },
+        {
+          "issue": 10,
+          "label": "2 Oct",
+          "low": 85,
+          "high": 85
+        },
+        {
+          "issue": 11,
+          "label": "9 Oct",
+          "low": 75,
+          "high": 82
+        },
+        {
+          "issue": 12,
+          "label": "16 Oct",
+          "low": 50,
+          "high": 66
+        },
+        {
+          "issue": 13,
+          "label": "23 Oct",
+          "low": 33,
+          "high": 40
+        },
+        {
+          "issue": 14,
+          "label": "30 Oct",
+          "low": -12,
+          "high": -5
+        },
+        {
+          "issue": 15,
+          "label": "6 Nov",
+          "low": 0,
+          "high": 22
+        },
+        {
+          "issue": 16,
+          "label": "13 Nov",
+          "low": -60,
+          "high": 5
+        },
+        {
+          "issue": 17,
+          "label": "20 Nov",
+          "low": -15,
+          "high": -14
+        },
+        {
+          "issue": 18,
+          "label": "27 Nov",
+          "low": -46,
+          "high": -23
+        }
+      ],
+      "incidentsNote": "Attacks now land on both sides of the Musandam Peninsula and at UAE east-coast anchorages. Correction to Issue 017: the missing Jordanian officer was aboard the ADNOC-operated tanker hit on 17 November, which appears to be the same incident as the unnamed tanker 13 nm north of Khasab.",
+      "claimsTitle": "Claims and unconfirmed reports",
+      "incidents": [
+        {
+          "status": "confirmed",
+          "vessel": "Tanker, not named",
+          "date": "26 Nov",
+          "location": "~93 km W of Dubai",
+          "outcome": "Projectile exploded nearby.",
+          "source": "UKMTO / The National"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Bahrain, Cameroon and Romania Prosperity (VLCCs)",
+          "date": "22 Nov",
+          "location": "E of Musandam, 20:25–20:42 UTC",
+          "outcome": "Three VLCCs hit within 17 minutes; crews safe; all continued.",
+          "source": "UKMTO 219–221-26"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "CTI Helen (bulker)",
+          "date": "22 Nov",
+          "location": "Dibba OPL anchorage",
+          "outcome": "Projectile; fire; no casualties.",
+          "source": "UKMTO / Vanguard Tech"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Tanker, not named",
+          "date": "21 Nov",
+          "location": "17 nm E of Khasab",
+          "outcome": "Engine room hit; no casualties.",
+          "source": "UKMTO / Reuters"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Tanker, not named",
+          "date": "21 Nov",
+          "location": "11 nm N of Khasab",
+          "outcome": "Hit on stern; no casualties.",
+          "source": "UKMTO / Reuters"
+        },
+        {
+          "status": "confirmed",
+          "vessel": "Tanker, not named",
+          "date": "20 Nov",
+          "location": "Near Khasab, outbound",
+          "outcome": "Struck; fire on board.",
+          "source": "UKMTO 214-26"
+        },
+        {
+          "status": "claim",
+          "vessel": "Two tankers",
+          "date": "26 Nov",
+          "location": "North of Khasab",
+          "outcome": "IRGC: hit by sea mines; unverified.",
+          "source": "IRGC / ABC"
+        },
+        {
+          "status": "claim",
+          "vessel": "Container ship",
+          "date": "24 Nov",
+          "location": "Strait of Hormuz",
+          "outcome": "Reported stopped; details unconfirmed.",
+          "source": "ENGINE"
+        },
+        {
+          "status": "claim",
+          "vessel": "Three tankers",
+          "date": "23 Nov",
+          "location": "Strait of Hormuz",
+          "outcome": "IRGC: caught fire after hitting mines; unverified.",
+          "source": "IRGC / ENGINE"
+        }
+      ],
+      "hormuz": [
+        {
+          "value": "~218",
+          "label": "Ships at anchor east of the strait",
+          "source": "JMIC, 22 Nov"
+        },
+        {
+          "value": "38",
+          "label": "US-facilitated transits a day, 19–21 Nov (2025 average about 138)",
+          "source": ""
+        },
+        {
+          "value": "141",
+          "label": "Incidents since the war began, with 25 seafarer deaths",
+          "source": "IMO"
+        },
+        {
+          "value": "54%",
+          "label": "Oil leaving Hormuz against pre-war levels",
+          "source": "Kpler, 7 days to 24 Nov"
+        }
+      ],
+      "riskAdvice": "Confirm war-risk and hull cover at nomination for any Gulf call, including Kuwait and Saudi ports, and for anchorages off Fujairah, Khor Fakkan and Dibba. For transits past Musandam, follow US-facilitated transit guidance, keep crews clear of the engine room where possible, and report any approach to UKMTO.",
+      "freight": [
+        {
+          "market": "VLCC",
+          "score": 4,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Three VLCCs hit on Sunday."
+        },
+        {
+          "market": "Suezmax",
+          "score": 4,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Larger share of Hormuz volumes."
+        },
+        {
+          "market": "Aframax",
+          "score": 4,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Larger share of Hormuz volumes."
+        },
+        {
+          "market": "LR2",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Gulf refineries under attack."
+        },
+        {
+          "market": "LR1",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Firm alongside LR2."
+        },
+        {
+          "market": "MR Pacific",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Low Asian distillate stocks."
+        },
+        {
+          "market": "MR Atlantic",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Refinery outages in Russia and Venezuela."
+        },
+        {
+          "market": "LPG",
+          "score": 5,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Ras Tanura and Jazan exposure."
+        },
+        {
+          "market": "LNG",
+          "score": 4,
+          "trend": "flat",
+          "trendLabel": "Steady",
+          "read": "Attacks near Qatar's export route."
+        }
+      ],
+      "freightSignal": "All scores are unchanged this week. Crude tankers hold at 4/5; product tankers, LPG and Singapore-linked clean trades stay at 5/5.",
+      "outlookPeriod": "28 November to 4 December 2026",
+      "outlook": [
+        {
+          "market": "Crude oil",
+          "base": "Brent (Feb) US$88–100.",
+          "up": "A Saudi export terminal hit; US–Iran exchange.",
+          "down": "Attacks pause; OPEC+ and IEA surplus dominate."
+        },
+        {
+          "market": "Crude tankers",
+          "base": "Steady at 4/5.",
+          "up": "More VLCCs targeted; owners refuse Gulf voyages.",
+          "down": "Hormuz traffic normalises."
+        },
+        {
+          "market": "Product tankers",
+          "base": "Firm on refinery outages.",
+          "up": "Further strikes on Saudi refineries.",
+          "down": "Jazan restarts quickly."
+        },
+        {
+          "market": "Bunkers",
+          "base": "Singapore VLSFO US$840–920; lead times 12–14 days.",
+          "up": "Prices follow any oil spike.",
+          "down": "Forward curve's easing arrives sooner."
+        },
+        {
+          "market": "Southeast Asia",
+          "base": "Strong screening; December slots fill.",
+          "up": "US action on activity off Malaysia.",
+          "down": "Regional supply improves."
+        }
+      ],
+      "watch": [
+        "The OPEC+ meeting on Sunday 29 November, and the Brent contract roll to February on 30 November.",
+        "Further attacks around Musandam and at UAE east-coast anchorages; news of the missing Jordanian officer.",
+        "Houthi strikes on Saudi refineries, ports and export terminals, including Ras Tanura, Jazan and Yanbu.",
+        "Iran's response to the deaths in Kuwait, and whether the Kharg convoy idea returns.",
+        "Any US action on shadow-fleet activity off Malaysia, and Singapore December bookings."
+      ],
+      "sources": "Integr8 Fuels, ENGINE, The National, Argus, Maritime Executive, UKMTO and JMIC (via gCaptain, Ship Universe, Reuters), Al Jazeera, ABC News, Gulf News, OFAC, Kpler, Vortexa and DDS Marine market intelligence."
+    },
+    "pdfUrl": "/assets/intelligence/dds-weekly-intelligence-issue-018.pdf",
+    "published": true
   }
 ]

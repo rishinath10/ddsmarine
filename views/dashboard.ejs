@@ -260,7 +260,7 @@
               <span class="block font-heading text-sm font-bold text-navy">Fujairah VLSFO premium over Singapore</span>
               <span class="block font-heading text-xs text-slate-500">US$/mt, range across sources; below zero means Singapore was dearer</span>
             </figcaption>
-            <div class="mt-3"><%- rangeChart(dash.premiumHistory, { aria: 'Fujairah VLSFO premium over Singapore by issue' }) %></div>
+            <div class="mt-3"><%# Ten bars is the most that stay legible at phone width; the full history is in the issue. %><%- rangeChart(dash.premiumHistory.slice(-10), { aria: 'Fujairah VLSFO premium over Singapore by issue' }) %></div>
           </figure>
         <% } %>
       </div>
